@@ -356,7 +356,7 @@ if __name__ == '__main__':
 						n_unk_lemmas += 1
 						matches = [(wn_first_sense(curr_lemma), 1)]
 					else:
-					matches = senses_vsm.match_senses(currVec_c, lemma=curr_lemma, topn=10)
+						matches = senses_vsm.match_senses(currVec_c, lemma=curr_lemma, topn=10)
 					results_f.write('{}, {}, {}, {}\n'.format(sent_info, idxs, word, matches))
 	logging.info('Num. unknown lemmas in %s: %d' % (args.test_set, n_unk_lemmas))
 	logging.info('Num. annotated sentences in %s: %d' % (args.test_set, sentece_count))
