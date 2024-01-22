@@ -27,47 +27,47 @@ LANGUAGES = (
 )
 
 MODELS = {
-    "english": "ltg/mt0-definition-en-xl",
-    #"english": "ltg/flan-t5-definition-en-base",
-    "norwegian1": "ltg/mt0-definition-no-xl",
-    "norwegian2": "ltg/mt0-definition-no-xl",
-    "russian": "ltg/mt0-definition-ru-xl",
+    "english": "mt0-definition-en-xl",
+    #"english": "flan-t5-definition-en-base",
+    "norwegian1": "mt0-definition-no-xl",
+    "norwegian2": "mt0-definition-no-xl",
+    "russian": "mt0-definition-ru-xl",
 }
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 
-def load_model_and_tokenizer(lang):
+def load_model_and_tokenizer(model_path):
     tokenizer = T5Tokenizer.from_pretrained(
-        MODELS[lang],
+        model_path,
         add_prefix_space=True,
     )
     if DEVICE == "cuda":
         model = T5ForConditionalGeneration.from_pretrained(
-            MODELS[lang],
+            model_path,
             device_map="auto",
         )
     else:
         model = T5ForConditionalGeneration.from_pretrained(
-            MODELS[lang],
+            model_path,
             low_cpu_mem_usage=True,
         )
     model.eval()
     return model, tokenizer
 
 
-def load_mt5_model_and_tokenizer(lang):
+def load_mt5_model_and_tokenizer(model_path):
     tokenizer = MT5Tokenizer.from_pretrained(
-        MODELS[lang],
+        model_path,
         add_prefix_space=True,
     )
     if DEVICE == "cuda":
         model = MT5ForConditionalGeneration.from_pretrained(
-            MODELS[lang],
+            model_path,
             device_map="auto",
         )
     else:
         model = MT5ForConditionalGeneration.from_pretrained(
-            MODELS[lang],
+            model_path,
             low_cpu_mem_usage=True,
         )
     model.eval()
@@ -103,6 +103,10 @@ def parse_arge():
         "--n_first",
         type=int,
         default=None,
+    )
+    parser.add_argument(
+        "--models_dir",
+        default="ltg",
     )
     return parser.parse_args()
 
@@ -157,10 +161,11 @@ def define(
 
 if __name__ == '__main__':
     args = parse_arge()
-    if "mt0" in MODELS[args.lang]:
-        model, tokenizer = load_mt5_model_and_tokenizer(args.lang)
+    model_path = os.path.join(args.models_dir, MODELS[args.lang])
+    if "mt0" in model_path:
+        model, tokenizer = load_mt5_model_and_tokenizer(model_path)
     else:
-        model, tokenizer = load_model_and_tokenizer(args.lang)
+        model, tokenizer = load_model_and_tokenizer(model_path)
     for corpus in glob(f"{args.data_path}/{args.lang}/*.gz"):
         logging.info(corpus)
         prompts, targets_list = [], []
