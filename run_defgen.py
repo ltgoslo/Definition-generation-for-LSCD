@@ -135,11 +135,11 @@ def define(
 
     target_ids = cur_tokenizer(targets, add_special_tokens=False).input_ids
     target_ids = torch.tensor([el[-1] for el in target_ids])
-
+    device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
     test_dataset = torch.utils.data.TensorDataset(
-        inputs["input_ids"].to(DEVICE),
-        inputs["attention_mask"].to(DEVICE),
-        target_ids.to(DEVICE),
+        inputs["input_ids"].to(device),
+        inputs["attention_mask"].to(device),
+        target_ids.to(device),
     )
     test_iter = torch.utils.data.DataLoader(test_dataset,
                                             batch_size=arguments.bsize,
