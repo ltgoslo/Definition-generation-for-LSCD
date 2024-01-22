@@ -33,8 +33,6 @@ MODELS = {
     "norwegian2": "mt0-definition-no-xl",
     "russian": "mt0-definition-ru-xl",
 }
-DEVICE = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-logging.info(f"Predicting on {DEVICE}")
 
 
 def load_model_and_tokenizer(model_path):
@@ -42,7 +40,7 @@ def load_model_and_tokenizer(model_path):
         model_path,
         add_prefix_space=True,
     )
-    if DEVICE == "cuda":
+    if torch.cuda.is_available():
         model = T5ForConditionalGeneration.from_pretrained(
             model_path,
             device_map="auto",
@@ -61,7 +59,8 @@ def load_mt5_model_and_tokenizer(model_path):
         model_path,
         add_prefix_space=True,
     )
-    if DEVICE == "cuda":
+    if torch.cuda.is_available():
+        logging.info("Predicting on cuda")
         model = MT5ForConditionalGeneration.from_pretrained(
             model_path,
             device_map="auto",
