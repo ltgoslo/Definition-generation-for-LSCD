@@ -194,6 +194,6 @@ if __name__ == '__main__':
             os.path.expanduser(args.res_path),
             f"{corpus.replace('/', '-')}{os.extsep}txt",
         )
-        with open(res_path, "w") as results_file:
+        with open(res_path, "w", encoding="utf8") as results_file:
             for prompt, definition in zip(prompts, definitions):
                 results_file.write(f"{prompt}\t{definition}\n")
