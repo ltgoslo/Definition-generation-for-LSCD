@@ -33,7 +33,8 @@ MODELS = {
     "norwegian2": "mt0-definition-no-xl",
     "russian": "mt0-definition-ru-xl",
 }
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+DEVICE = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+logging.info(f"Predicting on {DEVICE}")
 
 
 def load_model_and_tokenizer(model_path):
@@ -108,6 +109,10 @@ def parse_arge():
         "--models_dir",
         default="ltg",
     )
+    parser.add_argument(
+        "--max_new_tokens",
+        default=50,
+    )
     return parser.parse_args()
 
 
@@ -147,8 +152,13 @@ def define(
         with torch.no_grad():
             if filter_target:
                 bad = [[el] for el in targetwords.tolist()]
-                outputs = lm.generate(input_ids=inp, attention_mask=att,
-                                      do_sample=False, bad_words_ids=bad)
+                outputs = lm.generate(
+                    input_ids=inp,
+                    attention_mask=att,
+                    do_sample=False,
+                    bad_words_ids=bad,
+                    max_new_tokens=arguments.max_new_tokens,
+                )
             else:
                 outputs = lm.generate(input_ids=inp, attention_mask=att,
                                       do_sample=False)

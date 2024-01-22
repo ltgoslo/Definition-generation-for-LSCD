@@ -31,5 +31,7 @@ REPO=/cluster/projects/nn9851k/andreku/defgen_lscd/Sense-based-Semantic-Change-P
 DATA_PATH=/cluster/projects/nn9851k/corpora/diachronic/acl_data
 RES_PATH=/cluster/projects/nn9851k/corpora/diachronic/acl_results
 MODELS_DIR=/cluster/projects/nn9851k/models/definition_generation
-N_FIRST=${1}
-python "${REPO}run_defgen.py" --data_path $DATA_PATH --bsize 64 --res_path $RES_PATH --n_first $N_FIRST --models_dir $MODELS_DIR
+BATCH_SIZE=${1}
+MAX_NEW_TOKENS=${2}
+N_FIRST=${3}
+python "${REPO}run_defgen.py" --data_path $DATA_PATH --bsize $BATCH_SIZE --res_path $RES_PATH --n_first $N_FIRST --models_dir $MODELS_DIR --max_new_tokens $MAX_NEW_TOKENS
