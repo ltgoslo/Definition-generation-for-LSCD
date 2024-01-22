@@ -182,7 +182,7 @@ if __name__ == '__main__':
         with gzip.open(corpus, "rt") as corpus_file:
             count = 0
             for line in tqdm.tqdm(corpus_file):
-                if (args.n_first is None) or (count < args.n_first):
+                if (args.n_first == 0) or (count < args.n_first):
                     target, prompt = line.strip().split('\t')
                     prompts.append(prompt)
                     targets_list.append(target)
