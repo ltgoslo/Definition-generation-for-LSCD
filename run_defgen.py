@@ -111,6 +111,7 @@ def parse_arge():
     parser.add_argument(
         "--max_new_tokens",
         default=50,
+        type=int,
     )
     return parser.parse_args()
 
