@@ -7,7 +7,7 @@
 #SBATCH --account=nn9851k
 #
 # Wall time limit:
-#SBATCH --time=20:00:00
+#SBATCH --time=4:00:00
 #SBATCH --partition=a100
 #SBATCH --gpus=1
 #SBATCH --nodes=1
@@ -26,7 +26,7 @@ module load nlpl-sentencepiece/0.1.99-foss-2022b-Python-3.10.8
 
 
 module list    # For easier debugging
-
+export PYTHONIOENCODING=utf8
 REPO=/cluster/projects/nn9851k/andreku/defgen_lscd/Sense-based-Semantic-Change-Prediction/
 DATA_PATH=/cluster/projects/nn9851k/corpora/diachronic/acl_data
 RES_PATH=/cluster/projects/nn9851k/corpora/diachronic/acl_results
