@@ -190,10 +190,17 @@ if __name__ == '__main__':
                 else:
                     break
         definitions = define(prompts, model, tokenizer, args, targets_list)
+        res_fn = corpus.replace("/", "-").replace(
+            "-home-m-corpora-acl-parsed-english-", "",
+        ).replace(
+            ".conllu.gz.txt.gz", ".tsv.gz",
+        ).strip("-")
         res_path = os.path.join(
             os.path.expanduser(args.res_path),
-            f"{corpus.replace('/', '-')}{os.extsep}txt",
+            res_fn,
         )
         with open(res_path, "w", encoding="utf8") as results_file:
-            for prompt, definition in zip(prompts, definitions):
-                results_file.write(f"{prompt}\t{definition}\n")
+            for target, prompt, definition in zip(
+                    targets_list, prompts, definitions,
+            ):
+                results_file.write(f"{target}\t{prompt}\t{definition}\n")
