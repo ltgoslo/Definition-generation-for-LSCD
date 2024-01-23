@@ -6,7 +6,7 @@ import re
 PATTERN = re.compile(r"What is the definition of (\w+)\?")
 
 if __name__ == '__main__':
-    data_path = "../acl_results"
+    data_path = "../../acl_results"
     res_path = os.path.join(data_path, "fixed")
     if not os.path.exists(res_path):
         os.mkdir(res_path)
