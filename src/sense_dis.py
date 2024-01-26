@@ -67,13 +67,10 @@ METRICS = (
 
 def _get_senses_lesk(args, target_dict, target_list, target_list_pos, sent_ls):
     for i, target_word in enumerate(tqdm(target_list)):
-        if args.use_pos_in_lesk or (args.corpus == "lemma"):
+        if args.use_pos_in_lesk:
             word_without_pos, pos = target_list_pos[i].split("_")
         for sent in sent_ls[target_word]:
             sent_ = sent.split()
-            if args.corpus == "lemma":
-                sent_ = sent.replace(f"_{pos}", "").split()
-
             if args.use_pos_in_lesk:
                 # pos tag in SemEval shared task lemma corpus are nn, vb for English
                 # and they are n, v in WordNet
@@ -109,8 +106,6 @@ def get_senses_lesk(
 
     for i, target_word in enumerate(tqdm(target_list)):
         word = copy(target_word)
-        # if args.corpus == "lemma":
-        #     word = target_list_pos[i]
         for sent in c1_text:
             sent = re.sub(r"_\w+", "", sent)
             if word in sent.split():
@@ -157,7 +152,6 @@ def parse_args():
                         help='Results directory.')
     parser.add_argument("--method", choices=(LESK, "defgen"), default=LESK)
     parser.add_argument("--use_pos_in_lesk", type=bool, default=False)
-    parser.add_argument("--corpus", choices=("lemma", "token"), default="lemma")
     parser.add_argument("--no_zeros_in_kl", type=bool, default=False)
     return parser.parse_args()
 
