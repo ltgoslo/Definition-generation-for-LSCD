@@ -6,6 +6,7 @@ import os
 
 from conllu import parse_incr
 import tqdm
+from transformers import MT5Tokenizer
 
 
 logging.basicConfig(level=logging.INFO)
@@ -55,7 +56,7 @@ if __name__ == '__main__':
     with open(os.path.expanduser(args.targets_path), "r") as targets_file:
         targets = targets_file.readlines()
     targets = [target.strip() for target in targets]
-
+    tokenizer = MT5Tokenizer.from_pretrained(os.path.expanduser("~/mt0-xl"))
     for corpus in glob(f"{lang_path}/*.gz"):
         logging.info(corpus)
         prompts, targets_list = [], []
@@ -76,11 +77,18 @@ if __name__ == '__main__':
                         sent = ' '.join([tok["form"] for tok in token_list])
                         for target in intersected:
                             target = target.split("_")[0]
-                            prompts.append(
-                                f"{sent} {PROMPTS[args.lang]} {target}?",
+                            prompt = f"{sent} {PROMPTS[args.lang]} {target}?"
+                            tokenized = tokenizer(
+                                prompt,
+                                return_token_type_ids=False,
+                                return_attention_mask=False,
                             )
-                            targets_list.append(target)
-                            count += 1
+                            if len(tokenized["input_ids"]) <= 350:
+                                prompts.append(
+                                    prompt,
+                                )
+                                targets_list.append(target)
+                                count += 1
                 else:
                     break
         res_path = os.path.join(
