@@ -34,4 +34,4 @@ MODELS_DIR=/cluster/projects/nn9851k/models/definition_generation
 BATCH_SIZE=${1}
 MAX_NEW_TOKENS=${2}
 N_FIRST=${3}
-python "${REPO}run_defgen.py" --data_path $DATA_PATH --bsize $BATCH_SIZE --res_path $RES_PATH --n_first $N_FIRST --models_dir $MODELS_DIR --max_new_tokens $MAX_NEW_TOKENS
+python "${REPO}src_acl/run_defgen.py" --data_path $DATA_PATH --bsize $BATCH_SIZE --maxl 350 --res_path $RES_PATH --n_first $N_FIRST --models_dir $MODELS_DIR --max_new_tokens $MAX_NEW_TOKENS
