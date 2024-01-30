@@ -123,6 +123,8 @@ def define(
         arguments,
         targets,
         filter_target=True,
+        num_beams=5,
+        num_beam_groups=5,
 ):
     logging.info(f"Tokenizing with max length {arguments.maxl}...")
     inputs = cur_tokenizer(
@@ -158,6 +160,8 @@ def define(
                     do_sample=False,
                     bad_words_ids=bad,
                     max_new_tokens=arguments.max_new_tokens,
+                    num_beams=num_beams,
+                    num_beam_groups=num_beam_groups,
                 )
             else:
                 outputs = lm.generate(input_ids=inp, attention_mask=att,
