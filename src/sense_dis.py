@@ -26,8 +26,8 @@ from nltk.wsd import lesk
 from tqdm import tqdm
 import numpy as np
 
-CORPUS_1 = "cluster-projects-nn9851k-corpora-diachronic-acl_data-english-corpus1.tsv.gz"
-CORPUS_2 = "cluster-projects-nn9851k-corpora-diachronic-acl_data-english-corpus2.tsv.gz"
+CORPUS_1 = "cluster-projects-nn9851k-andreku-defgen_lscd-acl_data-english-corpora-acl-parsed-english-corpus1.tsv.gz"
+CORPUS_2 = "cluster-projects-nn9851k-andreku-defgen_lscd-acl_data-english-corpora-acl-parsed-english-corpus2.tsv.gz"
 LESK = "lesk"
 METRICS_NAMES = (
     "Cosine",
@@ -153,7 +153,49 @@ def parse_args():
     parser.add_argument("--method", choices=(LESK, "defgen"), default=LESK)
     parser.add_argument("--use_pos_in_lesk", type=bool, default=False)
     parser.add_argument("--no_zeros_in_kl", type=bool, default=False)
+    parser.add_argument("--lang", default="english")
     return parser.parse_args()
+
+
+def write_results(args, target_list, target_dict1, target_dict2, dis_dicts):
+    if not os.path.exists(args.results_dir):
+        os.mkdir(args.results_dir)
+    method_dir = os.path.join(args.results_dir, args.method, args.lang)
+    if not os.path.exists(method_dir):
+        os.mkdir(method_dir)
+    with open(f'{method_dir}/senseset_c1.txt',
+              'w') as f:
+        for target_word in target_list:
+            f.write(f'{target_word}')
+            for sense in target_dict1[target_word]:
+                f.write(f',{sense}:{target_dict1[target_word][sense]}')
+            f.write('\n')
+    with open(f'{method_dir}/senseset_c2.txt',
+              'w') as f:
+        for target_word in target_list:
+            f.write(f'{target_word}')
+            for sense in target_dict2[target_word]:
+                f.write(f',{sense}:{target_dict2[target_word][sense]}')
+            f.write('\n')
+
+    for metric, dis_dict in zip(METRICS_NAMES, dis_dicts):
+        with open(f'{method_dir}/{metric}_dict.txt', 'w') as f:
+            for target_word in target_list:
+                f.write(f'{target_word},{dis_dict[target_word]}\n')
+
+        with open(f'{method_dir}/{metric}_score.txt', 'w') as f:
+            for target_word in target_list:
+                f.write(f'{dis_dict[target_word]},')
+
+        truth = []
+        with open(f'{args.data_dir}/english/truth/graded.txt') as f:
+            lines = f.readlines()
+            for l in lines:
+                truth.append(l.split()[-1])
+
+        new = [dis_dict[target_word] for target_word in target_list]
+        score = stats.spearmanr(truth, new)[0]
+        logging.info(f"{args.method}, {metric}: {round(score, 3)}")
 
 
 def main():
@@ -205,46 +247,12 @@ def main():
                 sense_ids2.append(target_dict2[target_word][sense])
             else:
                 sense_ids2.append(0.0)
-
         for i, metric in enumerate(METRICS[:-1]):
             dis_dicts[i][target_word] = metric(sense_ids1, sense_ids2)
         dis_dicts[-1][target_word] = METRICS[-1](
             sense_ids1, sense_ids2, args.no_zeros_in_kl,
         )
-
-    with open(f'{args.results_dir}/english/hypothesis/senseset_c1.txt',
-              'w') as f:
-        for target_word in target_list:
-            f.write(f'{target_word}')
-            for sense in target_dict1[target_word]:
-                f.write(f',{sense}:{target_dict1[target_word][sense]}')
-            f.write('\n')
-    with open(f'{args.results_dir}/english/hypothesis/senseset_c2.txt',
-              'w') as f:
-        for target_word in target_list:
-            f.write(f'{target_word}')
-            for sense in target_dict2[target_word]:
-                f.write(f',{sense}:{target_dict2[target_word][sense]}')
-            f.write('\n')
-
-    for metric, dis_dict in zip(METRICS_NAMES, dis_dicts):
-        with open(f'{args.results_dir}/english/hypothesis/{metric}_dict.txt', 'w') as f:
-            for target_word in target_list:
-                f.write(f'{target_word},{dis_dict[target_word]}\n')
-
-        with open(f'{args.results_dir}/english/hypothesis/{metric}_score.txt', 'w') as f:
-            for target_word in target_list:
-                f.write(f'{dis_dict[target_word]},')
-
-        truth = []
-        with open(f'{args.data_dir}/english/truth/graded.txt') as f:
-            lines = f.readlines()
-            for l in lines:
-                truth.append(l.split()[-1])
-
-        new = [dis_dict[target_word] for target_word in target_list]
-        score = stats.spearmanr(truth, new)[0]
-        logging.info(f"{args.method}, {metric}: {round(score, 3)}")
+    write_results(args, target_list, target_dict1, target_dict2, dis_dicts)
 
 
 if __name__ == '__main__':
