@@ -26,8 +26,7 @@ from nltk.wsd import lesk
 from tqdm import tqdm
 import numpy as np
 
-CORPUS_1 = "cluster-projects-nn9851k-andreku-defgen_lscd-acl_data-english-corpora-acl-parsed-english-corpus1.tsv.gz"
-CORPUS_2 = "cluster-projects-nn9851k-andreku-defgen_lscd-acl_data-english-corpora-acl-parsed-english-corpus2.tsv.gz"
+
 LESK = "lesk"
 METRICS_NAMES = (
     "Cosine",
@@ -154,6 +153,10 @@ def parse_args():
     parser.add_argument("--use_pos_in_lesk", type=bool, default=False)
     parser.add_argument("--no_zeros_in_kl", type=bool, default=False)
     parser.add_argument("--lang", default="english")
+    parser.add_argument(
+        "--defgen_path",
+        default="cluster-projects-nn9851k-corpora-diachronic-acl_data-english-corpus1.tsv.gz",
+    )
     return parser.parse_args()
 
 
@@ -230,8 +233,12 @@ def main():
             target_dict2,
         )
     elif args.method == "defgen":
-        target_dict1 = get_senses_defgen(args, target_dict1, CORPUS_1)
-        target_dict2 = get_senses_defgen(args, target_dict2, CORPUS_2)
+        target_dict1 = get_senses_defgen(args, target_dict1, args.defgen_path)
+        target_dict2 = get_senses_defgen(
+            args,
+            target_dict2,
+            args.defgen_path.replace("corpus1", "corpus2"),
+        )
 
     dis_dicts = [{} for _ in METRICS]
     for target_word in target_list:
