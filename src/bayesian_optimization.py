@@ -3,6 +3,7 @@ import logging
 import os
 
 from ax import optimize
+from ax.exceptions.core import UserInputError
 import random
 import numpy as np
 import math
@@ -71,14 +72,19 @@ for metric in METRICS_NAMES:
         if x == float('-inf'): bound_score.append(
             min(bound_score) - abs(min(bound_score)))
     logging.info(bound_score)
-    best_parameters, best_values, _, _ = optimize(
-        parameters=[
-            {"name": "threshold",
-             "type": "range",
-             "bounds": [float(min(bound_score)),
-                        float(max(bound_score))], }, ],
-        evaluation_function=cal_acc,
-        minimize=False, random_seed=RANDOM_SEED)
+    try:
+        best_parameters, best_values, _, _ = optimize(
+            parameters=[
+                {"name": "threshold",
+                 "type": "range",
+                 "bounds": [float(min(bound_score)),
+                            float(max(bound_score))], }, ],
+            evaluation_function=cal_acc,
+            minimize=False, random_seed=RANDOM_SEED,
+        )
+    except UserInputError:
+        logging.info(f"impossible to optimize for the metric {metric}")
+        continue
     logging.info(best_parameters)
     logging.info(f'best_acc: {cal_acc(best_parameters)}')
 

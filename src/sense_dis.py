@@ -162,6 +162,7 @@ def write_results(args, target_list, target_dict1, target_dict2, dis_dicts):
         os.mkdir(args.results_dir)
     method_dir = os.path.join(args.results_dir, args.method, args.lang)
     if not os.path.exists(method_dir):
+        os.mkdir(os.path.join(args.results_dir, args.method))
         os.mkdir(method_dir)
     with open(f'{method_dir}/senseset_c1.txt',
               'w') as f:
