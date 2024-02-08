@@ -1,5 +1,6 @@
 import argparse
 from copy import deepcopy
+from collections import defaultdict
 import csv
 import logging
 import os
@@ -8,6 +9,7 @@ import random
 import numpy as np
 import pandas as pd
 from sklearn.cluster import AgglomerativeClustering
+from sklearn.metrics import pairwise_distances
 from tqdm import tqdm
 
 logging.basicConfig(level=logging.INFO)
@@ -38,32 +40,57 @@ def load_np(path, period):
     return wordtable, embs
 
 
-def create_threshold_dict(target_words, threshold_dict, wordtable, period):
+def create_threshold_dict(target_words, threshold_dict, wordtable, period, embs):
     for word in target_words:
         this_word = wordtable[wordtable[WORD_COLUMN] == word]
+        defs=this_word[DEFS_COLUMN]
+        threshold_dict[DEFS_COLUMN].extend(
+            defs.to_list()
+        )
         threshold_dict[WORD_COLUMN].extend(
             [word for _ in range(this_word.shape[0])]
         )
-        threshold_dict[DEFS_COLUMN].extend(this_word[DEFS_COLUMN].to_list())
+
         threshold_dict[TIME_PERIOD_COLUMN].extend(
             [period for _ in range(this_word.shape[0])]
         )
+        threshold_dict["embs"].extend(embs[word].tolist())
     return threshold_dict
 
 
-def run_clustering(args, threshold_dict, target_words, thresholds, embs):
+def run_clustering(args, threshold_dict, target_words, thresholds):
     for threshold in thresholds:
         logging.info(threshold)
         numbers_of_senses = []
-        threshold_dict[SENSE_ID_COLUMN] = []
+
+        df = pd.DataFrame(threshold_dict)
+        print(df.shape)
+        df_unique = df.drop_duplicates(subset=[DEFS_COLUMN])
+        print(df_unique.shape)
+        clusters_dict = {}
+
         for target_word in tqdm(target_words):
-            vectors = embs[target_word]
+            this_word = df_unique[df_unique[WORD_COLUMN]==target_word].reset_index()
+            # sim_matrix = pairwise_distances(this_word.embs, this_word.embs, metric="cosine")
+            # clusters = {}
+            # indices = np.where(sim_matrix < threshold)
+            # seen_col_numbers = set()
+            # for i, definition in enumerate(this_word[DEFS_COLUMN]):
+            #     if i not in seen_col_numbers:
+            #         col_numbers = indices[1][np.where(indices[0]==i)]
+            #         col_numbers = col_numbers[np.where(np.isin(col_numbers, list(seen_col_numbers), invert=True))]
+            #         seen_col_numbers = seen_col_numbers.union(set(col_numbers))
+            #         clusters[definition] = [this_word[DEFS_COLUMN][n] for n in col_numbers]
+            #
+            # numbers_of_senses.append(len(clusters))
+            vectors = this_word.embs.to_list()
+            linkage = "single"
             clustering = AgglomerativeClustering(
                 n_clusters=None,
                 distance_threshold=threshold,
                 compute_full_tree=True,
-                #metric="cosine",
-                #linkage="single",
+                metric="cosine",
+                linkage=linkage,
             ).fit(vectors)
             numbers_of_senses.append(clustering.n_clusters_)
             label2def = []
@@ -75,17 +102,18 @@ def run_clustering(args, threshold_dict, target_words, thresholds, embs):
             #     label2def[label] = defs_cluster[longest]
 
             # threshold_dict[SENSE_ID_COLUMN].extend([label2def[label] for label in clustering.labels_])
-            threshold_dict[SENSE_ID_COLUMN].extend(clustering.labels_.tolist())
-
-
+            #threshold_dict[SENSE_ID_COLUMN].extend(clustering.labels_.tolist())
+            for definition, label in zip(this_word[DEFS_COLUMN], clustering.labels_):
+                row_number = df[df[DEFS_COLUMN]==definition].index
+                df.loc[row_number, SENSE_ID_COLUMN] = label
         avg_num_of_clusters = sum(numbers_of_senses)/len(numbers_of_senses)
         logging.info(avg_num_of_clusters)
-        df = pd.DataFrame(threshold_dict)
+        df.insert(2, SENSE_ID_COLUMN, df.pop(SENSE_ID_COLUMN))
         first = df[df[TIME_PERIOD_COLUMN]==1]
         first.to_csv(
             os.path.join(
                 args.results_dir,
-                f"{threshold}_corpus{1}.tsv",
+                f"{threshold}_{linkage}_corpus{1}.tsv",
             ),
             sep="\t",
             index=False,
@@ -95,7 +123,7 @@ def run_clustering(args, threshold_dict, target_words, thresholds, embs):
         second.to_csv(
             os.path.join(
                 args.results_dir,
-                f"{threshold}_corpus{2}.tsv",
+                f"{threshold}_{linkage}_corpus{2}.tsv",
             ),
             sep="\t",
             index=False,
@@ -105,22 +133,19 @@ def run_clustering(args, threshold_dict, target_words, thresholds, embs):
 
 def main():
     args = parse_args()
-    thresholds = [round(x, 1) for x in np.arange(0.1, 0.6, 0.1)]
+    thresholds = [round(x, 2) for x in np.arange(0.6, 0.9, 0.1)]
     logging.info(f"Loading embeddings for time period 1")
     period_1, period_2 = 1, 2
     wordtable_1, embs_1 = load_np(args.path, period_1)
     logging.info(f"Loading embeddings for time period 2")
     wordtable_2, embs_2 = load_np(args.path, period_2)
-    threshold_dict = {WORD_COLUMN: [], DEFS_COLUMN: [], SENSE_ID_COLUMN: [], TIME_PERIOD_COLUMN: []}
+    threshold_dict = {WORD_COLUMN: [], DEFS_COLUMN: [],  TIME_PERIOD_COLUMN: [], "embs": [] }
     target_words = wordtable_1[WORD_COLUMN].unique()
-    threshold_dict = create_threshold_dict(target_words, threshold_dict, wordtable_1, period_1)
+    threshold_dict = create_threshold_dict(target_words, threshold_dict, wordtable_1, period_1, embs_1)
     threshold_dict = create_threshold_dict(target_words, threshold_dict,
-                                           wordtable_2, period_2)
-    embs = {}
-    for word, vectors in embs_2.items():
-        embs[word] = np.concatenate((embs_1[word], vectors))
+                                           wordtable_2, period_2, embs_2)
 
-    run_clustering(args, threshold_dict, target_words, thresholds, embs)
+    run_clustering(args, threshold_dict, target_words, thresholds)
 
 if __name__ == '__main__':
     main()

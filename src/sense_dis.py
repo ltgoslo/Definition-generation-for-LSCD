@@ -139,7 +139,7 @@ def get_senses_defgen(args, target_dict, corpus_fn):
                          header=None)
     for target_word in corpus[0].unique():
         this_word = corpus[corpus[0] == target_word]
-        target_dict[target_word] = Counter(this_word[2].unique())
+        target_dict[target_word] = Counter(this_word[2])
     return target_dict
 
 
