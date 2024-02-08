@@ -84,7 +84,7 @@ def run_clustering(args, threshold_dict, target_words, thresholds):
             #
             # numbers_of_senses.append(len(clusters))
             vectors = this_word.embs.to_list()
-            linkage = "single"
+            linkage = "average"
             clustering = AgglomerativeClustering(
                 n_clusters=None,
                 distance_threshold=threshold,
@@ -133,7 +133,7 @@ def run_clustering(args, threshold_dict, target_words, thresholds):
 
 def main():
     args = parse_args()
-    thresholds = [round(x, 2) for x in np.arange(0.6, 0.9, 0.1)]
+    thresholds = [round(x, 2) for x in np.arange(0.5, 0.7, 0.1)]
     logging.info(f"Loading embeddings for time period 1")
     period_1, period_2 = 1, 2
     wordtable_1, embs_1 = load_np(args.path, period_1)
