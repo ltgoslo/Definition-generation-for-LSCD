@@ -98,7 +98,6 @@ def write_results(df, args, metric, numbers_of_senses):
 
 def run_clustering(args, threshold_dict, target_words, thresholds):
     numbers_of_senses_silhouette = []
-
     df = pd.DataFrame(threshold_dict)
     df_unique = df.drop_duplicates(subset=[DEFS_COLUMN])
 
@@ -137,7 +136,7 @@ def run_clustering(args, threshold_dict, target_words, thresholds):
         ):
             row_number = df[df[DEFS_COLUMN] == definition].index
             df.loc[row_number, SENSE_ID_COLUMN] = label
-
+    logging.info(f"Average number of senses before clustering {len(df[DEFS_COLUMN].unique())/len(target_words)}")
     write_results(df, args, "Silhouette", numbers_of_senses_silhouette)
 
 
