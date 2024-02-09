@@ -1,5 +1,4 @@
 import argparse
-from collections import defaultdict
 import csv
 import logging
 import os
@@ -8,7 +7,7 @@ import random
 import numpy as np
 import pandas as pd
 from sklearn.cluster import AgglomerativeClustering
-from sklearn.metrics import pairwise_distances
+from sklearn.metrics import silhouette_score
 from tqdm import tqdm
 
 logging.basicConfig(level=logging.INFO)
@@ -34,6 +33,8 @@ def parse_args():
     parser.add_argument('--agglomerative', default=True)
     parser.add_argument('--linkage', default="average")
     parser.add_argument('--metric', default="cosine")
+    parser.add_argument('--distances_range_start', default=0.1, type=float)
+    parser.add_argument('--distances_range_end', default=1.0, type=float)
     return parser.parse_args()
 
 
@@ -68,17 +69,48 @@ def create_threshold_dict(target_words, threshold_dict, wordtable, period,
     return threshold_dict
 
 
+def write_results(df, args, metric, numbers_of_senses):
+    avg_num_of_clusters = sum(numbers_of_senses) / len(
+        numbers_of_senses)
+    logging.info(avg_num_of_clusters)
+    df.insert(2, SENSE_ID_COLUMN, df.pop(SENSE_ID_COLUMN))
+    first = df[df[TIME_PERIOD_COLUMN] == 1]
+    first.to_csv(
+        os.path.join(
+            args.results_dir,
+            f"{args.linkage}_{metric}corpus{1}.tsv",
+        ),
+        sep="\t",
+        index=False,
+        header=False,
+    )
+    second = df[df[TIME_PERIOD_COLUMN] == 2]
+    second.to_csv(
+        os.path.join(
+            args.results_dir,
+            f"{args.linkage}_{metric}corpus{2}.tsv",
+        ),
+        sep="\t",
+        index=False,
+        header=False,
+    )
+
+
 def run_clustering(args, threshold_dict, target_words, thresholds):
-    for threshold in thresholds:
-        logging.info(threshold)
-        numbers_of_senses = []
+    numbers_of_senses_silhouette = []
 
-        df = pd.DataFrame(threshold_dict)
-        df_unique = df.drop_duplicates(subset=[DEFS_COLUMN])
+    df = pd.DataFrame(threshold_dict)
+    df_unique = df.drop_duplicates(subset=[DEFS_COLUMN])
 
-        for target_word in tqdm(target_words):
-            this_word = df_unique[
-                df_unique[WORD_COLUMN] == target_word].reset_index()
+    for target_word in tqdm(target_words):
+        sils = []
+        results = []
+        this_word = df_unique[
+            df_unique[WORD_COLUMN] == target_word
+            ].reset_index()
+        for threshold in thresholds:
+            logging.info(threshold)
+
             if args.agglomerative:
                 vectors = this_word.embs.to_list()
                 clustering = AgglomerativeClustering(
@@ -88,57 +120,36 @@ def run_clustering(args, threshold_dict, target_words, thresholds):
                     metric=args.metric,
                     linkage=args.linkage,
                 ).fit(vectors)
-                numbers_of_senses.append(clustering.n_clusters_)
-                for definition, label in zip(
-                        this_word[DEFS_COLUMN],
-                        clustering.labels_,
-                ):
-                    row_number = df[df[DEFS_COLUMN] == definition].index
-                    df.loc[row_number, SENSE_ID_COLUMN] = label
-            else:
-                sim_matrix = pairwise_distances(this_word.embs, this_word.embs, metric=args.metric)
-                numbers_of_senses = []
-                indices = np.where(sim_matrix < threshold)
-                seen_col_numbers = set()
-                for i, definition in enumerate(this_word[DEFS_COLUMN]):
-                    if i not in seen_col_numbers:
-                        col_numbers = indices[1][np.where(indices[0] == i)]
-                        col_numbers = col_numbers[np.where(np.isin(col_numbers, list(seen_col_numbers), invert=True))]
-                        seen_col_numbers = seen_col_numbers.union(set(col_numbers))
-                        numbers_of_senses.append(len(col_numbers))
-                        for n in col_numbers:
-                            row_number = df[
-                                df[DEFS_COLUMN] == this_word[DEFS_COLUMN][n]
-                            ].index
-                            df.loc[row_number, SENSE_ID_COLUMN] = definition
-        avg_num_of_clusters = sum(numbers_of_senses) / len(numbers_of_senses)
-        logging.info(avg_num_of_clusters)
-        df.insert(2, SENSE_ID_COLUMN, df.pop(SENSE_ID_COLUMN))
-        first = df[df[TIME_PERIOD_COLUMN] == 1]
-        first.to_csv(
-            os.path.join(
-                args.results_dir,
-                f"{threshold}_{args.linkage}_{args.metric}corpus{1}.tsv",
-            ),
-            sep="\t",
-            index=False,
-            header=False,
-        )
-        second = df[df[TIME_PERIOD_COLUMN] == 2]
-        second.to_csv(
-            os.path.join(
-                args.results_dir,
-                f"{threshold}_{args.linkage}_{args.metric}corpus{2}.tsv",
-            ),
-            sep="\t",
-            index=False,
-            header=False,
-        )
+
+                try:
+                    sils.append(silhouette_score(vectors, clustering.labels_,
+                                                 metric='cosine'))
+                except ValueError:
+                    logging.info("Unable to calculate metrics 1 label only")
+                    sils.append(-1)
+                results.append((clustering.n_clusters_, clustering.labels_))
+        best_silhouette = np.argmax(sils)
+        numbers_of_senses_silhouette.append(results[best_silhouette][0])
+
+        for definition, label in zip(
+                this_word[DEFS_COLUMN],
+                results[best_silhouette][1],
+        ):
+            row_number = df[df[DEFS_COLUMN] == definition].index
+            df.loc[row_number, SENSE_ID_COLUMN] = label
+
+    write_results(df, args, "Silhouette", numbers_of_senses_silhouette)
 
 
 def main():
     args = parse_args()
-    thresholds = [round(x, 2) for x in np.arange(0.8, 1.0, 0.1)]
+    thresholds = [
+        round(x, 2) for x in np.arange(
+            args.distances_range_start,
+            args.distances_range_end,
+            0.1,
+        )
+    ]
     logging.info(f"Loading embeddings for time period 1")
     period_1, period_2 = 1, 2
     wordtable_1, embs_1 = load_np(args.path, period_1)
