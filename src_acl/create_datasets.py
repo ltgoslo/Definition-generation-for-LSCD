@@ -49,6 +49,7 @@ def parse_arge():
     parser.add_argument(
         "--n_first",
         default=None,
+        type=int,
     )
     return parser.parse_args()
 
@@ -56,8 +57,11 @@ def parse_arge():
 if __name__ == '__main__':
     args = parse_arge()
     lang_path = os.path.join(os.path.expanduser(args.conll_path), args.lang)
-    with open(os.path.expanduser(args.targets_path), "r") as targets_file:
-        targets = targets_file.readlines()
+    if args.lang == "english":
+        with open(os.path.expanduser(args.targets_path), "r") as targets_file:
+            targets = targets_file.readlines()
+    elif "norwegian" in args.lang:
+        targets = os.listdir(args.targets_path)
     targets = [target.strip() for target in targets]
     tokenizer = MT5Tokenizer.from_pretrained(os.path.expanduser("~/mt0-xl"))
     assert os.path.isdir(args.res_path)
