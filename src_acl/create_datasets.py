@@ -21,7 +21,10 @@ LANGUAGES = (
     'swedish',
 )
 PROMPTS = {
-    "english": "What is the definition of"
+    "english": "What is the definition of",
+    'norwegian1': "Hva betyr",
+    'norwegian2': "Hva betyr",
+    'russian': "Что такое",
 }
 POS = {"NOUN": "nn", "VERB": "vb"}
 LEMMA = "lemma"
@@ -41,7 +44,7 @@ def parse_arge():
     )
     parser.add_argument(
         "--res_path",
-        default="../acl_data"
+        default="../../acl_data"
     )
     parser.add_argument(
         "--n_first",
@@ -57,9 +60,15 @@ if __name__ == '__main__':
         targets = targets_file.readlines()
     targets = [target.strip() for target in targets]
     tokenizer = MT5Tokenizer.from_pretrained(os.path.expanduser("~/mt0-xl"))
+    assert os.path.isdir(args.res_path)
     for corpus in glob(f"{lang_path}/*.gz"):
         logging.info(corpus)
         prompts, targets_list = [], []
+        res_path = os.path.join(
+            os.path.expanduser(args.res_path),
+            f"{corpus.replace('/', '-')}{os.extsep}txt{os.extsep}gz".lstrip(
+                "-"),
+        )
         with gzip.open(corpus, "rt") as corpus_file:
             count = 0
             for token_list in tqdm.tqdm(parse_incr(corpus_file)):
@@ -91,10 +100,6 @@ if __name__ == '__main__':
                                 count += 1
                 else:
                     break
-        res_path = os.path.join(
-            os.path.expanduser(args.res_path),
-            f"{corpus.replace('/', '-')}{os.extsep}txt{os.extsep}gz",
-        )
         with gzip.open(res_path, "wt") as results_file:
             for target, prompt in zip(targets_list, prompts):
                 results_file.write(f"{target}\t{prompt}\n")
