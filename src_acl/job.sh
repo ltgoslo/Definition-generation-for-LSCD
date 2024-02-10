@@ -33,7 +33,7 @@ RES_PATH=/cluster/projects/nn9851k/andreku/defgen_lscd/acl_results
 MODELS_DIR=/cluster/projects/nn9851k/models/definition_generation
 BATCH_SIZE=${1}
 MAX_NEW_TOKENS=${2}
-LANG={3}
+LANG=${3}
 N_FIRST=${4}
 
 python "${REPO}src_acl/run_defgen.py" --data_path $DATA_PATH \
