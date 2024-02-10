@@ -7,7 +7,7 @@
 #SBATCH --account=nn9851k
 #
 # Wall time limit:
-#SBATCH --time=4:00:00
+#SBATCH --time=6:00:00
 #SBATCH --partition=a100
 #SBATCH --gpus=1
 #SBATCH --nodes=1
@@ -33,5 +33,14 @@ RES_PATH=/cluster/projects/nn9851k/andreku/defgen_lscd/acl_results
 MODELS_DIR=/cluster/projects/nn9851k/models/definition_generation
 BATCH_SIZE=${1}
 MAX_NEW_TOKENS=${2}
-N_FIRST=${3}
-python "${REPO}src_acl/run_defgen.py" --data_path $DATA_PATH --bsize $BATCH_SIZE --maxl 350 --res_path $RES_PATH --n_first $N_FIRST --models_dir $MODELS_DIR --max_new_tokens $MAX_NEW_TOKENS
+LANG={3}
+N_FIRST=${4}
+
+python "${REPO}src_acl/run_defgen.py" --data_path $DATA_PATH \
+ --bsize $BATCH_SIZE \
+ --maxl 350 \
+ --res_path $RES_PATH \
+ --n_first $N_FIRST \
+ --models_dir $MODELS_DIR \
+ --max_new_tokens $MAX_NEW_TOKENS \
+ --lang $LANG
