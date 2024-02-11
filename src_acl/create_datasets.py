@@ -5,6 +5,7 @@ import logging
 import os
 
 from conllu import parse_incr
+import pandas as pd
 import tqdm
 from transformers import MT5Tokenizer
 
@@ -43,6 +44,10 @@ def parse_arge():
         default="~/Downloads/semeval2020_ulscd_eng/targets.txt",
     )
     parser.add_argument(
+        "--targets_path_2",
+        default="../../gloss-annotator/wugs/rushifteval_public/annotated_all.tsv",
+    )
+    parser.add_argument(
         "--res_path",
         default="../../acl_data"
     )
@@ -60,8 +65,11 @@ if __name__ == '__main__':
     if args.lang == "english":
         with open(os.path.expanduser(args.targets_path), "r") as targets_file:
             targets = targets_file.readlines()
-    elif "norwegian" in args.lang:
+    elif ("norwegian" in args.lang) or (args.lang == "russian"):
         targets = os.listdir(args.targets_path)
+    if args.lang == "russian":
+        targets_2 = pd.read_csv(args.targets_path_2, sep="\t", header=None)
+    targets = list(set(targets).union(set(targets_2[0])))
     targets = [target.strip() for target in targets]
     tokenizer = MT5Tokenizer.from_pretrained(os.path.expanduser("~/mt0-xl"))
     assert os.path.isdir(args.res_path)

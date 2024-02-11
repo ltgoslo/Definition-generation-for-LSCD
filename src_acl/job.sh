@@ -35,10 +35,11 @@ BATCH_SIZE=${1}
 MAX_NEW_TOKENS=${2}
 LANG=${3}
 N_FIRST=${4}
+MAXL=${5}
 
 python "${REPO}src_acl/run_defgen.py" --data_path $DATA_PATH \
  --bsize $BATCH_SIZE \
- --maxl 350 \
+ --maxl $MAXL \
  --res_path $RES_PATH \
  --n_first $N_FIRST \
  --models_dir $MODELS_DIR \
