@@ -114,6 +114,21 @@ def parse_arge():
         default=50,
         type=int,
     )
+    parser.add_argument(
+        "--num_beams",
+        default=1,  # no beam search by default
+        type=int,
+    )
+    parser.add_argument(
+        "--num_beam_groups",
+        default=1,
+        type=int,
+    )
+    parser.add_argument(
+        "--diversity_penalty",
+        default=0.0,
+        type=float,
+    )
     return parser.parse_args()
 
 
@@ -124,9 +139,6 @@ def define(
         arguments,
         targets,
         filter_target=True,
-        num_beams=5,
-        num_beam_groups=5,
-        diversity_penalty=0.5,
 ):
     logging.info(f"Tokenizing with max length {arguments.maxl}...")
     inputs = cur_tokenizer(
@@ -162,9 +174,9 @@ def define(
                     do_sample=False,
                     bad_words_ids=bad,
                     max_new_tokens=arguments.max_new_tokens,
-                    num_beams=num_beams,
-                    num_beam_groups=num_beam_groups,
-                    diversity_penalty=diversity_penalty,
+                    num_beams=arguments.num_beams,
+                    num_beam_groups=arguments.num_beam_groups,
+                    diversity_penalty=arguments.diversity_penalty,
                 )
             else:
                 outputs = lm.generate(input_ids=inp, attention_mask=att,
