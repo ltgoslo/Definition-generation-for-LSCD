@@ -182,6 +182,12 @@ if __name__ == '__main__':
         model, tokenizer = load_mt5_model_and_tokenizer(model_path)
     else:
         model, tokenizer = load_model_and_tokenizer(model_path)
+    res_path = os.path.join(
+        os.path.expanduser(args.res_path),
+        args.lang,
+    )
+    if not os.path.isdir(res_path):
+        os.mkdir(res_path)
     for corpus in glob(f"{args.data_path}/{args.lang}/*.gz"):
         logging.info(corpus)
         prompts, targets_list = [], []
@@ -196,11 +202,11 @@ if __name__ == '__main__':
                 else:
                     break
         definitions = define(prompts, model, tokenizer, args, targets_list)
-        res_fn = os.path.split(corpus)[0].replace(
+        res_fn = os.path.split(corpus)[-1].replace(
             ".conllu.gz.txt.gz", ".tsv",
         )
         res_path = os.path.join(
-            os.path.expanduser(args.res_path),
+            res_path,
             res_fn,
         )
         with open(res_path, "w", encoding="utf8") as results_file:
