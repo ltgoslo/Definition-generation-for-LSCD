@@ -115,6 +115,11 @@ def parse_arge():
         type=int,
     )
     parser.add_argument(
+        "--decoding_strategy",
+        default="greedy",
+        choices=("greedy", "beam", "diverse_beam"),
+    )
+    parser.add_argument(
         "--num_beams",
         default=1,  # no beam search by default
         type=int,
@@ -195,12 +200,23 @@ if __name__ == '__main__':
         model, tokenizer = load_mt5_model_and_tokenizer(model_path)
     else:
         model, tokenizer = load_model_and_tokenizer(model_path)
-    res_folder = os.path.join(
+    lang_folder = os.path.join(
         os.path.expanduser(args.res_path),
         args.lang,
     )
+    if not os.path.isdir(lang_folder):
+        os.mkdir(lang_folder)
+    res_folder = os.path.join(lang_folder, args.decoding_strategy)
     if not os.path.isdir(res_folder):
         os.mkdir(res_folder)
+    if args.decoding_strategy == "greedy":
+        assert args.num_beams == 1
+        assert args.num_beam_groups == 1
+        assert args.diversity_penalty == 0
+    elif "beam" in args.decoding_strategy:
+        assert args.num_beams > 1
+        if "diverse" in args.decoding_strategy:
+            assert args.num_beam_groups > 1
     logging.info(f"Will save to {res_folder}")
     for corpus in glob(f"{args.data_path}/{args.lang}/*.gz"):
         logging.info(corpus)
