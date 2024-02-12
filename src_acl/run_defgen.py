@@ -196,11 +196,9 @@ if __name__ == '__main__':
                 else:
                     break
         definitions = define(prompts, model, tokenizer, args, targets_list)
-        res_fn = corpus.replace("/", "-").replace(
-            "-home-m-corpora-acl-parsed-english-", "",
-        ).replace(
-            ".conllu.gz.txt.gz", ".tsv.gz",
-        ).strip("-")
+        res_fn = os.path.split(corpus)[0].replace(
+            ".conllu.gz.txt.gz", ".tsv",
+        )
         res_path = os.path.join(
             os.path.expanduser(args.res_path),
             res_fn,
