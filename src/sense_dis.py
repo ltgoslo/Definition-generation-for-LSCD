@@ -24,7 +24,7 @@ from nltk.wsd import lesk
 from tqdm import tqdm
 import numpy as np
 
-METRICS_NAMES = (
+METRICS_NAMES = [
     "Cosine",
     "Chebyshev",
     "Canberra",
@@ -32,7 +32,7 @@ METRICS_NAMES = (
     "Euclidean",
     "JS",
     "KL",
-)
+]
 
 logging.basicConfig(format="%(asctime)s : %(levelname)s : %(message)s", level=logging.INFO)
 
@@ -51,7 +51,7 @@ def kl(sense_ids1, sense_ids2, no_zeros=False):
     return sum(kl_div(sense_ids1, sense_ids2))
 
 
-METRICS = (
+METRICS = [
     cosine,
     chebyshev,
     canberra,
@@ -59,7 +59,7 @@ METRICS = (
     euclidean,
     jensenshannon,
     kl,
-)
+]
 
 
 def _get_senses_lesk(args, target_dict, target_list, target_list_pos, sent_ls):
