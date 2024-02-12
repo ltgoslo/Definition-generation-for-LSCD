@@ -68,8 +68,12 @@ if __name__ == '__main__':
                 i = targets.index(wrong_lemma)
                 targets[i] = wrong_lemma[:-2]
     if args.lang == "russian":
-        targets = pd.read_csv(args.targets_path, sep="\t", header=None)
-    targets = [target.strip() for target in targets]
+        targets = pd.read_csv(args.targets_path, sep="\t", header=None)[0]
+    try:
+        targets = [target.strip() for target in targets]
+    except AttributeError:
+        logging.info(targets)
+        raise AttributeError
     tokenizer = MT5Tokenizer.from_pretrained(os.path.expanduser("~/mt0-xl"))
     assert os.path.isdir(args.res_path)
     for corpus in glob(f"{lang_path}/*.gz"):
