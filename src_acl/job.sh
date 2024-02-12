@@ -7,7 +7,7 @@
 #SBATCH --account=nn9851k
 #
 # Wall time limit:
-#SBATCH --time=6:00:00
+#SBATCH --time=10:00:00
 #SBATCH --partition=a100
 #SBATCH --gpus=1
 #SBATCH --nodes=1
@@ -29,7 +29,7 @@ module list    # For easier debugging
 export PYTHONIOENCODING=utf8
 REPO=/cluster/projects/nn9851k/andreku/defgen_lscd/Sense-based-Semantic-Change-Prediction/
 DATA_PATH=/cluster/projects/nn9851k/andreku/defgen_lscd/acl_data
-RES_PATH=/cluster/projects/nn9851k/andreku/defgen_lscd/acl_results
+RES_PATH=/cluster/projects/nn9851k/andreku/defgen_lscd/generated_definitions
 MODELS_DIR=/cluster/projects/nn9851k/models/definition_generation
 BATCH_SIZE=${1}
 MAX_NEW_TOKENS=${2}
