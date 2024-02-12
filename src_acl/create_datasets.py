@@ -44,10 +44,6 @@ def parse_arge():
         default="~/Downloads/semeval2020_ulscd_eng/targets.txt",
     )
     parser.add_argument(
-        "--targets_path_2",
-        default="../../gloss-annotator/wugs/rushifteval_public/annotated_all.tsv",
-    )
-    parser.add_argument(
         "--res_path",
         default="../../acl_data"
     )
@@ -65,12 +61,19 @@ if __name__ == '__main__':
     if args.lang == "english":
         with open(os.path.expanduser(args.targets_path), "r") as targets_file:
             targets = targets_file.readlines()
-    elif ("norwegian" in args.lang) or (args.lang == "russian"):
+    elif "norwegian" in args.lang:
         targets = os.listdir(args.targets_path)
+        if args.lang == "norwegian1":
+            for wrong_lemma in {"formiddagen", "landet"}:
+                i = targets.index(wrong_lemma)
+                targets[i] = wrong_lemma[:-2]
     if args.lang == "russian":
-        targets_2 = pd.read_csv(args.targets_path_2, sep="\t", header=None)
-    targets = list(set(targets).union(set(targets_2[0])))
-    targets = [target.strip() for target in targets]
+        targets = pd.read_csv(args.targets_path, sep="\t", header=None)[0]
+    try:
+        targets = [target.strip() for target in targets]
+    except AttributeError:
+        logging.info(targets)
+        raise AttributeError
     tokenizer = MT5Tokenizer.from_pretrained(os.path.expanduser("~/mt0-xl"))
     assert os.path.isdir(args.res_path)
     for corpus in glob(f"{lang_path}/*.gz"):
@@ -85,17 +88,24 @@ if __name__ == '__main__':
             count = 0
             for token_list in tqdm.tqdm(parse_incr(corpus_file)):
                 if (args.n_first is None) or (count < args.n_first):
+                    sent = ' '.join([tok["form"] for tok in token_list])
+
                     if args.lang == "english":
                         lemmas_set = {
                             f'{tok[LEMMA]}_{POS.get(tok["upos"])}' for tok
                             in token_list
                         }
+                    elif "norwegian" in args.lang:
+                        lemmas_set = {
+                            tok[LEMMA] for tok
+                            in token_list if tok["upos"] in {"NOUN", "PROPN"}
+                        }
                     else:
-                        lemmas_set = {tok[LEMMA] for tok in token_list}
+                        lemmas_set = {tok[LEMMA].rstrip(".") for tok in token_list}
 
                     intersected = lemmas_set.intersection(targets)
                     if intersected:
-                        sent = ' '.join([tok["form"] for tok in token_list])
+
                         for target in intersected:
                             target = target.split("_")[0]
                             prompt = f"{sent} {PROMPTS[args.lang]} {target}?"
