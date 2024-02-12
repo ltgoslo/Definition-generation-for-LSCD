@@ -32,6 +32,8 @@ MODELS = {
     "norwegian1": "mt0-definition-no-xl",
     "norwegian2": "mt0-definition-no-xl",
     "russian": "mt0-definition-ru-xl",
+    "russian2": "mt0-definition-ru-xl",
+    "russian3": "mt0-definition-ru-xl",
 }
 
 
@@ -79,7 +81,6 @@ def parse_arge():
     parser.add_argument(
         "--lang",
         default="english",
-        choices=LANGUAGES,
     )
     parser.add_argument(
         "--data_path",
@@ -182,16 +183,17 @@ if __name__ == '__main__':
         model, tokenizer = load_mt5_model_and_tokenizer(model_path)
     else:
         model, tokenizer = load_model_and_tokenizer(model_path)
-    res_path = os.path.join(
+    res_folder = os.path.join(
         os.path.expanduser(args.res_path),
         args.lang,
     )
-    if not os.path.isdir(res_path):
-        os.mkdir(res_path)
+    if not os.path.isdir(res_folder):
+        os.mkdir(res_folder)
+    logging.info(f"Will save to {res_folder}")
     for corpus in glob(f"{args.data_path}/{args.lang}/*.gz"):
         logging.info(corpus)
         prompts, targets_list = [], []
-        with gzip.open(corpus, "rt") as corpus_file:
+        with gzip.open(corpus, "rt", encoding="utf8") as corpus_file:
             count = 0
             for line in tqdm.tqdm(corpus_file):
                 if (args.n_first == 0) or (count < args.n_first):
@@ -202,17 +204,16 @@ if __name__ == '__main__':
                 else:
                     break
         definitions = define(prompts, model, tokenizer, args, targets_list)
-        res_fn = corpus.split("/")[-1].replace(
+        res_fn = corpus.split("/")[-1].split(os.extsep)[0].replace(
             "home-m-corpora-acl-parsed-", "",
-        ).replace(
-            ".conllu.gz.txt.gz", ".tsv",
-        )
+        ) + ".tsv"
         res_path = os.path.join(
-            res_path,
+            res_folder,
             res_fn,
         )
         with open(res_path, "w", encoding="utf8") as results_file:
             for target, prompt, definition in zip(
                     targets_list, prompts, definitions,
             ):
-                results_file.write(f"{target}\t{prompt}\t{definition}\n")
+                res_str = f"{target}\t{prompt}\t{definition}\n"
+                results_file.write(res_str)
