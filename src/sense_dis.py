@@ -273,6 +273,10 @@ def main():
                 sense_ids2.append(target_dict2[target_word][sense])
             else:
                 sense_ids2.append(0.0)
+        if target_word == "multitude":
+            print(f"bit1: {sense_ids1}")
+            print(f"bit2: {sense_ids2}")
+            print(cosine(sense_ids1, sense_ids2))
         for i, metric in enumerate(METRICS[:-1]):
             dis_dicts[i][target_word] = metric(sense_ids1, sense_ids2)
         dis_dicts[-1][target_word] = METRICS[-1](
