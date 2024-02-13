@@ -36,7 +36,8 @@ MAX_NEW_TOKENS=${2}
 LANG=${3}
 N_FIRST=${4}
 MAXL=${5}
-NUM_BEAMS=${6}
+DECODING_STRATEGY=${6}
+NUM_BEAMS=${7}
 
 python "${REPO}src_acl/run_defgen.py" --data_path $DATA_PATH \
  --bsize $BATCH_SIZE \
@@ -46,4 +47,5 @@ python "${REPO}src_acl/run_defgen.py" --data_path $DATA_PATH \
  --models_dir $MODELS_DIR \
  --max_new_tokens $MAX_NEW_TOKENS \
  --lang $LANG \
+ --decoding_strategy $DECODING_STRATEGY \
  --num_beams $NUM_BEAMS
