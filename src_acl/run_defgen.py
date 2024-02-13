@@ -4,6 +4,7 @@ import gzip
 import logging
 import os
 
+import pandas as pd
 import torch
 import tqdm
 from transformers import (
@@ -234,14 +235,18 @@ if __name__ == '__main__':
         definitions = define(prompts, model, tokenizer, args, targets_list)
         res_fn = corpus.split("/")[-1].split(os.extsep)[0].replace(
             "home-m-corpora-acl-parsed-", "",
-        ) + ".tsv"
+        ) + ".tsv.gz"
         res_path = os.path.join(
             res_folder,
             res_fn,
         )
-        with open(res_path, "w", encoding="utf8") as results_file:
-            for target, prompt, definition in zip(
-                    targets_list, prompts, definitions,
-            ):
-                res_str = f"{target}\t{prompt}\t{definition}\n"
-                results_file.write(res_str)
+        results = pd.DataFrame({0: targets_list, 1: prompts, 2: definitions})
+        logging.info(f"Number of lines in the result: {results.shape[0]}")
+        results.to_csv(
+            res_path,
+            sep="\t",
+            index=False,
+            compression="gzip",
+            header=False,
+            encoding="utf8",
+        )
