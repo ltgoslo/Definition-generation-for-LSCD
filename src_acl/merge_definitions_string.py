@@ -6,6 +6,7 @@ import pandas as pd
 from collections import Counter
 import argparse
 import logging
+import os
 
 
 if __name__ == "__main__":
@@ -13,7 +14,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--data_path",
         type=str,
-        help="Directory with two time-specific datasets",
+        help="File with a dataset",
         required=True
     )
     parser.add_argument(
@@ -24,13 +25,15 @@ if __name__ == "__main__":
     parser.add_argument(
         "--out",
         type=str,
-        help="Directory to save datasets with merged definitions",
+        help="File to save the dataset with merged definitions",
         required=True
     )
     args = parser.parse_args()
 
+    os.makedirs(os.path.dirname(args.out), exist_ok=True)
+
     LENGTH = 3  # We merge only definitions longer than LENGTH words
-    logging.basicConfig(format="%(asctime)s : %(levelname)s : %(message)s", level=logging.DEBUG)
+    logging.basicConfig(format="%(asctime)s : %(levelname)s : %(message)s", level=logging.INFO)
 
     df = pd.read_csv(args.data_path, sep="\t", header=None)
     df.columns = ["word", "usage", "definition"]
@@ -69,5 +72,7 @@ if __name__ == "__main__":
             for d in df[df.word == word].definition
         ]
         df.loc[df.word == word, "definition"] = new_defs
+        definitions = Counter(df[df.word == word].definition).most_common()
+        logging.info(f"{word}: {len(definitions)} unique senses")
     df.to_csv(args.out, sep="\t", header=False, index=False)
     logging.info(f"Merged definitions saved to {args.out}")

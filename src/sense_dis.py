@@ -34,7 +34,7 @@ METRICS_NAMES = [
     "KL",
 ]
 
-logging.basicConfig(format="%(asctime)s : %(levelname)s : %(message)s", level=logging.INFO)
+logging.basicConfig(format="%(asctime)s : %(levelname)s : %(message)s", level=logging.DEBUG)
 
 
 def kl(sense_ids1, sense_ids2, no_zeros=False):
@@ -239,7 +239,7 @@ def main():
     with open(os.path.join(args.data_dir, f"{args.lang}/targets.txt")) as target_file:
         for line in target_file:
             target_list_pos.append(line.rstrip())
-            target_word = line.split("_")[0]
+            target_word = line.strip().split("_")[0]
             target_list.append(target_word)
             target_dict1[target_word] = {}
             target_dict2[target_word] = {}
@@ -258,7 +258,6 @@ def main():
     elif args.method == "defgen":
         target_dict1 = get_senses_defgen(target_dict1, args.defgen_path, args.lang, "1")
         target_dict2 = get_senses_defgen(target_dict2, args.defgen_path, args.lang, "2")
-
     dis_dicts = [{} for _ in METRICS]
     for target_word in target_list:
         sense_set = set(target_dict1[target_word]).union(set(target_dict2[target_word]))
