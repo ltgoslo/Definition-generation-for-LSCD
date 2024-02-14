@@ -58,7 +58,9 @@ def _get_senses_lesk(args, target_dict, target_list, target_list_pos, sent_ls):
         dictionary = pd.read_csv(
             os.path.expanduser(
                 os.path.join(
-                    args.data_dir, args.lang, "norwegian_finetuning_.tsv.gz",
+                    args.data_dir,
+                    args.lang,
+                    "complete.tsv.gz",
                 ),
             ),
             sep="\t",
@@ -224,7 +226,7 @@ def parse_args():
 
 
 def write_results(
-        args, target_list, target_dict1, target_dict2, dis_dicts, truth,
+        args, target_list, target_dict1, target_dict2, dis_dicts, truth, target_list_original,
 ):
     logging.info("=========")
     logging.info("Evaluation")
@@ -252,17 +254,17 @@ def write_results(
 
     for metric, dis_dict in zip(METRICS_NAMES, dis_dicts):
         with open(f"{method_dir}/{metric}_dict.tsv", "w") as f:
-            for target_word in target_list:
+            for i, target_word in enumerate(target_list_original):
                 f.write(
-                    f"{target_word}\t{dis_dict.get(target_word, 0.00001)}\n")
+                    f"{target_word}\t{dis_dict[target_list[i]]}\n")
 
         with open(f"{method_dir}/{metric}_score.txt", "w") as f:
             for target_word in target_list:
-                f.write(f"{dis_dict.get(target_word, 0.00001)},")
+                f.write(f"{dis_dict[target_word]},")
 
-        new = [dis_dict.get(target_word, 0.00001) for target_word in
+        new = [dis_dict[target_word] for target_word in
                target_list]
-        score = stats.spearmanr(truth, new)[0]
+        score = stats.spearmanr(truth, new, nan_policy='omit')[0]
         logging.info(f"{args.method}, {metric}: {round(score, 3)}")
 
 
@@ -281,15 +283,12 @@ def main():
         lines = f.readlines()
         for el in lines:
             splitted = el.split()
-            if splitted[0] not in {"formiddagen", "landet"}:
-                target_list_original.append(splitted[0])
-            else:
-                target_list_original.append(splitted[0][:-2])
+            target_list_original.append(splitted[0])
             truth.append(float(splitted[-1]))
     with open(os.path.join(args.data_dir,
                            f"{args.lang}/targets.txt")) as target_file:
         for line in target_file:
-            if line.rstrip() in target_list_original:  # not all Norwegian words are used
+            if (line.rstrip() in target_list_original) or (line.rstrip() in {"formiddag", "land"}):  # not all Norwegian words are used
                 target_word = line.strip().split("_")[0]
                 target_list.append(target_word)
                 target_dict1[target_word] = {}
@@ -340,7 +339,7 @@ def main():
         else:
             dis_dicts[-1][target_word] = 0.00001
     write_results(
-        args, target_list, target_dict1, target_dict2, dis_dicts, truth,
+        args, target_list, target_dict1, target_dict2, dis_dicts, truth, target_list_original
     )
     logging.info(
         "Don't forget to evaluate the predictions with the official scorer.")
