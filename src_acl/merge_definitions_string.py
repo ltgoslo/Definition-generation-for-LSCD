@@ -35,7 +35,7 @@ def find_merges(df, argums):
     for targ_word in targ_words:
         definitions = Counter(df[df.word == targ_word].definition).most_common()
         # definitions = sorted(definitions)  # can be commented to out to start from most frequent
-        logging.info(f"{targ_word}: {len(definitions)} unique senses before merging")
+        logging.debug(f"{targ_word}: {len(definitions)} unique senses before merging")
         sim_cache = {}
         def2compare = None
         for nr, source in enumerate(definitions):
@@ -88,7 +88,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--thresh",
-            type=int,
+        type=int,
         help="Levenshtein distance threshold: we merge only definitions longer than thresh words",
         default=50
     )
@@ -150,6 +150,6 @@ if __name__ == "__main__":
             ]
             period.loc[period.word == word, "definition"] = new_defs
             cur_definitions = Counter(period[period.word == word].definition).most_common()
-            logging.info(f"{word}: {len(cur_definitions)} unique senses")
+            logging.debug(f"{word}: {len(cur_definitions)} unique senses")
         period.to_csv(path.join(args.out, filename), sep="\t", header=False, index=False)
         logging.info(f"Merged definitions saved to {path.join(args.out, filename)}")
