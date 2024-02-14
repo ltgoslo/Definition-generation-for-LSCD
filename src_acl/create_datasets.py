@@ -84,12 +84,11 @@ if __name__ == '__main__':
             f"{corpus.replace('/', '-')}{os.extsep}txt{os.extsep}gz".lstrip(
                 "-"),
         )
-        with gzip.open(corpus, "rt") as corpus_file:
+        with gzip.open(corpus, "rt", encoding="utf8") as corpus_file:
             count = 0
             for token_list in tqdm.tqdm(parse_incr(corpus_file)):
                 if (args.n_first is None) or (count < args.n_first):
                     sent = ' '.join([tok["form"] for tok in token_list])
-
                     if args.lang == "english":
                         lemmas_set = {
                             f'{tok[LEMMA]}_{POS.get(tok["upos"])}' for tok
