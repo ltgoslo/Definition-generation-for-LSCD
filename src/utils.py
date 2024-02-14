@@ -62,7 +62,7 @@ def lesk(context_sentence, ambiguous_word, pos=None, synsets=None, lang="eng"):
     elif lang == "nob":
         prompt_start = re.search(PATTERN, context_sentence).span()[0]
         context_sentence = context_sentence[:prompt_start].strip()
-        context = set(context_sentence)
+        context = set(context_sentence.split())
         _, sense = max(
             (len(context.intersection(ss[1].gloss.split())), ss[1].gloss) for ss in
             synsets.iterrows()
