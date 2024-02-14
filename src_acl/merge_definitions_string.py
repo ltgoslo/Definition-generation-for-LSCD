@@ -24,7 +24,7 @@ def normalize(text, badwords):
 def find_merges(df, argums):
     targ_words = df.word.unique()
 
-    if argums.minimalist:
+    if argums.strategy == "minimal":
         logging.info("Minimalist: finding the definitions similar to the most frequent one...")
     else:
         logging.info("Full merging: finding the definitions similar to each other...")
@@ -58,7 +58,7 @@ def find_merges(df, argums):
                             mapped += 1
                 if mapped > 0:
                     logging.debug(f"{mapped} definitions mapped to {def2compare}")
-            if argums.minimalist:
+            if argums.strategy == "minimal":
                 if def2compare:
                     break
         if not def2compare:
@@ -88,7 +88,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--thresh",
-        type=int,
+            type=int,
         help="Levenshtein distance threshold: we merge only definitions longer than thresh words",
         default=50
     )
@@ -106,10 +106,11 @@ if __name__ == "__main__":
         required=True
     )
     parser.add_argument(
-        "--minimalist",
-        type=bool,
-        help="Use only the most frequent definition to merge with",
-        default=0
+        "--strategy",
+        options=["maximal", "minimal"],
+        help="Use only the most frequent definition to merge with (minimal) "
+             "or all definitions (maximal)",
+        default="maximal"
     )
     args = parser.parse_args()
 
