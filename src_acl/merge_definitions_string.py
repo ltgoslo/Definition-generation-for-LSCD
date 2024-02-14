@@ -1,15 +1,14 @@
 #! /bin/env python3
 # coding: utf-8
 
-from leven import levenshtein
-import pandas as pd
-from collections import Counter
 import argparse
 import logging
 import os
+from collections import Counter
 from os import path
 from unicodedata import category
-from nltk.corpus import stopwords
+import pandas as pd
+from leven import levenshtein
 
 
 def normalize(text, badwords):
@@ -37,7 +36,7 @@ def find_merges(df, argums):
         definitions = Counter(df[df.word == targ_word].definition).most_common()
         # definitions = sorted(definitions)  # can be commented to out to start from most frequent
         logging.info(f"{targ_word}: {len(definitions)} unique senses before merging")
-        # TODO: a better logic for choosing the dominant sense
+        sim_cache = {}
         def2compare = None
         for nr, source in enumerate(definitions):
             cand = source[0]
@@ -48,7 +47,12 @@ def find_merges(df, argums):
                     definition_text = definition[0]
                     if definition_text != def2compare and \
                             definition_text not in mappings[targ_word]:
-                        distance = levenshtein(definition_text, def2compare)
+                        if (definition_text, def2compare) in sim_cache:
+                            distance = sim_cache[(definition_text, def2compare)]
+                        else:
+                            distance = levenshtein(definition_text, def2compare)
+                            sim_cache[(definition_text, def2compare)] = distance
+                            sim_cache[(def2compare, definition_text)] = distance
                         if distance < DISTANCE:
                             mappings[targ_word][definition_text] = def2compare
                             mapped += 1
@@ -83,6 +87,19 @@ if __name__ == "__main__":
         default=1
     )
     parser.add_argument(
+        "--thresh",
+        type=int,
+        help="Levenshtein distance threshold: we merge only definitions longer than thresh words",
+        default=50
+    )
+    parser.add_argument(
+        "--len",
+        type=int,
+        help="Minimal length of the definition (in words) to be allowed "
+             "to replace other definitions",
+        default=3
+    )
+    parser.add_argument(
         "--out",
         type=str,
         help="Directory to save datasets with merged definitions",
@@ -98,10 +115,9 @@ if __name__ == "__main__":
 
     os.makedirs(path.dirname(args.out), exist_ok=True)
 
-    LENGTH = 3  # We merge only definitions longer than LENGTH words
+    LENGTH = args.len
 
-    # Ad-hoc number, just "very similar":
-    DISTANCE = 50  # We merge only definitions with Levenshtein distance less than that
+    DISTANCE = args.thresh
 
     logging.basicConfig(format="%(asctime)s : %(levelname)s : %(message)s", level=logging.INFO)
 
