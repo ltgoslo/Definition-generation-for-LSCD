@@ -1,8 +1,10 @@
 import nltk
 nltk.download("wordnet")
-nltk.download('omw-1.4')
 from nltk.corpus import wordnet
 from scipy.special import kl_div
+import re
+
+PATTERN = re.compile(r"Hva betyr \w+\?")
 
 
 def kl(sense_ids1, sense_ids2, no_zeros=False):
@@ -42,21 +44,28 @@ def lesk(context_sentence, ambiguous_word, pos=None, synsets=None, lang="eng"):
     Systems Documentation. ACM, 1986.
     https://dl.acm.org/citation.cfm?id=318728
     """
+    if lang == "eng":
+        context = set(context_sentence.split())
+        if synsets is None:
+            synsets = wordnet.synsets(ambiguous_word, lang=lang)
 
-    context = set(context_sentence)
-    if synsets is None:
-        synsets = wordnet.synsets(ambiguous_word, lang=lang)
+        if pos:
+            synsets = [ss for ss in synsets if str(ss.pos()) == pos]
 
-    if pos:
-        synsets = [ss for ss in synsets if str(ss.pos()) == pos]
+        if not synsets:
+            return None
 
-    if not synsets:
-        return None
-
-    synsets_definitions =[ss.definition().split() for ss in synsets]
-    _, sense = max(
-        (len(context.intersection(ss.definition().split())), ss) for ss in
-        synsets
-    )
+        _, sense = max(
+            (len(context.intersection(ss.definition().split())), ss) for ss in
+            synsets
+        )
+    elif lang == "nob":
+        prompt_start = re.search(PATTERN, context_sentence).span()[0]
+        context_sentence = context_sentence[:prompt_start].strip()
+        context = set(context_sentence)
+        _, sense = max(
+            (len(context.intersection(ss[1].gloss.split())), ss[1].gloss) for ss in
+            synsets.iterrows()
+        )
 
     return sense

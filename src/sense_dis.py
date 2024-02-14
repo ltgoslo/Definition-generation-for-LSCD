@@ -53,21 +53,39 @@ LANG2ISO = {
 
 
 def _get_senses_lesk(args, target_dict, target_list, target_list_pos, sent_ls):
+    dictionary, synsets = None, None
+    if "norwegian" in args.lang:
+        dictionary = pd.read_csv(
+            os.path.expanduser(
+                os.path.join(
+                    args.data_dir, args.lang, "norwegian_finetuning_.tsv.gz",
+                ),
+            ),
+            sep="\t",
+            compression="gzip",
+        )
+
     for i, target_word in enumerate(tqdm(target_list)):
+        if "norwegian" in args.lang:
+            synsets = dictionary[
+                dictionary["word"] == target_word].drop_duplicates("gloss")
+            if synsets.shape[0] == 0:
+                continue
         word_without_pos = None
         pos = None
         if args.use_pos_in_lesk:
             word_without_pos, pos = target_list_pos[i].split("_")
         for sent in sent_ls[target_word]:
-            sent_ = sent.split()
             if args.use_pos_in_lesk:
                 # pos tag in SemEval shared task lemma corpus are nn, vb for English
                 # and they are n, v in WordNet
                 sense = lesk(
-                    sent_, word_without_pos, pos[0], lang=LANG2ISO[args.lang],
+                    sent, word_without_pos, pos[0], synsets=synsets,
+                    lang=LANG2ISO[args.lang],
                 )
             else:
-                sense = lesk(sent_, target_word, lang=LANG2ISO[args.lang])
+                sense = lesk(sent, target_word, synsets=synsets,
+                             lang=LANG2ISO[args.lang])
             if sense not in target_dict[target_word]:
                 target_dict[target_word][sense] = 1
             else:
@@ -115,42 +133,50 @@ def get_senses_lesk(
         target_dict1,
         target_dict2,
 ):
-    c1_text, c2_text = load_corpora(args)
-    for i, target_word in enumerate(tqdm(target_list)):
-        for sent in c1_text:
-            sent = re.sub(r"_\w+", "", sent)
-            if target_word in sent.split():
-                sent_ls1[target_word].append(sent)
-        for sent in c2_text:
-            sent = re.sub(r"_\w+", "", sent)
-            if target_word in sent.split():
-                sent_ls2[target_word].append(sent)
+    lang_folder = f"{args.results_dir}/{args.lang}"
+    sent_ls1_path = f"{lang_folder}/sent_ls1.json"
+    sent_ls2_path = sent_ls1_path.replace("ls1", "ls2")
+    if not os.path.exists(sent_ls1_path):
+        if not os.path.exists(lang_folder):
+            os.mkdir(lang_folder)
+        c1_text, c2_text = load_corpora(args)
+        for i, target_word in enumerate(tqdm(target_list)):
+            for sent in c1_text:
+                sent = re.sub(r"_\w+", "", sent)
+                if target_word in sent.split():
+                    sent_ls1[target_word].append(sent)
+            for sent in c2_text:
+                sent = re.sub(r"_\w+", "", sent)
+                if target_word in sent.split():
+                    sent_ls2[target_word].append(sent)
 
-        logging.info(
-            f"{target_word}, {len(sent_ls1[target_word])}, {len(sent_ls2[target_word])}"
-        )
-        sent_ls1[target_word] = random.sample(
-            sent_ls1[target_word],
-            min(len(sent_ls1[target_word]), len(sent_ls2[target_word])),
-        )
-        sent_ls2[target_word] = random.sample(
-            sent_ls2[target_word],
-            min(len(sent_ls1[target_word]), len(sent_ls2[target_word])),
-        )
-
+            logging.info(
+                f"{target_word}, {len(sent_ls1[target_word])}, {len(sent_ls2[target_word])}"
+            )
+            sent_ls1[target_word] = random.sample(
+                sent_ls1[target_word],
+                min(len(sent_ls1[target_word]), len(sent_ls2[target_word])),
+            )
+            sent_ls2[target_word] = random.sample(
+                sent_ls2[target_word],
+                min(len(sent_ls1[target_word]), len(sent_ls2[target_word])),
+            )
+        with open(sent_ls1_path, "w", encoding="utf8") as f:
+            json.dump(sent_ls1, f)
+        with open(sent_ls2_path, "w",
+                  encoding="utf8") as f:
+            json.dump(sent_ls2, f)
+    else:
+        with open(sent_ls1_path, "r", encoding="utf8") as f:
+            sent_ls1 = json.load(f)
+        with open(sent_ls2_path, "r", encoding="utf8") as f:
+            sent_ls2 = json.load(f)
     target_dict1 = _get_senses_lesk(
         args, target_dict1, target_list, target_list_pos, sent_ls1
     )
-    lang_folder = f"{args.results_dir}/{args.lang}"
-    if not os.path.exists(lang_folder):
-        os.mkdir(lang_folder)
-    with open(f"{lang_folder}/sent_ls1.json", "w", encoding="utf8") as f:
-        json.dump(sent_ls1, f)
     target_dict2 = _get_senses_lesk(
         args, target_dict2, target_list, target_list_pos, sent_ls2
     )
-    with open(f"{lang_folder}/sent_ls2.json", "w", encoding="utf8") as f:
-        json.dump(sent_ls2, f)
     return target_dict1, target_dict2
 
 
@@ -227,13 +253,15 @@ def write_results(
     for metric, dis_dict in zip(METRICS_NAMES, dis_dicts):
         with open(f"{method_dir}/{metric}_dict.tsv", "w") as f:
             for target_word in target_list:
-                f.write(f"{target_word}\t{dis_dict[target_word]}\n")
+                f.write(
+                    f"{target_word}\t{dis_dict.get(target_word, 0.00001)}\n")
 
         with open(f"{method_dir}/{metric}_score.txt", "w") as f:
             for target_word in target_list:
-                f.write(f"{dis_dict[target_word]},")
+                f.write(f"{dis_dict.get(target_word, 0.00001)},")
 
-        new = [dis_dict[target_word] for target_word in target_list]
+        new = [dis_dict.get(target_word, 0.00001) for target_word in
+               target_list]
         score = stats.spearmanr(truth, new)[0]
         logging.info(f"{args.method}, {metric}: {round(score, 3)}")
 
@@ -299,12 +327,18 @@ def main():
             else:
                 sense_ids2.append(0.0)
         for i, metric in enumerate(METRICS[:-1]):
-            dis_dicts[i][target_word] = metric(sense_ids1, sense_ids2)
-        dis_dicts[-1][target_word] = METRICS[-1](
-            sense_ids1,
-            sense_ids2,
-            args.no_zeros_in_kl,
-        )
+            if sense_ids1:
+                dis_dicts[i][target_word] = metric(sense_ids1, sense_ids2)
+            else:
+                dis_dicts[i][target_word] = 0.00001
+        if sense_ids1:
+            dis_dicts[-1][target_word] = METRICS[-1](
+                sense_ids1,
+                sense_ids2,
+                args.no_zeros_in_kl,
+            )
+        else:
+            dis_dicts[-1][target_word] = 0.00001
     write_results(
         args, target_list, target_dict1, target_dict2, dis_dicts, truth,
     )
