@@ -107,7 +107,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--strategy",
-        options=["maximal", "minimal"],
+        choices=["maximal", "minimal"],
         help="Use only the most frequent definition to merge with (minimal) "
              "or all definitions (maximal)",
         default="maximal"
