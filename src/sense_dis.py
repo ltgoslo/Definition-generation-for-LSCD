@@ -177,7 +177,7 @@ def parse_args():
     parser.add_argument(
         "--defgen_path",
         help="Path to the directory with generated definitions",
-        default="/cluster/projects/nn9851k/andreku/defgen_lscd/generated_definitions/english/diverse_beam_search",
+        default="generated_definitions/english/diverse_beam_search",
     )
     return parser.parse_args()
 
@@ -218,7 +218,7 @@ def write_results(args, target_list, target_dict1, target_dict2, dis_dicts):
         with open(f"{args.data_dir}/{args.lang}/truth/graded.txt") as f:
             lines = f.readlines()
             for el in lines:
-                truth.append(el.split()[-1])
+                truth.append(float(el.split()[-1]))
 
         new = [dis_dict[target_word] for target_word in target_list]
         score = stats.spearmanr(truth, new)[0]

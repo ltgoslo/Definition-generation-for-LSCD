@@ -7,13 +7,60 @@ from collections import Counter
 import argparse
 import logging
 import os
+from os import path
 from unicodedata import category
+from nltk.corpus import stopwords
 
 
-def normalize(text):
+def normalize(text, badwords):
     text = "".join(ch for ch in text if category(ch)[0] != "P")
-    text = " ".join(text.split())
+    if badwords:
+        tokenized = text.split()
+        text = [w for w in tokenized if not w.lower() in badwords]
+        text = " ".join(text)
+    text = text.strip()
     return text
+
+
+def find_merges(df, argums):
+    targ_words = df.word.unique()
+
+    if argums.minimalist:
+        logging.info("Minimalist: finding the definitions similar to the most frequent one...")
+    else:
+        logging.info("Full merging: finding the definitions similar to each other...")
+
+    # Finding definitions similar to the most frequent one (paraphrases) for each targ_word:
+    mappings = {targ_word: {} for targ_word in targ_words}
+
+    for targ_word in targ_words:
+        definitions = Counter(df[df.word == targ_word].definition).most_common()
+        # definitions = sorted(definitions)  # can be commented to out to start from most frequent
+        logging.info(f"{targ_word}: {len(definitions)} unique senses before merging")
+        # TODO: a better logic for choosing the dominant sense
+        def2compare = None
+        for nr, source in enumerate(definitions):
+            cand = source[0]
+            if len(cand.split()) > LENGTH and cand not in mappings[targ_word]:
+                def2compare = cand
+                mapped = 0
+                for definition in definitions:
+                    definition_text = definition[0]
+                    if definition_text != def2compare and \
+                            definition_text not in mappings[targ_word]:
+                        distance = levenshtein(definition_text, def2compare)
+                        if distance < DISTANCE:
+                            mappings[targ_word][definition_text] = def2compare
+                            mapped += 1
+                if mapped > 0:
+                    logging.debug(f"{mapped} definitions mapped to {def2compare}")
+            if argums.minimalist:
+                if def2compare:
+                    break
+        if not def2compare:
+            logging.info(f"No dominant sense with a long enough definition found for {targ_word}!")
+    logging.info("==================================")
+    return mappings, targ_words
 
 
 if __name__ == "__main__":
@@ -21,7 +68,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--data_path",
         type=str,
-        help="File with a dataset",
+        help="Directory with two time-specific datasets",
         required=True
     )
     parser.add_argument(
@@ -38,58 +85,54 @@ if __name__ == "__main__":
     parser.add_argument(
         "--out",
         type=str,
-        help="File to save the dataset with merged definitions",
+        help="Directory to save datasets with merged definitions",
         required=True
+    )
+    parser.add_argument(
+        "--minimalist",
+        type=bool,
+        help="Use only the most frequent definition to merge with",
+        default=0
     )
     args = parser.parse_args()
 
-    os.makedirs(os.path.dirname(args.out), exist_ok=True)
+    os.makedirs(path.dirname(args.out), exist_ok=True)
 
     LENGTH = 3  # We merge only definitions longer than LENGTH words
-    DISTANCE = 10  # We merge only definitions with Levenshtein distance less than that
+
+    # Ad-hoc number, just "very similar":
+    DISTANCE = 50  # We merge only definitions with Levenshtein distance less than that
 
     logging.basicConfig(format="%(asctime)s : %(levelname)s : %(message)s", level=logging.INFO)
 
-    df = pd.read_csv(args.data_path, sep="\t", header=None)
-    df.columns = ["word", "usage", "definition"]
+    filename1 = f"{args.lang}-corpus1.tsv.gz"
+    filename2 = f"{args.lang}-corpus2.tsv.gz"
+    df1 = pd.read_csv(path.join(args.data_path, filename1), sep="\t", header=None)
+    df2 = pd.read_csv(path.join(args.data_path, filename2), sep="\t", header=None)
+    df1.columns = ["word", "usage", "definition"]
+    df2.columns = ["word", "usage", "definition"]
 
+    # It seems stopwords do not really help
+    # notcontent = set(stopwords.words("norwegian" if "norwegian" in args.lang else args.lang))
+
+    notcontent = None
     if args.punct:
         logging.info("Removing punctuation marks from the definitions...")
-        df["definition"] = df["definition"].apply(lambda x: normalize(x))
+        df1["definition"] = df1["definition"].apply(lambda x: normalize(x, notcontent))
+        df2["definition"] = df2["definition"].apply(lambda x: normalize(x, notcontent))
 
-    words = df.word.unique()
+    # df = pd.concat([df1, df2])  # Concatenated dataset with definitions from both periods
 
-    # Finding definitions similar to the most frequent one (paraphrases) for each word:
-    mappings = {word: {} for word in words}
-    for word in words:
-        definitions = Counter(df[df.word == word].definition).most_common()
-        logging.info(f"{word}: {len(definitions)} unique senses")
-        # TODO: a better logic for choosing the dominant sense
-        # TODO: find all similar pairs
-        def2compare = None
-        for source in definitions:
-            if len(source[0].split()) > LENGTH and source[0] not in mappings[word]:
-                def2compare = source[0]
-                for definition in definitions:
-                    definition_text = definition[0]
-                    if definition_text != def2compare and definition_text not in mappings[word]:
-                        distance = levenshtein(definition_text, def2compare)
-                        if distance < DISTANCE:  # Ad-hoc number, just "very similar"
-                            mappings[word][definition_text] = def2compare
-                            logging.debug(f"{definition_text} mapped to {def2compare}")
-        if not def2compare:
-            logging.info(f"No dominant sense with a long enough definition found for {word}!")
-        # for paraphrase in mappings[word]:
-        #    logging.debug(paraphrase)
-
-    logging.info("==================================")
-    for word in words:
-        new_defs = [
-            mappings[word][d] if d in mappings[word] else d
-            for d in df[df.word == word].definition
-        ]
-        df.loc[df.word == word, "definition"] = new_defs
-        definitions = Counter(df[df.word == word].definition).most_common()
-        logging.info(f"{word}: {len(definitions)} unique senses")
-    df.to_csv(args.out, sep="\t", header=False, index=False)
-    logging.info(f"Merged definitions saved to {args.out}")
+    for period, filename in zip([df1, df2], [filename1, filename2]):
+        logging.info(f"Processing {filename}")
+        mapping, words = find_merges(period, args)
+        for word in words:
+            new_defs = [
+                mapping[word][d] if d in mapping[word] else d
+                for d in period[period.word == word].definition
+            ]
+            period.loc[period.word == word, "definition"] = new_defs
+            cur_definitions = Counter(period[period.word == word].definition).most_common()
+            logging.info(f"{word}: {len(cur_definitions)} unique senses")
+        period.to_csv(path.join(args.out, filename), sep="\t", header=False, index=False)
+        logging.info(f"Merged definitions saved to {path.join(args.out, filename)}")
