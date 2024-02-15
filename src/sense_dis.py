@@ -66,17 +66,28 @@ def _get_senses_lesk(args, target_dict, target_list, target_list_pos, sent_ls):
             sep="\t",
             compression="gzip",
         )
-
+        # SYM - symbol
+        # COMPPFX - first part of a compound
+        # PFX - prefix
+        # EXPR - expression
+        logging.info(f"Unique Norwegian POS tags: {dictionary['POS'].unique()}")
     for i, target_word in enumerate(tqdm(target_list)):
         if "norwegian" in args.lang:
             synsets = dictionary[
-                dictionary["word"] == target_word].drop_duplicates("gloss")
+                dictionary["word"] == target_word
+            ].drop_duplicates("gloss")
+            if args.use_pos_in_lesk:
+                # we know from the NorDiaChange paper that all words are nouns
+                synsets = synsets[synsets["POS"].isin({"NOUN", "PROPN"})]
             if synsets.shape[0] == 0:
                 continue
         word_without_pos = None
         pos = None
         if args.use_pos_in_lesk:
-            word_without_pos, pos = target_list_pos[i].split("_")
+            if args.lang == "english":
+                word_without_pos, pos = target_list_pos[i].split("_")
+            elif "norwegian" in args.lang:
+                word_without_pos, pos = target_list_pos[i], "NOUN"
         for sent in sent_ls[target_word]:
             if args.use_pos_in_lesk:
                 # pos tag in SemEval shared task lemma corpus are nn, vb for English
@@ -264,7 +275,7 @@ def write_results(
 
         new = [dis_dict[target_word] for target_word in
                target_list]
-        score = stats.spearmanr(truth, new, nan_policy='omit')[0]
+        score = stats.spearmanr(truth, new, nan_policy='omit').statistic
         logging.info(f"{args.method}, {metric}: {round(score, 3)}")
 
 
