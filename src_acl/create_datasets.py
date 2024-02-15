@@ -52,6 +52,7 @@ def parse_arge():
         default=None,
         type=int,
     )
+    parser.add_argument("--return_lemmatized", default=False)
     return parser.parse_args()
 
 
@@ -74,21 +75,24 @@ if __name__ == '__main__':
     except AttributeError:
         logging.info(targets)
         raise AttributeError
-    tokenizer = MT5Tokenizer.from_pretrained(os.path.expanduser("~/mt0-xl"))
+    #tokenizer = MT5Tokenizer.from_pretrained(os.path.expanduser("~/mt0-xl"))
     assert os.path.isdir(args.res_path)
     for corpus in glob(f"{lang_path}/*.gz"):
         logging.info(corpus)
         prompts, targets_list = [], []
         res_path = os.path.join(
             os.path.expanduser(args.res_path),
-            f"{corpus.replace('/', '-')}{os.extsep}txt{os.extsep}gz".lstrip(
+            f"{corpus.replace('/home/m/corpora-acl/parsed/', '').replace('/', '-')}{os.extsep}txt{os.extsep}gz".lstrip(
                 "-"),
         )
         with gzip.open(corpus, "rt", encoding="utf8") as corpus_file:
             count = 0
             for token_list in tqdm.tqdm(parse_incr(corpus_file)):
                 if (args.n_first is None) or (count < args.n_first):
-                    sent = ' '.join([tok["form"] for tok in token_list])
+                    if not args.return_lemmatized:
+                        sent = ' '.join([tok["form"] for tok in token_list])
+                    else:
+                        sent = ' '.join([tok[LEMMA].strip("$") for tok in token_list])
                     if args.lang == "english":
                         lemmas_set = {
                             f'{tok[LEMMA]}_{POS.get(tok["upos"])}' for tok
@@ -107,18 +111,21 @@ if __name__ == '__main__':
 
                         for target in intersected:
                             target = target.split("_")[0]
-                            prompt = f"{sent} {PROMPTS[args.lang]} {target}?"
-                            tokenized = tokenizer(
-                                prompt,
-                                return_token_type_ids=False,
-                                return_attention_mask=False,
-                            )
-                            if len(tokenized["input_ids"]) <= 350:
-                                prompts.append(
-                                    prompt,
-                                )
-                                targets_list.append(target)
-                                count += 1
+                            #prompt = f"{sent} {PROMPTS[args.lang]} {target}?"
+                            # tokenized = tokenizer(
+                            #     prompt,
+                            #     return_token_type_ids=False,
+                            #     return_attention_mask=False,
+                            # )
+                            # if len(tokenized["input_ids"]) <= 350:
+                            #     prompts.append(
+                            #         prompt,
+                            #     )
+                            #     targets_list.append(target)
+                            #     count += 1
+                            targets_list.append(target)
+                            count += 1
+                            prompts.append(sent)
                 else:
                     break
         with gzip.open(res_path, "wt") as results_file:

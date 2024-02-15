@@ -1,3 +1,8 @@
+from time import sleep
+
+import pandas as pd
+from bs4 import BeautifulSoup
+from requests import get
 import nltk
 
 nltk.download("wordnet")
@@ -12,7 +17,9 @@ PATTERNS = {
     "russian2": re.compile(r"Что такое \w+\?"),
     "russian3": re.compile(r"Что такое \w+\?"),
 }
-
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36',
+}
 
 def kl(sense_ids1, sense_ids2, no_zeros=False):
     sum1 = sum(sense_ids1)
@@ -81,3 +88,20 @@ def lesk(
             synsets.gloss.unique()
         )
     return sense
+
+
+def read_html_wiktionary(word):
+    source = f"https://ru.wiktionary.org/wiki/{word}"
+    response = get(source, headers=HEADERS)
+    contents = response.text
+
+    soup = BeautifulSoup(contents, "html.parser")
+    header_element = soup.find(attrs={'id': 'Значение'}).parent
+    this_word = {"word": word, "gloss": []}
+    meanings_element = header_element.next_sibling.next_sibling
+    for li in meanings_element.children:
+        gloss = li.text.split("◆")[0].strip()
+        if gloss:
+            this_word["gloss"].append(gloss)
+    sleep(0.1)
+    return pd.DataFrame(this_word)

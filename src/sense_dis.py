@@ -16,11 +16,10 @@ from scipy.spatial.distance import (
     cosine,
     euclidean,
 )
-
 from tqdm import tqdm
 import numpy as np
 
-from utils import kl, lesk
+from utils import kl, lesk, read_html_wiktionary
 
 METRICS_NAMES = [
     "Cosine",
@@ -85,7 +84,12 @@ def _get_senses_lesk(args, target_dict, target_list, target_list_pos, sent_ls):
                 # we know from the NorDiaChange paper that all words are nouns
                 synsets = synsets[synsets["POS"].isin({"NOUN", "PROPN"})]
             if synsets.shape[0] == 0:
-                continue
+                if "norwegian" in args.lang:
+                    continue
+                elif "russian" in args.lang:
+                    synsets = read_html_wiktionary(target_word)
+                    if synsets.shape[0] == 0:
+                        continue
         word_without_pos = None
         pos = None
         if args.use_pos_in_lesk:
