@@ -40,7 +40,7 @@ def find_merges(df, argums):
         def2compare = None
         for nr, source in enumerate(definitions):
             cand = source[0]
-            if len(cand.split()) > LENGTH and cand not in mappings[targ_word]:
+            if len(cand.split()) >= LENGTH and cand not in mappings[targ_word]:
                 def2compare = cand
                 mapped = 0
                 for definition in definitions:
@@ -97,7 +97,7 @@ if __name__ == "__main__":
         type=int,
         help="Minimal length of the definition (in words) to be allowed "
              "to replace other definitions",
-        default=3
+        default=4,
     )
     parser.add_argument(
         "--out",
