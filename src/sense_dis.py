@@ -45,11 +45,6 @@ METRICS = [
     jensenshannon,
     kl,
 ]
-LANG2ISO = {
-    "english": "eng",
-    "norwegian1": "nob",
-    "norwegian2": "nob",
-}
 
 
 def _get_senses_lesk(args, target_dict, target_list, target_list_pos, sent_ls):
@@ -71,12 +66,22 @@ def _get_senses_lesk(args, target_dict, target_list, target_list_pos, sent_ls):
         # PFX - prefix
         # EXPR - expression
         logging.info(f"Unique Norwegian POS tags: {dictionary['POS'].unique()}")
+    elif "russian" in args.lang:
+        dictionary = pd.read_csv(
+            os.path.expanduser(
+                os.path.join(
+                    args.data_dir,
+                    args.lang,
+                    "ru.complete.csv",
+                ),
+            ),
+        )
     for i, target_word in enumerate(tqdm(target_list)):
-        if "norwegian" in args.lang:
+        if ("norwegian" in args.lang) or ("russian" in args.lang):
             synsets = dictionary[
                 dictionary["word"] == target_word
             ].drop_duplicates("gloss")
-            if args.use_pos_in_lesk:
+            if args.use_pos_in_lesk and ("norwegian" in args.lang):
                 # we know from the NorDiaChange paper that all words are nouns
                 synsets = synsets[synsets["POS"].isin({"NOUN", "PROPN"})]
             if synsets.shape[0] == 0:
@@ -86,19 +91,21 @@ def _get_senses_lesk(args, target_dict, target_list, target_list_pos, sent_ls):
         if args.use_pos_in_lesk:
             if args.lang == "english":
                 word_without_pos, pos = target_list_pos[i].split("_")
-            elif "norwegian" in args.lang:
-                word_without_pos, pos = target_list_pos[i], "NOUN"
+            elif ("norwegian" in args.lang) or ("russian" in args.lang):
+                word_without_pos, pos = target_list_pos[i], ["NOUN"]
         for sent in sent_ls[target_word]:
             if args.use_pos_in_lesk:
                 # pos tag in SemEval shared task lemma corpus are nn, vb for English
                 # and they are n, v in WordNet
                 sense = lesk(
-                    sent, word_without_pos, pos[0], synsets=synsets,
-                    lang=LANG2ISO[args.lang],
+                    sent,
+                    word_without_pos,
+                    pos[0],
+                    synsets=synsets, lang=args.lang,
                 )
             else:
                 sense = lesk(sent, target_word, synsets=synsets,
-                             lang=LANG2ISO[args.lang])
+                             lang=args.lang)
             if sense not in target_dict[target_word]:
                 target_dict[target_word][sense] = 1
             else:
@@ -120,7 +127,7 @@ def load_corpora(args):
                 "r",
         ) as ccoha2:
             c2_text = [line.strip() for line in ccoha2.readlines()]
-    elif "norwegian" in args.lang:
+    elif ("norwegian" in args.lang) or ("russian" in args.lang):
         c_texts = []
         for period in (1, 2):
             filename = f"{args.lang}/{args.lang}-corpus{period}.tsv.gz"

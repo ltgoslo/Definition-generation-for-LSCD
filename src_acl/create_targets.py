@@ -18,15 +18,15 @@ def parse_arge():
 if __name__ == '__main__':
     args = parse_arge()
     targets = []
-    if "norwegian" in args.lang:
-        with open(f"{args.data_dir}/{args.lang}/truth/graded.txt") as f:
-            lines = f.readlines()
-            for el in lines:
-                splitted = el.split()
-                if splitted[0] not in {"formiddagen", "landet"}:
-                    targets.append(splitted[0])
-                else:
-                    targets.append(splitted[0][:-2])
+
+    with open(f"{args.data_dir}/{args.lang}/truth/graded.txt") as f:
+        lines = f.readlines()
+        for el in lines:
+            splitted = el.split()
+            if splitted[0] not in {"formiddagen", "landet"}:
+                targets.append(splitted[0])
+            else:
+                targets.append(splitted[0][:-2])
     with open(
             os.path.join(args.data_dir, args.lang, "targets.txt"),
             "w",

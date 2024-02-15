@@ -1,10 +1,17 @@
 import nltk
+
 nltk.download("wordnet")
 from nltk.corpus import wordnet
 from scipy.special import kl_div
 import re
 
-PATTERN = re.compile(r"Hva betyr \w+\?")
+PATTERNS = {
+    "norwegian1": re.compile(r"Hva betyr \w+\?"),
+    "norwegian2": re.compile(r"Hva betyr \w+\?"),
+    "russian1": re.compile(r"Что такое \w+\?"),
+    "russian2": re.compile(r"Что такое \w+\?"),
+    "russian3": re.compile(r"Что такое \w+\?"),
+}
 
 
 def kl(sense_ids1, sense_ids2, no_zeros=False):
@@ -21,7 +28,13 @@ def kl(sense_ids1, sense_ids2, no_zeros=False):
     return sum(kl_div(sense_ids1, sense_ids2))
 
 
-def lesk(context_sentence, ambiguous_word, pos=None, synsets=None, lang="eng"):
+def lesk(
+        context_sentence,
+        ambiguous_word,
+        pos=None,
+        synsets=None,
+        lang="english",
+):
     """Return a synset for an ambiguous word in a context.
 
     :param iter context_sentence: The context sentence where the ambiguous word
@@ -44,10 +57,10 @@ def lesk(context_sentence, ambiguous_word, pos=None, synsets=None, lang="eng"):
     Systems Documentation. ACM, 1986.
     https://dl.acm.org/citation.cfm?id=318728
     """
-    if lang == "eng":
+    if lang == "english":
         context = set(context_sentence.split())
         if synsets is None:
-            synsets = wordnet.synsets(ambiguous_word, lang=lang)
+            synsets = wordnet.synsets(ambiguous_word)
 
         if pos:
             synsets = [ss for ss in synsets if str(ss.pos()) == pos]
@@ -59,13 +72,12 @@ def lesk(context_sentence, ambiguous_word, pos=None, synsets=None, lang="eng"):
             (len(context.intersection(ss.definition().split())), ss) for ss in
             synsets
         )
-    elif lang == "nob":
-        prompt_start = re.search(PATTERN, context_sentence).span()[0]
+    elif ("norwegian" in lang) or ("russian" in lang):
+        prompt_start = re.search(PATTERNS[lang], context_sentence).span()[0]
         context_sentence = context_sentence[:prompt_start].strip()
         context = set(context_sentence.lower().split())
         _, sense = max(
             (len(context.intersection(gloss.split())), gloss) for gloss in
             synsets.gloss.unique()
         )
-
     return sense
