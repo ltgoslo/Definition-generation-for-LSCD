@@ -1,0 +1,241 @@
+2024-03-27 00:25:11,395 : INFO : ENGLISH
+2024-03-27 00:25:11,395 : INFO : beam
+2024-03-27 00:25:11,630 : INFO : =========
+2024-03-27 00:25:11,630 : INFO : Evaluation
+2024-03-27 00:25:11,630 : INFO : =========
+2024-03-27 00:25:11,637 : INFO : defgen, Cosine: 0.457, p-value 0.004434256744455723
+2024-03-27 00:25:11,637 : INFO : defgen, Chebyshev: -0.259, p-value 0.12219803107697406
+2024-03-27 00:25:11,637 : INFO : defgen, Canberra: 0.114, p-value 0.5001406955438273
+2024-03-27 00:25:11,638 : INFO : defgen, Bray-Curtis: 0.446, p-value 0.005692409214062402
+2024-03-27 00:25:11,638 : INFO : defgen, Euclidean: -0.198, p-value 0.24040150701365956
+2024-03-27 00:25:11,638 : INFO : defgen, JS: 0.476, p-value 0.0029172522931031905
+2024-03-27 00:25:11,639 : INFO : defgen, KL: 0.456, p-value 0.004527738039109462
+2024-03-27 00:25:11,639 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:11,639 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/english directory.
+2024-03-27 00:25:11,639 : INFO : divbeam
+2024-03-27 00:25:11,877 : INFO : =========
+2024-03-27 00:25:11,877 : INFO : Evaluation
+2024-03-27 00:25:11,877 : INFO : =========
+2024-03-27 00:25:11,884 : INFO : defgen, Cosine: 0.449, p-value 0.005366276437151797
+2024-03-27 00:25:11,884 : INFO : defgen, Chebyshev: -0.28, p-value 0.09304555422971066
+2024-03-27 00:25:11,885 : INFO : defgen, Canberra: -0.026, p-value 0.8771108724251246
+2024-03-27 00:25:11,885 : INFO : defgen, Bray-Curtis: 0.388, p-value 0.017550750015431566
+2024-03-27 00:25:11,885 : INFO : defgen, Euclidean: -0.172, p-value 0.3096342299412669
+2024-03-27 00:25:11,885 : INFO : defgen, JS: 0.382, p-value 0.019723235584144874
+2024-03-27 00:25:11,886 : INFO : defgen, KL: 0.369, p-value 0.024675763050906543
+2024-03-27 00:25:11,886 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:11,886 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/english directory.
+2024-03-27 00:25:11,886 : INFO : greedy
+2024-03-27 00:25:12,119 : INFO : =========
+2024-03-27 00:25:12,119 : INFO : Evaluation
+2024-03-27 00:25:12,119 : INFO : =========
+2024-03-27 00:25:12,126 : INFO : defgen, Cosine: 0.461, p-value 0.004087628261462286
+2024-03-27 00:25:12,127 : INFO : defgen, Chebyshev: -0.195, p-value 0.24644545977796084
+2024-03-27 00:25:12,127 : INFO : defgen, Canberra: -0.055, p-value 0.748518327039135
+2024-03-27 00:25:12,127 : INFO : defgen, Bray-Curtis: 0.421, p-value 0.00937452009710424
+2024-03-27 00:25:12,128 : INFO : defgen, Euclidean: -0.136, p-value 0.4218343998844938
+2024-03-27 00:25:12,128 : INFO : defgen, JS: 0.405, p-value 0.01295629110336405
+2024-03-27 00:25:12,128 : INFO : defgen, KL: 0.343, p-value 0.03789640858325252
+2024-03-27 00:25:12,128 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:12,128 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/english directory.
+2024-03-27 00:25:12,128 : INFO : RUSSIAN1
+2024-03-27 00:25:12,128 : INFO : beam
+2024-03-27 00:25:13,403 : INFO : =========
+2024-03-27 00:25:13,403 : INFO : Evaluation
+2024-03-27 00:25:13,403 : INFO : =========
+2024-03-27 00:25:13,421 : INFO : defgen, Cosine: -0.304, p-value 0.002254516909246207
+2024-03-27 00:25:13,422 : INFO : defgen, Chebyshev: -0.018, p-value 0.8610180918198632
+2024-03-27 00:25:13,422 : INFO : defgen, Canberra: -0.375, p-value 0.00012891957938860577
+2024-03-27 00:25:13,422 : INFO : defgen, Bray-Curtis: -0.294, p-value 0.003112615331298227
+2024-03-27 00:25:13,423 : INFO : defgen, Euclidean: -0.06, p-value 0.5539936306319491
+2024-03-27 00:25:13,423 : INFO : defgen, JS: -0.368, p-value 0.00017947094984623453
+2024-03-27 00:25:13,424 : INFO : defgen, KL: -0.354, p-value 0.0003308554180821163
+2024-03-27 00:25:13,424 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:13,424 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/russian1 directory.
+2024-03-27 00:25:13,424 : INFO : divbeam
+2024-03-27 00:25:14,711 : INFO : =========
+2024-03-27 00:25:14,711 : INFO : Evaluation
+2024-03-27 00:25:14,711 : INFO : =========
+2024-03-27 00:25:14,734 : INFO : defgen, Cosine: -0.301, p-value 0.0024461345766896517
+2024-03-27 00:25:14,734 : INFO : defgen, Chebyshev: 0.032, p-value 0.7567822621814652
+2024-03-27 00:25:14,735 : INFO : defgen, Canberra: -0.347, p-value 0.0004256094424189055
+2024-03-27 00:25:14,735 : INFO : defgen, Bray-Curtis: -0.286, p-value 0.00409827843926227
+2024-03-27 00:25:14,735 : INFO : defgen, Euclidean: -0.019, p-value 0.8511485462754089
+2024-03-27 00:25:14,736 : INFO : defgen, JS: -0.345, p-value 0.00046468742960917455
+2024-03-27 00:25:14,736 : INFO : defgen, KL: -0.311, p-value 0.0017070396320728546
+2024-03-27 00:25:14,736 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:14,736 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/russian1 directory.
+2024-03-27 00:25:14,736 : INFO : greedy
+2024-03-27 00:25:16,027 : INFO : =========
+2024-03-27 00:25:16,027 : INFO : Evaluation
+2024-03-27 00:25:16,027 : INFO : =========
+2024-03-27 00:25:16,061 : INFO : defgen, Cosine: -0.299, p-value 0.0026449201538438325
+2024-03-27 00:25:16,061 : INFO : defgen, Chebyshev: 0.037, p-value 0.7154591454562801
+2024-03-27 00:25:16,062 : INFO : defgen, Canberra: -0.396, p-value 4.903082944550306e-05
+2024-03-27 00:25:16,062 : INFO : defgen, Bray-Curtis: -0.337, p-value 0.0006545281411671396
+2024-03-27 00:25:16,062 : INFO : defgen, Euclidean: 0.001, p-value 0.992438193597919
+2024-03-27 00:25:16,063 : INFO : defgen, JS: -0.39, p-value 6.595685587917448e-05
+2024-03-27 00:25:16,063 : INFO : defgen, KL: -0.345, p-value 0.00046913554186204257
+2024-03-27 00:25:16,063 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:16,063 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/russian1 directory.
+2024-03-27 00:25:16,063 : INFO : RUSSIAN2
+2024-03-27 00:25:16,063 : INFO : beam
+2024-03-27 00:25:17,430 : INFO : =========
+2024-03-27 00:25:17,430 : INFO : Evaluation
+2024-03-27 00:25:17,430 : INFO : =========
+2024-03-27 00:25:17,451 : INFO : defgen, Cosine: -0.297, p-value 0.0027905889327964196
+2024-03-27 00:25:17,451 : INFO : defgen, Chebyshev: -0.089, p-value 0.3822726324837723
+2024-03-27 00:25:17,452 : INFO : defgen, Canberra: -0.481, p-value 4.6453370508265965e-07
+2024-03-27 00:25:17,452 : INFO : defgen, Bray-Curtis: -0.425, p-value 1.1775864536982885e-05
+2024-03-27 00:25:17,453 : INFO : defgen, Euclidean: -0.216, p-value 0.03159355047851735
+2024-03-27 00:25:17,453 : INFO : defgen, JS: -0.403, p-value 3.4881938951596535e-05
+2024-03-27 00:25:17,453 : INFO : defgen, KL: -0.352, p-value 0.0003476169016970774
+2024-03-27 00:25:17,454 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:17,454 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/russian2 directory.
+2024-03-27 00:25:17,454 : INFO : divbeam
+2024-03-27 00:25:18,843 : INFO : =========
+2024-03-27 00:25:18,843 : INFO : Evaluation
+2024-03-27 00:25:18,843 : INFO : =========
+2024-03-27 00:25:18,870 : INFO : defgen, Cosine: -0.31, p-value 0.0018044117684232126
+2024-03-27 00:25:18,871 : INFO : defgen, Chebyshev: -0.057, p-value 0.5758151914096202
+2024-03-27 00:25:18,871 : INFO : defgen, Canberra: -0.472, p-value 8.192778581949866e-07
+2024-03-27 00:25:18,871 : INFO : defgen, Bray-Curtis: -0.398, p-value 4.5386431864836734e-05
+2024-03-27 00:25:18,872 : INFO : defgen, Euclidean: -0.217, p-value 0.031197763832203233
+2024-03-27 00:25:18,872 : INFO : defgen, JS: -0.389, p-value 6.952065188964375e-05
+2024-03-27 00:25:18,873 : INFO : defgen, KL: -0.342, p-value 0.0005219082357662191
+2024-03-27 00:25:18,873 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:18,873 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/russian2 directory.
+2024-03-27 00:25:18,873 : INFO : greedy
+2024-03-27 00:25:20,300 : INFO : =========
+2024-03-27 00:25:20,300 : INFO : Evaluation
+2024-03-27 00:25:20,300 : INFO : =========
+2024-03-27 00:25:20,333 : INFO : defgen, Cosine: -0.337, p-value 0.0006362520402483373
+2024-03-27 00:25:20,333 : INFO : defgen, Chebyshev: -0.081, p-value 0.42624674314726796
+2024-03-27 00:25:20,334 : INFO : defgen, Canberra: -0.521, p-value 3.2401356469532314e-08
+2024-03-27 00:25:20,334 : INFO : defgen, Bray-Curtis: -0.43, p-value 8.908884929609317e-06
+2024-03-27 00:25:20,335 : INFO : defgen, Euclidean: -0.211, p-value 0.03593006852038995
+2024-03-27 00:25:20,335 : INFO : defgen, JS: -0.427, p-value 1.0629336638315e-05
+2024-03-27 00:25:20,335 : INFO : defgen, KL: -0.387, p-value 7.536481468018405e-05
+2024-03-27 00:25:20,335 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:20,335 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/russian2 directory.
+2024-03-27 00:25:20,336 : INFO : RUSSIAN3
+2024-03-27 00:25:20,336 : INFO : beam
+2024-03-27 00:25:21,658 : INFO : =========
+2024-03-27 00:25:21,658 : INFO : Evaluation
+2024-03-27 00:25:21,658 : INFO : =========
+2024-03-27 00:25:21,678 : INFO : defgen, Cosine: -0.317, p-value 0.0014028191027271385
+2024-03-27 00:25:21,678 : INFO : defgen, Chebyshev: -0.049, p-value 0.6313772765684589
+2024-03-27 00:25:21,678 : INFO : defgen, Canberra: -0.43, p-value 9.096560024558444e-06
+2024-03-27 00:25:21,679 : INFO : defgen, Bray-Curtis: -0.418, p-value 1.688637171252611e-05
+2024-03-27 00:25:21,679 : INFO : defgen, Euclidean: -0.102, p-value 0.3159733104504221
+2024-03-27 00:25:21,680 : INFO : defgen, JS: -0.417, p-value 1.7944795178614892e-05
+2024-03-27 00:25:21,680 : INFO : defgen, KL: -0.376, p-value 0.00012719539366212908
+2024-03-27 00:25:21,680 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:21,680 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/russian3 directory.
+2024-03-27 00:25:21,680 : INFO : divbeam
+2024-03-27 00:25:23,024 : INFO : =========
+2024-03-27 00:25:23,024 : INFO : Evaluation
+2024-03-27 00:25:23,024 : INFO : =========
+2024-03-27 00:25:23,048 : INFO : defgen, Cosine: -0.348, p-value 0.00042299009923847805
+2024-03-27 00:25:23,049 : INFO : defgen, Chebyshev: -0.043, p-value 0.6703939138367578
+2024-03-27 00:25:23,049 : INFO : defgen, Canberra: -0.412, p-value 2.2350820113711484e-05
+2024-03-27 00:25:23,050 : INFO : defgen, Bray-Curtis: -0.426, p-value 1.0759303204789812e-05
+2024-03-27 00:25:23,050 : INFO : defgen, Euclidean: -0.051, p-value 0.6173051167600734
+2024-03-27 00:25:23,050 : INFO : defgen, JS: -0.421, p-value 1.4492883039769606e-05
+2024-03-27 00:25:23,051 : INFO : defgen, KL: -0.364, p-value 0.0002141522706734592
+2024-03-27 00:25:23,051 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:23,051 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/russian3 directory.
+2024-03-27 00:25:23,051 : INFO : greedy
+2024-03-27 00:25:24,396 : INFO : =========
+2024-03-27 00:25:24,396 : INFO : Evaluation
+2024-03-27 00:25:24,396 : INFO : =========
+2024-03-27 00:25:24,422 : INFO : defgen, Cosine: -0.383, p-value 9.286168317733942e-05
+2024-03-27 00:25:24,423 : INFO : defgen, Chebyshev: -0.046, p-value 0.6492901971430285
+2024-03-27 00:25:24,423 : INFO : defgen, Canberra: -0.45, p-value 2.953490255453889e-06
+2024-03-27 00:25:24,423 : INFO : defgen, Bray-Curtis: -0.455, p-value 2.2441110157243483e-06
+2024-03-27 00:25:24,424 : INFO : defgen, Euclidean: -0.052, p-value 0.6073940619440714
+2024-03-27 00:25:24,424 : INFO : defgen, JS: -0.469, p-value 9.7985408162293e-07
+2024-03-27 00:25:24,425 : INFO : defgen, KL: -0.409, p-value 2.5921281720611667e-05
+2024-03-27 00:25:24,425 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:24,425 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/russian3 directory.
+2024-03-27 00:25:24,425 : INFO : NORWEGIAN1
+2024-03-27 00:25:24,425 : INFO : beam
+2024-03-27 00:25:24,671 : INFO : =========
+2024-03-27 00:25:24,671 : INFO : Evaluation
+2024-03-27 00:25:24,671 : INFO : =========
+2024-03-27 00:25:24,674 : INFO : defgen, Cosine: 0.268, p-value 0.10855112010007437
+2024-03-27 00:25:24,675 : INFO : defgen, Chebyshev: 0.062, p-value 0.7134598703698213
+2024-03-27 00:25:24,675 : INFO : defgen, Canberra: 0.101, p-value 0.5509629692382076
+2024-03-27 00:25:24,675 : INFO : defgen, Bray-Curtis: 0.065, p-value 0.7043257035804238
+2024-03-27 00:25:24,676 : INFO : defgen, Euclidean: 0.023, p-value 0.8902384741087837
+2024-03-27 00:25:24,676 : INFO : defgen, JS: 0.238, p-value 0.15649761651635063
+2024-03-27 00:25:24,676 : INFO : defgen, KL: 0.116, p-value 0.49567283270556894
+2024-03-27 00:25:24,676 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:24,676 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/norwegian1 directory.
+2024-03-27 00:25:24,676 : INFO : divbeam
+2024-03-27 00:25:24,924 : INFO : =========
+2024-03-27 00:25:24,925 : INFO : Evaluation
+2024-03-27 00:25:24,925 : INFO : =========
+2024-03-27 00:25:24,929 : INFO : defgen, Cosine: 0.241, p-value 0.15015937710691923
+2024-03-27 00:25:24,929 : INFO : defgen, Chebyshev: 0.02, p-value 0.9065635665446193
+2024-03-27 00:25:24,929 : INFO : defgen, Canberra: 0.108, p-value 0.5243902214193981
+2024-03-27 00:25:24,930 : INFO : defgen, Bray-Curtis: 0.078, p-value 0.6483661847839839
+2024-03-27 00:25:24,930 : INFO : defgen, Euclidean: 0.005, p-value 0.9779837123089923
+2024-03-27 00:25:24,930 : INFO : defgen, JS: 0.28, p-value 0.09276266973029519
+2024-03-27 00:25:24,931 : INFO : defgen, KL: 0.204, p-value 0.2250101482210737
+2024-03-27 00:25:24,931 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:24,931 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/norwegian1 directory.
+2024-03-27 00:25:24,931 : INFO : greedy
+2024-03-27 00:25:25,175 : INFO : =========
+2024-03-27 00:25:25,175 : INFO : Evaluation
+2024-03-27 00:25:25,175 : INFO : =========
+2024-03-27 00:25:25,180 : INFO : defgen, Cosine: 0.303, p-value 0.06793099376072669
+2024-03-27 00:25:25,180 : INFO : defgen, Chebyshev: -0.021, p-value 0.9028606166895181
+2024-03-27 00:25:25,180 : INFO : defgen, Canberra: 0.149, p-value 0.37724353906647157
+2024-03-27 00:25:25,181 : INFO : defgen, Bray-Curtis: 0.168, p-value 0.3191229853978209
+2024-03-27 00:25:25,181 : INFO : defgen, Euclidean: -0.03, p-value 0.8604615280628141
+2024-03-27 00:25:25,181 : INFO : defgen, JS: 0.332, p-value 0.04472315145057565
+2024-03-27 00:25:25,182 : INFO : defgen, KL: 0.272, p-value 0.10372950355210453
+2024-03-27 00:25:25,182 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:25,182 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/norwegian1 directory.
+2024-03-27 00:25:25,182 : INFO : NORWEGIAN2
+2024-03-27 00:25:25,182 : INFO : beam
+2024-03-27 00:25:25,433 : INFO : =========
+2024-03-27 00:25:25,433 : INFO : Evaluation
+2024-03-27 00:25:25,433 : INFO : =========
+2024-03-27 00:25:25,438 : INFO : defgen, Cosine: 0.144, p-value 0.3945954224274678
+2024-03-27 00:25:25,438 : INFO : defgen, Chebyshev: 0.023, p-value 0.8919411625091471
+2024-03-27 00:25:25,438 : INFO : defgen, Canberra: 0.265, p-value 0.11282275057094045
+2024-03-27 00:25:25,439 : INFO : defgen, Bray-Curtis: 0.004, p-value 0.9794166505985308
+2024-03-27 00:25:25,439 : INFO : defgen, Euclidean: -0.003, p-value 0.9872859204492024
+2024-03-27 00:25:25,439 : INFO : defgen, JS: 0.201, p-value 0.2325782357995256
+2024-03-27 00:25:25,439 : INFO : defgen, KL: 0.118, p-value 0.4854624312890503
+2024-03-27 00:25:25,440 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:25,440 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/norwegian2 directory.
+2024-03-27 00:25:25,440 : INFO : divbeam
+2024-03-27 00:25:25,688 : INFO : =========
+2024-03-27 00:25:25,689 : INFO : Evaluation
+2024-03-27 00:25:25,689 : INFO : =========
+2024-03-27 00:25:25,693 : INFO : defgen, Cosine: 0.069, p-value 0.6855238780447046
+2024-03-27 00:25:25,694 : INFO : defgen, Chebyshev: 0.043, p-value 0.8004058336867403
+2024-03-27 00:25:25,694 : INFO : defgen, Canberra: 0.223, p-value 0.18545504769504997
+2024-03-27 00:25:25,694 : INFO : defgen, Bray-Curtis: -0.01, p-value 0.9515918901602257
+2024-03-27 00:25:25,695 : INFO : defgen, Euclidean: 0.04, p-value 0.815131148489818
+2024-03-27 00:25:25,695 : INFO : defgen, JS: 0.164, p-value 0.3307360828945112
+2024-03-27 00:25:25,695 : INFO : defgen, KL: 0.059, p-value 0.7273825899235686
+2024-03-27 00:25:25,695 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:25,695 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/norwegian2 directory.
+2024-03-27 00:25:25,695 : INFO : greedy
+2024-03-27 00:25:25,946 : INFO : =========
+2024-03-27 00:25:25,946 : INFO : Evaluation
+2024-03-27 00:25:25,946 : INFO : =========
+2024-03-27 00:25:25,951 : INFO : defgen, Cosine: 0.211, p-value 0.21008584393222465
+2024-03-27 00:25:25,951 : INFO : defgen, Chebyshev: -0.064, p-value 0.7054485967862669
+2024-03-27 00:25:25,952 : INFO : defgen, Canberra: 0.316, p-value 0.05696365396966439
+2024-03-27 00:25:25,952 : INFO : defgen, Bray-Curtis: -0.016, p-value 0.9238234658053973
+2024-03-27 00:25:25,952 : INFO : defgen, Euclidean: -0.106, p-value 0.5341369105812394
+2024-03-27 00:25:25,953 : INFO : defgen, JS: 0.232, p-value 0.16776423073185034
+2024-03-27 00:25:25,953 : INFO : defgen, KL: 0.104, p-value 0.5396868236885886
+2024-03-27 00:25:25,953 : INFO : Don't forget to evaluate the predictions with the official scorer.
+2024-03-27 00:25:25,953 : INFO : They can be found in the *.dict.tsv files in the ../../acl_results/defgen/norwegian2 directory.
+2024-03-27 00:25:25,953 : INFO : ---------- 0.2 minutes ----------
