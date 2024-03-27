@@ -14,7 +14,6 @@ ris	0.3529
 rad	0.3436
 rev	0.3415
 tro	0.3162
-land	0.3134
 lyng	0.2914
 katt	0.2701
 sete	0.2447
@@ -22,7 +21,6 @@ fag	0.2168
 data	0.0000
 egg	0.0000
 etterforskning	0.0000
-formiddag	0.0000
 frakk	0.0000
 gress	0.0000
 husrom	0.0000
