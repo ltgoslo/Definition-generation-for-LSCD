@@ -111,66 +111,66 @@ russian3 Lesk without PoS Canberra: score -0.286 p-value 0.004
 russian3 Lesk without PoS JS: score -0.278 p-value 0.005
 russian3 Lesk without PoS KL: score -0.284 p-value 0.004
 russian3 Lesk without PoS Bray-Curtis: score -0.244 p-value 0.015
-norwegian1 beam10-minimal Cosine: score 0.289 p-value 0.092 too large p-value :(
-norwegian1 beam10-minimal JS: score 0.220 p-value 0.203 too large p-value :(
-norwegian1 divbeam50-min Cosine: score 0.199 p-value 0.251 too large p-value :(
-norwegian1 divbeam50-min JS: score 0.174 p-value 0.317 too large p-value :(
-norwegian1 divbeam-max Cosine: score 0.180 p-value 0.301 too large p-value :(
-norwegian1 divbeam-max JS: score 0.292 p-value 0.088 too large p-value :(
-norwegian1 beam-orig Cosine: score 0.276 p-value 0.108 too large p-value :(
-norwegian1 beam-orig JS: score 0.219 p-value 0.206 too large p-value :(
-norwegian1 divbeam-min Cosine: score 0.315 p-value 0.065 too large p-value :(
-norwegian1 divbeam-min JS: score 0.281 p-value 0.102 too large p-value :(
-norwegian1 beam10-maximal Cosine: score 0.248 p-value 0.152 too large p-value :(
-norwegian1 beam10-maximal JS: score 0.191 p-value 0.273 too large p-value :(
-norwegian1 greedy-orig Cosine: score 0.294 p-value 0.087 too large p-value :(
-norwegian1 greedy-orig JS: score 0.322 p-value 0.059 too large p-value :(
-norwegian1 greedy-max Cosine: score 0.234 p-value 0.176 too large p-value :(
-norwegian1 greedy-max JS: score 0.347 p-value 0.041
-norwegian1 divbeam50-max Cosine: score 0.141 p-value 0.418 too large p-value :(
-norwegian1 divbeam50-max JS: score 0.140 p-value 0.421 too large p-value :(
-norwegian1 greedy50-min Cosine: score 0.072 p-value 0.681 too large p-value :(
-norwegian1 greedy50-min JS: score 0.029 p-value 0.867 too large p-value :(
-norwegian1 beam-max Cosine: score 0.248 p-value 0.152 too large p-value :(
-norwegian1 beam-max JS: score 0.191 p-value 0.273 too large p-value :(
-norwegian1 greedy-shared-sw60 Cosine: score 0.135 p-value 0.438 too large p-value :(
-norwegian1 greedy-shared-sw60 JS: score 0.109 p-value 0.534 too large p-value :(
-norwegian1 greedy10-maximal Cosine: score 0.234 p-value 0.176 too large p-value :(
-norwegian1 greedy10-maximal JS: score 0.347 p-value 0.041
-norwegian1 divbeam-orig Cosine: score 0.233 p-value 0.178 too large p-value :(
-norwegian1 divbeam-orig JS: score 0.264 p-value 0.125 too large p-value :(
-norwegian1 beam-min Cosine: score 0.289 p-value 0.092 too large p-value :(
-norwegian1 beam-min JS: score 0.220 p-value 0.203 too large p-value :(
-norwegian1 beam50-min Cosine: score 0.039 p-value 0.826 too large p-value :(
-norwegian1 beam50-min JS: score 0.019 p-value 0.912 too large p-value :(
-norwegian1 greedy-min Cosine: score 0.236 p-value 0.172 too large p-value :(
-norwegian1 greedy-min JS: score 0.266 p-value 0.123 too large p-value :(
-norwegian1 divbeam10-maximal Cosine: score 0.180 p-value 0.301 too large p-value :(
-norwegian1 divbeam10-maximal JS: score 0.292 p-value 0.088 too large p-value :(
-norwegian1 greedy10-minimal Cosine: score 0.236 p-value 0.172 too large p-value :(
-norwegian1 greedy10-minimal JS: score 0.266 p-value 0.123 too large p-value :(
-norwegian1 beam50-max Cosine: score -0.046 p-value 0.795 too large p-value :(
-norwegian1 beam50-max JS: score -0.029 p-value 0.869 too large p-value :(
-norwegian1 greedy50-max Cosine: score 0.045 p-value 0.796 too large p-value :(
-norwegian1 greedy50-max JS: score 0.061 p-value 0.728 too large p-value :(
-norwegian1 greedy50-maximal Cosine: score 0.045 p-value 0.796 too large p-value :(
-norwegian1 greedy50-maximal JS: score 0.031 p-value 0.859 too large p-value :(
-norwegian1 divbeam10-minimal Cosine: score 0.315 p-value 0.065 too large p-value :(
-norwegian1 divbeam10-minimal JS: score 0.281 p-value 0.102 too large p-value :(
-norwegian1 Lesk without PoS Chebyshev: score -0.005 p-value 0.975 too large p-value :(
-norwegian1 Lesk without PoS Cosine: score 0.060 p-value 0.732 too large p-value :(
-norwegian1 Lesk without PoS Euclidean: score -0.027 p-value 0.877 too large p-value :(
-norwegian1 Lesk without PoS Canberra: score 0.093 p-value 0.593 too large p-value :(
-norwegian1 Lesk without PoS JS: score 0.110 p-value 0.528 too large p-value :(
-norwegian1 Lesk without PoS KL: score 0.110 p-value 0.531 too large p-value :(
-norwegian1 Lesk without PoS Bray-Curtis: score 0.078 p-value 0.657 too large p-value :(
-norwegian1 Lesk with PoS Chebyshev: score -0.005 p-value 0.975 too large p-value :(
-norwegian1 Lesk with PoS Cosine: score 0.060 p-value 0.732 too large p-value :(
-norwegian1 Lesk with PoS Euclidean: score -0.027 p-value 0.877 too large p-value :(
-norwegian1 Lesk with PoS Canberra: score 0.093 p-value 0.593 too large p-value :(
-norwegian1 Lesk with PoS JS: score 0.110 p-value 0.528 too large p-value :(
-norwegian1 Lesk with PoS KL: score 0.110 p-value 0.531 too large p-value :(
-norwegian1 Lesk with PoS Bray-Curtis: score 0.078 p-value 0.657 too large p-value :(
+norwegian1 beam10-minimal Cosine: score 0.297 p-value 0.074 too large p-value :(
+norwegian1 beam10-minimal JS: score 0.240 p-value 0.152 too large p-value :(
+norwegian1 divbeam50-min Cosine: score 0.197 p-value 0.242 too large p-value :(
+norwegian1 divbeam50-min JS: score 0.207 p-value 0.218 too large p-value :(
+norwegian1 divbeam-max Cosine: score 0.209 p-value 0.215 too large p-value :(
+norwegian1 divbeam-max JS: score 0.315 p-value 0.058 too large p-value :(
+norwegian1 beam-orig Cosine: score 0.268 p-value 0.109 too large p-value :(
+norwegian1 beam-orig JS: score 0.238 p-value 0.156 too large p-value :(
+norwegian1 divbeam-min Cosine: score 0.325 p-value 0.049
+norwegian1 divbeam-min JS: score 0.296 p-value 0.075 too large p-value :(
+norwegian1 beam10-maximal Cosine: score 0.265 p-value 0.113 too large p-value :(
+norwegian1 beam10-maximal JS: score 0.215 p-value 0.200 too large p-value :(
+norwegian1 greedy-orig Cosine: score 0.303 p-value 0.068 too large p-value :(
+norwegian1 greedy-orig JS: score 0.332 p-value 0.045
+norwegian1 greedy-max Cosine: score 0.261 p-value 0.119 too large p-value :(
+norwegian1 greedy-max JS: score 0.362 p-value 0.028
+norwegian1 divbeam50-max Cosine: score 0.148 p-value 0.382 too large p-value :(
+norwegian1 divbeam50-max JS: score 0.166 p-value 0.326 too large p-value :(
+norwegian1 greedy50-min Cosine: score 0.087 p-value 0.608 too large p-value :(
+norwegian1 greedy50-min JS: score 0.072 p-value 0.670 too large p-value :(
+norwegian1 beam-max Cosine: score 0.265 p-value 0.113 too large p-value :(
+norwegian1 beam-max JS: score 0.215 p-value 0.200 too large p-value :(
+norwegian1 greedy-shared-sw60 Cosine: score 0.180 p-value 0.286 too large p-value :(
+norwegian1 greedy-shared-sw60 JS: score 0.154 p-value 0.364 too large p-value :(
+norwegian1 greedy10-maximal Cosine: score 0.261 p-value 0.119 too large p-value :(
+norwegian1 greedy10-maximal JS: score 0.362 p-value 0.028
+norwegian1 divbeam-orig Cosine: score 0.241 p-value 0.150 too large p-value :(
+norwegian1 divbeam-orig JS: score 0.280 p-value 0.093 too large p-value :(
+norwegian1 beam-min Cosine: score 0.297 p-value 0.074 too large p-value :(
+norwegian1 beam-min JS: score 0.240 p-value 0.152 too large p-value :(
+norwegian1 beam50-min Cosine: score 0.068 p-value 0.689 too large p-value :(
+norwegian1 beam50-min JS: score 0.063 p-value 0.713 too large p-value :(
+norwegian1 greedy-min Cosine: score 0.251 p-value 0.134 too large p-value :(
+norwegian1 greedy-min JS: score 0.280 p-value 0.094 too large p-value :(
+norwegian1 divbeam10-maximal Cosine: score 0.209 p-value 0.215 too large p-value :(
+norwegian1 divbeam10-maximal JS: score 0.315 p-value 0.058 too large p-value :(
+norwegian1 greedy10-minimal Cosine: score 0.251 p-value 0.134 too large p-value :(
+norwegian1 greedy10-minimal JS: score 0.280 p-value 0.094 too large p-value :(
+norwegian1 beam50-max Cosine: score -0.011 p-value 0.949 too large p-value :(
+norwegian1 beam50-max JS: score 0.020 p-value 0.908 too large p-value :(
+norwegian1 greedy50-max Cosine: score 0.054 p-value 0.750 too large p-value :(
+norwegian1 greedy50-max JS: score 0.085 p-value 0.617 too large p-value :(
+norwegian1 greedy50-maximal Cosine: score 0.054 p-value 0.750 too large p-value :(
+norwegian1 greedy50-maximal JS: score 0.058 p-value 0.735 too large p-value :(
+norwegian1 divbeam10-minimal Cosine: score 0.325 p-value 0.049
+norwegian1 divbeam10-minimal JS: score 0.296 p-value 0.075 too large p-value :(
+norwegian1 Lesk without PoS Chebyshev: score 0.053 p-value 0.754 too large p-value :(
+norwegian1 Lesk without PoS Cosine: score 0.112 p-value 0.509 too large p-value :(
+norwegian1 Lesk without PoS Euclidean: score 0.025 p-value 0.881 too large p-value :(
+norwegian1 Lesk without PoS Canberra: score 0.167 p-value 0.323 too large p-value :(
+norwegian1 Lesk without PoS JS: score 0.178 p-value 0.292 too large p-value :(
+norwegian1 Lesk without PoS KL: score 0.168 p-value 0.321 too large p-value :(
+norwegian1 Lesk without PoS Bray-Curtis: score 0.137 p-value 0.420 too large p-value :(
+norwegian1 Lesk with PoS Chebyshev: score 0.039 p-value 0.820 too large p-value :(
+norwegian1 Lesk with PoS Cosine: score 0.099 p-value 0.561 too large p-value :(
+norwegian1 Lesk with PoS Euclidean: score 0.016 p-value 0.925 too large p-value :(
+norwegian1 Lesk with PoS Canberra: score 0.130 p-value 0.443 too large p-value :(
+norwegian1 Lesk with PoS JS: score 0.150 p-value 0.374 too large p-value :(
+norwegian1 Lesk with PoS KL: score 0.149 p-value 0.378 too large p-value :(
+norwegian1 Lesk with PoS Bray-Curtis: score 0.120 p-value 0.480 too large p-value :(
 norwegian2 divbeam-max Cosine: score 0.202 p-value 0.230 too large p-value :(
 norwegian2 divbeam-max JS: score 0.221 p-value 0.189 too large p-value :(
 norwegian2 beam-orig Cosine: score 0.144 p-value 0.395 too large p-value :(
@@ -204,10 +204,10 @@ norwegian2 Lesk with PoS Canberra: score 0.468 p-value 0.003
 norwegian2 Lesk with PoS JS: score 0.474 p-value 0.003
 norwegian2 Lesk with PoS KL: score 0.460 p-value 0.004
 norwegian2 Lesk with PoS Bray-Curtis: score 0.453 p-value 0.005
-norwegian2 Lesk without PoS Chebyshev: score 0.426 p-value 0.009
-norwegian2 Lesk without PoS Cosine: score 0.466 p-value 0.004
-norwegian2 Lesk without PoS Euclidean: score 0.424 p-value 0.009
-norwegian2 Lesk without PoS Canberra: score 0.468 p-value 0.003
-norwegian2 Lesk without PoS JS: score 0.474 p-value 0.003
-norwegian2 Lesk without PoS KL: score 0.460 p-value 0.004
-norwegian2 Lesk without PoS Bray-Curtis: score 0.453 p-value 0.005
+norwegian2 Lesk without PoS Chebyshev: score 0.440 p-value 0.006
+norwegian2 Lesk without PoS Cosine: score 0.490 p-value 0.002
+norwegian2 Lesk without PoS Euclidean: score 0.434 p-value 0.007
+norwegian2 Lesk without PoS Canberra: score 0.492 p-value 0.002
+norwegian2 Lesk without PoS JS: score 0.500 p-value 0.002
+norwegian2 Lesk without PoS KL: score 0.480 p-value 0.003
+norwegian2 Lesk without PoS Bray-Curtis: score 0.470 p-value 0.003

@@ -23,7 +23,7 @@ def run(metric, strat_folder, language, f):
             "../src/eval.py",
             "2",
             f"{strat_folder}/defgen/{language}/{metric}_dict.tsv",
-            f"../src/data/{language}/truth/graded.txt",
+            f"../src/data/{language}/truth/graded.txt", # the ground truth on saga had landet changed to land . omg
         ], capture_output=True,
     )
     value = result.stdout.decode('utf8').split("\t")
@@ -46,7 +46,7 @@ def run_lesk(strat_folder, language, f):
                 "../src/eval.py",
                 "2",
                 metric_dict,
-                f"../src/data/{language}/truth/graded.txt",
+                f"../../acl_data/{language}/truth/graded.txt",
             ], capture_output=True,
         )
         value = result.stdout.decode('utf8').split("\t")

@@ -6,8 +6,8 @@ innstilling,beste karakter ved embetseksamen (som det gis innberetning om til Ko
 tavle,panel, anlegg med (elektriske) installasjoner, ofte med kontroll- og måleinstrumenter:11,flat, tynn helle, plate eller skive til å hogge, risse inn eller skrive på:6
 fane,dekorert tøystykke festet på en stang, brukt som samlingsmerke for forening eller lignende, banner:5,skråstrek på note:2,del av åpnet internettside (med navn på siden):1
 strøm,rasktflytende vann bevegelse i luft:231,flom, vell stadig og rikelig mengde:71,elektrisitet som følger en ledning:153
-nett,system av forbindelseslinjer:442,flettverk av snorer, tråder eller lignende overført::47,i i bestemt form: Internett:112,flettverk av snorer, tråder eller lignende garn:1
-sky,tett samling av vanndråper eller iskrystaller i atmosfæren:67,tett samling av røyk, støv og lignende:18
+nett,system av forbindelseslinjer:413,ikke ubetydelig, temmelig stor:19,flettverk av snorer, tråder eller lignende overført::42,i i bestemt form: Internett:58,som adverb: nettopp, akkurat:69,flettverk av snorer, tråder eller lignende garn:1
+sky,som prøver å unngå andre mennesker:2,som er lett å skremme, vanskelig å komme inn på:24,i i sammensetninger: som ikke tåler, vil prøve å slippe det som forleddet angir:42,tett samling av røyk, støv og lignende:10,tett samling av vanndråper eller iskrystaller i atmosfæren:7
 moment,medvirkende faktor eller omstendighet, hovedpunkt, element:20,øyeblikk:51,i fysikk: virkning av en kraft:344
 vindu,noe som ligner et vindu (1):34,karm med glass eller lignende i ramme overført::3,glass eller lignende i vindu (1):5
 spill,etter visse regler benytte kort, brikker, terninger og lignende for å vinne over en motpart det å satse penger i håp om fortjeneste:269,sport, idrett som det gjelder visse regler for, særlig (lag)idretter der en benytter ball det å utøve slik idrett:51,enkelt parti, omgang av spill:22,sett med kort, brikker og lignende til å spille med:50,noe som er spilt, jamfør spille:9,innretning til å heise eller hale noe med, vinsj:1

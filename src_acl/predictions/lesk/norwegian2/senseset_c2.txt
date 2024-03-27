@@ -6,8 +6,8 @@ innstilling,stans, avlysing:69,det å stille inn det å være innstilt (slik ell
 tavle,flat, tynn helle, plate eller skive til å hogge, risse inn eller skrive på:9,panel, anlegg med (elektriske) installasjoner, ofte med kontroll- og måleinstrumenter:8
 fane,dekorert tøystykke festet på en stang, brukt som samlingsmerke for forening eller lignende, banner:6,skråstrek på note:1,del av åpnet internettside (med navn på siden):1
 strøm,rasktflytende vann bevegelse i luft:259,flom, vell stadig og rikelig mengde:72,elektrisitet som følger en ledning:124
-nett,system av forbindelseslinjer:287,flettverk av snorer, tråder eller lignende overført::39,i i bestemt form: Internett:276
-sky,tett samling av vanndråper eller iskrystaller i atmosfæren:65,tett samling av røyk, støv og lignende:20
+nett,system av forbindelseslinjer:246,som adverb: nettopp, akkurat:132,flettverk av snorer, tråder eller lignende overført::32,i i bestemt form: Internett:139,ikke ubetydelig, temmelig stor:53
+sky,i i sammensetninger: som ikke tåler, vil prøve å slippe det som forleddet angir:30,som er lett å skremme, vanskelig å komme inn på:28,tett samling av røyk, støv og lignende:11,tett samling av vanndråper eller iskrystaller i atmosfæren:14,som prøver å unngå andre mennesker:2
 moment,i fysikk: virkning av en kraft:331,medvirkende faktor eller omstendighet, hovedpunkt, element:12,øyeblikk:72
 vindu,noe som ligner et vindu (1):37,glass eller lignende i vindu (1):3,karm med glass eller lignende i ramme overført::2
 spill,etter visse regler benytte kort, brikker, terninger og lignende for å vinne over en motpart det å satse penger i håp om fortjeneste:264,sett med kort, brikker og lignende til å spille med:64,sport, idrett som det gjelder visse regler for, særlig (lag)idretter der en benytter ball det å utøve slik idrett:45,noe som er spilt, jamfør spille:11,enkelt parti, omgang av spill:17,det å spille på musikkinstrument fugleleik:1
