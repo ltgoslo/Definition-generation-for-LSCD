@@ -1,4 +1,5 @@
 import argparse
+from ast import literal_eval
 from collections import Counter
 import logging
 import os
@@ -234,7 +235,7 @@ def parse_args():
         help="Results directory.",
     )
     parser.add_argument("--method", choices=["lesk", "defgen"], default="lesk")
-    parser.add_argument("--use_pos_in_lesk", type=bool, default=False)
+    parser.add_argument("--use_pos_in_lesk", type=literal_eval, default=False)
     parser.add_argument("--no_zeros_in_kl", type=bool,
                         help="Use smoothing in KL distance",
                         default=True)
@@ -259,6 +260,8 @@ def write_results(
     if not os.path.exists(method_dir):
         os.mkdir(os.path.join(method_dir))
     method_dir = os.path.join(method_dir, args.lang)
+    if args.method == "lesk":
+        method_dir += f"_pos_{args.use_pos_in_lesk}"
     if not os.path.exists(method_dir):
         os.mkdir(method_dir)
     with open(f"{method_dir}/senseset_c1.txt", "w") as f:
