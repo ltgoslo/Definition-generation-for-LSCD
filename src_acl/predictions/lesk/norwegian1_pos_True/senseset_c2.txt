@@ -1,0 +1,37 @@
+plattform,grunnlag, program, utgangspunkt:39,flat forhøyning eller oppbygning perrong, avsats:4
+leilighet,bolig som består av ett eller flere rom og kjøkken:321
+horisont,fag. storsirkel som dannes ved skjæring mellom et horisontalplan på observasjonsstedet og himmelkula:83,åndelig synskrets, omfang av ens interesser, forståelse eller lignende:19
+mål,område som det gjelder å få ballen inn i i ballspill:314,mengde som svarer til et målekar:31,linje som det gjelder å nå fram til, særlig i idrettskonkurranser:57,melkemengde i en melking av ett dyr eller en hel buskap, en gangs melking, jamfør kveldsmål:73,størrelse, dimensjon eller mengde som er oppmerket eller uttrykt i visse målenheter:220,sted en er på reise til, endepunkt:75,merke eller område å skyte på eller angripe:3,målenhet som er satt lik 1000 m2, dekar:1,utsagn, avtale, sak, ærend:8,i matematikk: størrelse som går opp i en annen uten rest:10,noe en arbeider for, strever etter å oppnå, formål, plan, mening:9,språk, tungemål i i bestemt form: nynorsk:1
+bølge,overført: noe som minner om en bølge, noe som strømmer fram eller brer seg:25,i fysikk: det at en lokal tilstandsendring sprer seg i et medium:64,hvelvet rygg (med tilsvarende søkk) som danner seg på overflaten av vann, og som synes å bevege seg bortover, båre:69
+skjerm,innretning som tjener til vern mot noe:48,flate av glass, metall eller lignende:20,bot. blomsterstand der blomsterstilkene går ut fra et felles punkt:3
+pære,noe som ligner pære:4
+forhold,romantisk eller seksuell forbindelse mellom personer:404,omstendighet eller ytre vilkår for hvordan noe arter seg, tilstand, stode:394,relasjon eller forbindelse mellom to personer, fenomener eller lignende, innbyrdes stilling:45,proporsjon eller samsvar mellom ulike faktorer:38
+anfektelse,noe som kan anfekte, tanke som volder indre uro, skruppel, tvil, prøvelse:8
+bit,særlig i bestemt form: del av et større hele:97,minste enhet for informasjonsmengde i en datamaskin med sifferverdi 0 eller 1, jamfør byte:102
+linse,gjennomsiktig, lysbrytende legeme (av glass) som er avgrenset av to motsatte bueflater eller av en plan flate og en bueflate:14,frø av linse (1):3,liten porsjonskake fylt med eggekrem:1
+stoff,tøy, klede:336,anlegg, to:7,narkotisk middel:2,materiale, tilfang:2,emne, substans:2
+ris,slag av ris:118,bunt av kvister (brukt til å slå med):37
+rad,linje, rekke:616
+rev,strimmel av seil som kan bindes opp med tau (for å gjøre seilflaten mindre):119,grunne, banke (som strekker seg ut fra en kyst):6,rovdyr som hører til hundefamilien Canidae:7
+tro,avlangt kar (opprinnelig av en uthult stokk) for mat og drikke til dyr:660,religiøs overbevisning, religion også overført, for eksempel om politisk overbevisning::52,troskap, i forbindelsen:114
+land,område av jordoverflaten som ikke er dekket av vann:199,særlig om eldre og utenlandske forhold: delvis selvstyrt del av et rike:465,grissgrendt område, bygd, til forskjell fra by:18,urin fra husdyr:33,jordeiendom, dyrket jord eller utmark:3
+lyng,kollektivt: lave, buskformede planter som for det meste tilhører lyngfamilien:78
+katt,stor talje til å heise opp anker med, jamfør katte:26,pisk med (som oftest) ni lange, tynne lærreimer, brukt som strafferedskap:17,lite husdyr og kjæledyr av kattefamilien, huskatt, jamfør katte:14
+sete,det å sitte som medlem av en forsamling eller lignende:115,plass til å sitte på:31
+fag,område eller felt, gren av yrke, vitenskap eller kunst:804
+data,representasjon av et digitalt innhold:120,opplysninger om verden som blir brukt i forskning, databehandling eller liknende:174,kortord for datateknologi:7
+egg,rundaktig gjenstand med hardt skall eller myk hinne omkring en eggcelle og næringsstoffer i halvt flytende form:175,lang rygg i havbunnen, ytterkant av banke:7,noe som er formet som et egg:101,egg av høns, brukt som matvare, jamfør eggekrem, eggerøre og speilegg:136,slipt kant på skjære-, hogge- og stikkredskap:25
+etterforskning,det å etterforske, undersøkelse, gransking:31
+formiddag,tid fra morgen til ettermiddag, tid mellom frokost og klokka tolv eller middagstid:122
+frakk,sidt (ytter)plagg:16
+gress,gress som dekker et område, for eksempel beitemark, plen eller idrettsbane:95,plante i gressfamilien eller lignende blomsterløse vekster som vokser i store mengder:63
+husrom,rom, plass til å bo på, losji:103
+idiot,person som oppfører seg svært dumt, tosk:2,i i sammensetninger: person med svært ensidige interesser:1
+kart,grafisk framstilling av en del av jordoverflaten (eller stjernehimmelen):285,umoden frukt eller umodent bær:208,overført: liten ting eller person:8,liste, oversikt, dagsorden:1
+kjemi,lære om grunnstoffene og deres forbindelse med hverandre:160,overført: (udefinerbare) psykologiske faktorer som avgjør hvor godt visse mennesker går sammen:79
+kloakk,felles utførselsåpning for kjønnsorganer, urinorganer og tarmkanal hos for eksempel fugler og krypdyr:59,underjordisk avløpssystem for flytende avfall:15
+leder,stoff eller legeme som leder elektrisitet eller varme:463,kanal eller lignende som leder noe:22,person som leder noe, styrer, fører:7
+operasjon,mil. virksomhet, flytting og gruppering av større troppestyrker:108,med. kirurgisk inngrep:1
+ørret,laksefisk med flere svarte flekker langs buksiden enn laks, Salmo trutta:12
+tropp,mil. underavdeling av kompani:41,i flertall: styrker:19
+varsel,tegn, forvarsel, omen:225,frist, underretning, beskjed gitt på forhånd:154
