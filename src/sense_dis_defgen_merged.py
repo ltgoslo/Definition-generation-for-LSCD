@@ -145,9 +145,9 @@ def main():
             "norwegian2"
     ):
         logging.info(lang.upper())
-        for merg_strat in ("maximal", "minimal"):
+        for merg_strat in ("maximal", "minimal", "separate"):
             logging.info(merg_strat)
-            for strat in ("beam", "divbeam", "greedy", "greedy10", "beam50", "divbeam50", "greedy50"):
+            for strat in ("beam", "divbeam", "greedy", "greedy10", "beam50", "divbeam50", "greedy50", "greedy_50"):
                 logging.info(strat)
                 target_dict1 = {}
                 target_dict2 = {}
