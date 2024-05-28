@@ -1,0 +1,37 @@
+stryk,pryl, bank:12,det å stryke til eksamen:36,parti av elv med stri strøm:22
+kanal,sending fra fjernsyns- eller radiostasjon på en bestemt frekvens:117,sund:9,mulighet til å påvirke eller få informasjon:29
+kode,(fortegnelse over) ord, bokstavkombinasjoner, tall eller andre symboler som brukes i skriftlige og muntlige meddelelser for å gjøre innholdet uforståelig for uvedkommende, for å spare plass eller for å få et standardisert, lettkjennelig informasjonssystem:75,tallkombinasjon som noe må innstilles på for å kunne åpnes eller gi tilgang:72,sett av entydige regler for den måten data blir representert ved tegnene i et tegnsett:23,del av foten som er mellom hoven og mellomfoten hos hovdyr og mellom klauvene og mellomfoten hos drøvtyggere og svin:21,sett av uskrevne regler for oppførsel og sosial omgang:8
+oppvarming,det å varme opp, fyring:369
+innstilling,stans, avlysing:69,det å stille inn det å være innstilt (slik eller slik):234,beste karakter ved embetseksamen (som det gis innberetning om til Kongen):240
+tavle,flat, tynn helle, plate eller skive til å hogge, risse inn eller skrive på:9,panel, anlegg med (elektriske) installasjoner, ofte med kontroll- og måleinstrumenter:8
+fane,dekorert tøystykke festet på en stang, brukt som samlingsmerke for forening eller lignende, banner:6,skråstrek på note:1,del av åpnet internettside (med navn på siden):1
+strøm,rasktflytende vann bevegelse i luft:259,flom, vell stadig og rikelig mengde:72,elektrisitet som følger en ledning:124
+nett,system av forbindelseslinjer:246,som adverb: nettopp, akkurat:132,flettverk av snorer, tråder eller lignende overført::32,i i bestemt form: Internett:139,ikke ubetydelig, temmelig stor:53
+sky,i i sammensetninger: som ikke tåler, vil prøve å slippe det som forleddet angir:30,som er lett å skremme, vanskelig å komme inn på:28,tett samling av røyk, støv og lignende:11,tett samling av vanndråper eller iskrystaller i atmosfæren:14,som prøver å unngå andre mennesker:2
+moment,i fysikk: virkning av en kraft:331,medvirkende faktor eller omstendighet, hovedpunkt, element:12,øyeblikk:72
+vindu,noe som ligner et vindu (1):37,glass eller lignende i vindu (1):3,karm med glass eller lignende i ramme overført::2
+spill,etter visse regler benytte kort, brikker, terninger og lignende for å vinne over en motpart det å satse penger i håp om fortjeneste:264,sett med kort, brikker og lignende til å spille med:64,sport, idrett som det gjelder visse regler for, særlig (lag)idretter der en benytter ball det å utøve slik idrett:45,noe som er spilt, jamfør spille:11,enkelt parti, omgang av spill:17,det å spille på musikkinstrument fugleleik:1
+side,ytterflate ytterlinje:194,høyre eller venstre del av menneske- eller dyrekropp:141,kant, retning, til venstre eller høyre:344,parti (for eller imot):11,del av rom, område eller tidsrom:2
+fjær,kant i smalsiden av en fjøl eller lignende til å felle inn i en renne i en annen fjøl, jamfør not:17,hver av de grenete, lette utvekstene som dekker kroppen på en fugl:3
+kohort,gruppe som har en felles faktor, for eksempel alder:8
+virus,skjult dataprogram som kan kopieres inn i datafiler, programmer og operativsystemer og ødelegge dem, datavirus:34
+bank,institusjon som tar imot innskudd av penger, gir lån, driver handel med verdipapirer og utfører pengetransaksjonstjenester:61,bygning der en bank holder til:29
+bystyrerepresentant,person som representerer et visst parti i bystyret:2
+driftsregnskap,regnskap for driften av et foretak eller en avdeling:10
+kjøpepress,det at det er større etterspørsel enn tilbud på markedet:6,press til å kjøpe stadig mer:1
+kreft,fellesbetegnelse for sykdommer med unormal cellevekst i et organ eller vev:99,fellesbetegnelse for plantesykdommer som viser seg med sår og oppsvulminger på stamme eller grener:129
+mappe,flat veske:13
+melding,opplysning, kunngjørelse, beskjed, rapport i kortspill::337,det å melde eller bli meldt:86
+melk,bot. saft eller væske som planteorgan(isme) skiller ut, og som ligner på melk (1):279,gulhvit næringsrik væske som blir skilt ut av melkekjertlene hos hunnpattedyr:26
+overflate,det utvendige, iøynefallende ved noe:8,flate som begrenser et legeme, ytterflate:31
+papir,blad, ark til å skrive på:254,om person::44
+rådgiver,en som har til oppgave å gi råd:280
+særforbund
+storby,by med høyt innbyggertall:35
+Syden,sørlige land, strøk, særlig om middelhavslandene:19
+tendens,tilbøyelighet, retning som noe(n) heller eller strever mot (tilløp til) utvikling i en viss retning:597,verdisynspunkt, hensikt, vri:11
+terror,bruk av (trusler om) vold for å oppnå visse mål:28
+test,(systematisk) prøve, fagmessig utprøving (for eksempel av et menneskes intelligens eller av en motors yteevne):180
+tjener,overført: i bibelspråk: underdanig, ydmyk person:22
+utakt,mangel på takt:54
+virkelighet,noe som virkelig, faktisk har hendt:196,livet slik det virkelig, faktisk er, realitet:35

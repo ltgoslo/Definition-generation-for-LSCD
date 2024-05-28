@@ -1,0 +1,13 @@
+english Lesk without PoS Canberra: score 0.435 p-value 0.007
+english Lesk with PoS Canberra: score 0.587 p-value 0.00
+
+norwegian1 Lesk without PoS JS: score 0.150 p-value 0.374 too large p-value :(
+norwegian1 Lesk without PoS JS: score 0.178 p-value 0.292 too large p-value :(
+
+norwegian2 Lesk without PoS JS: score 0.500 p-value 0.002
+norwegian2 Lesk with PoS JS: score 0.474 p-value 0.003
+
+russian1 Lesk without PoS Canberra: score -0.294 p-value 0.003
+russian2 Lesk without PoS JS: score -0.279 p-value 0.005
+russian3 Lesk without PoS Canberra: score -0.286 p-value 0.004
+

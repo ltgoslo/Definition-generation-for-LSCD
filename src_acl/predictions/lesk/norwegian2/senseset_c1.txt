@@ -1,0 +1,37 @@
+stryk,parti av elv med stri strøm:37,pryl, bank:18,det å stryke til eksamen:15
+kanal,sending fra fjernsyns- eller radiostasjon på en bestemt frekvens:112,mulighet til å påvirke eller få informasjon:33,sund:10
+kode,del av foten som er mellom hoven og mellomfoten hos hovdyr og mellom klauvene og mellomfoten hos drøvtyggere og svin:16,sett av entydige regler for den måten data blir representert ved tegnene i et tegnsett:36,(fortegnelse over) ord, bokstavkombinasjoner, tall eller andre symboler som brukes i skriftlige og muntlige meddelelser for å gjøre innholdet uforståelig for uvedkommende, for å spare plass eller for å få et standardisert, lettkjennelig informasjonssystem:63,sett av uskrevne regler for oppførsel og sosial omgang:44,tallkombinasjon som noe må innstilles på for å kunne åpnes eller gi tilgang:40
+oppvarming,det å varme opp, fyring:369
+innstilling,beste karakter ved embetseksamen (som det gis innberetning om til Kongen):307,det å stille inn det å være innstilt (slik eller slik):160,stans, avlysing:76
+tavle,panel, anlegg med (elektriske) installasjoner, ofte med kontroll- og måleinstrumenter:11,flat, tynn helle, plate eller skive til å hogge, risse inn eller skrive på:6
+fane,dekorert tøystykke festet på en stang, brukt som samlingsmerke for forening eller lignende, banner:5,skråstrek på note:2,del av åpnet internettside (med navn på siden):1
+strøm,rasktflytende vann bevegelse i luft:231,flom, vell stadig og rikelig mengde:71,elektrisitet som følger en ledning:153
+nett,system av forbindelseslinjer:413,ikke ubetydelig, temmelig stor:19,flettverk av snorer, tråder eller lignende overført::42,i i bestemt form: Internett:58,som adverb: nettopp, akkurat:69,flettverk av snorer, tråder eller lignende garn:1
+sky,som prøver å unngå andre mennesker:2,som er lett å skremme, vanskelig å komme inn på:24,i i sammensetninger: som ikke tåler, vil prøve å slippe det som forleddet angir:42,tett samling av røyk, støv og lignende:10,tett samling av vanndråper eller iskrystaller i atmosfæren:7
+moment,medvirkende faktor eller omstendighet, hovedpunkt, element:20,øyeblikk:51,i fysikk: virkning av en kraft:344
+vindu,noe som ligner et vindu (1):34,karm med glass eller lignende i ramme overført::3,glass eller lignende i vindu (1):5
+spill,etter visse regler benytte kort, brikker, terninger og lignende for å vinne over en motpart det å satse penger i håp om fortjeneste:269,sport, idrett som det gjelder visse regler for, særlig (lag)idretter der en benytter ball det å utøve slik idrett:51,enkelt parti, omgang av spill:22,sett med kort, brikker og lignende til å spille med:50,noe som er spilt, jamfør spille:9,innretning til å heise eller hale noe med, vinsj:1
+side,høyre eller venstre del av menneske- eller dyrekropp:188,kant, retning, til venstre eller høyre:343,ytterflate ytterlinje:148,parti (for eller imot):9,del av rom, område eller tidsrom:4
+fjær,kant i smalsiden av en fjøl eller lignende til å felle inn i en renne i en annen fjøl, jamfør not:13,hver av de grenete, lette utvekstene som dekker kroppen på en fugl:6,elastisk konstruksjon (som del av maskineri og ofte av stål):1
+kohort,gruppe som har en felles faktor, for eksempel alder:8
+virus,skjult dataprogram som kan kopieres inn i datafiler, programmer og operativsystemer og ødelegge dem, datavirus:34
+bank,bygning der en bank holder til:32,institusjon som tar imot innskudd av penger, gir lån, driver handel med verdipapirer og utfører pengetransaksjonstjenester:58
+bystyrerepresentant,person som representerer et visst parti i bystyret:2
+driftsregnskap,regnskap for driften av et foretak eller en avdeling:10
+kjøpepress,det at det er større etterspørsel enn tilbud på markedet:5,press til å kjøpe stadig mer:2
+kreft,fellesbetegnelse for plantesykdommer som viser seg med sår og oppsvulminger på stamme eller grener:115,fellesbetegnelse for sykdommer med unormal cellevekst i et organ eller vev:113
+mappe,flat veske:13
+melding,det å melde eller bli meldt:212,opplysning, kunngjørelse, beskjed, rapport i kortspill::210,omtale, vurdering:1
+melk,bot. saft eller væske som planteorgan(isme) skiller ut, og som ligner på melk (1):278,gulhvit næringsrik væske som blir skilt ut av melkekjertlene hos hunnpattedyr:27
+overflate,flate som begrenser et legeme, ytterflate:29,det utvendige, iøynefallende ved noe:10
+papir,blad, ark til å skrive på:174,om person::124
+rådgiver,en som har til oppgave å gi råd:280
+særforbund
+storby,by med høyt innbyggertall:35
+Syden,sørlige land, strøk, særlig om middelhavslandene:19
+tendens,tilbøyelighet, retning som noe(n) heller eller strever mot (tilløp til) utvikling i en viss retning:590,verdisynspunkt, hensikt, vri:18
+terror,bruk av (trusler om) vold for å oppnå visse mål:28
+test,(systematisk) prøve, fagmessig utprøving (for eksempel av et menneskes intelligens eller av en motors yteevne):180
+tjener,overført: i bibelspråk: underdanig, ydmyk person:22
+utakt,mangel på takt:54
+virkelighet,noe som virkelig, faktisk har hendt:185,livet slik det virkelig, faktisk er, realitet:46
