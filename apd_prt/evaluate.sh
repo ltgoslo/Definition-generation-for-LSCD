@@ -11,9 +11,9 @@ for LANG in "${!MAPPINGS[@]}"; do
         for METHOD in apd prt am gm; do
             echo "** $LANG / ${MAPPINGS[$LANG]} $RUN $METHOD **"
             if [ -f $LANG/$RUN.$METHOD.binary.tsv ]; then
-                python ../src/eval.py 1 $LANG/$RUN.$METHOD.binary.tsv ../src/data/"${MAPPINGS[$LANG]}"/binary.txt
+                python ../src/eval.py 1 $LANG/$RUN.$METHOD.binary.tsv ../src/data/"${MAPPINGS[$LANG]}"/truth/binary.txt
             fi
-            python ../src/eval.py 2 $LANG/$RUN.$METHOD.csv ../src/data/"${MAPPINGS[$LANG]}"/graded.txt
+            python ../src/eval.py 2 $LANG/$RUN.$METHOD.csv ../src/data/"${MAPPINGS[$LANG]}"/truth/graded.txt
         done
     done
 done
