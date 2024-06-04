@@ -1,0 +1,1 @@
+/cluster/projects/nn9851k/andreku/defgen_lscd/semeval2020/test_data_truth/task2/english_nopos.txt
