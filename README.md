@@ -1,4 +1,12 @@
-# Sense-based-Semantic-Change-Prediction
-This repository includes the code and data related to the "Can Word Sense Distribution Detect Semantic Changes of Words?" paper.
+# Definition Generation for Lexical Semantic Change Detection (LSCD)
 
-For more details, go to directory **[src](https://github.com/xiaohang-tang/Sense-based-Semantic-Change-Prediction/tree/main/src)**.
+## Repository structure
+
+    .
+    ├── analysis      # APD and PRT results analysis
+    ├── apd_prt       # APD and PRT experiments
+    ├── embeddings    # generating definitions embeddings
+    ├── gold          # ground truth, SemEval official Evaluation script
+    ├── src           # Running Tang et al. (2023)'s method, see more in its README
+    ├── src_acl       # generating definitions and merging them, stats etc.           
+
