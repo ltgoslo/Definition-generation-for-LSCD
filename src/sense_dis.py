@@ -352,7 +352,8 @@ def main():
                 sense_ids2.append(0.0)
         for i, metric in enumerate(METRICS[:-1]):
             if sense_ids1:
-                dis_dicts[i][target_word] = metric(sense_ids1, sense_ids2)
+                # Rounding because of numerical precision issues with JSD
+                dis_dicts[i][target_word] = round(metric(sense_ids1, sense_ids2), 10)
             else:
                 dis_dicts[i][target_word] = 0.00001
         if sense_ids1:
