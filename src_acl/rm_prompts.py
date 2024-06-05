@@ -8,13 +8,10 @@ import csv
 
 import pandas as pd
 
-PATTERN_RU = re.compile(r"Что такое (\w+)\?")
 PATTERN_NB = re.compile(r"Hva betyr (\w+)\?")
 PATTERNS = {
     'english': re.compile(r"What is the definition of (\w+)\?"),
-    'russian1': PATTERN_RU,
-    'russian2': PATTERN_RU,
-    'russian3': PATTERN_RU,
+    'russian': re.compile(r"Что такое (\w+)\?"),
     'norwegian1': PATTERN_NB,
     'norwegian2': PATTERN_NB,
 }
@@ -23,7 +20,7 @@ PATTERNS = {
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--data_dir", default='../generated_definitions/russian1/greedy/',
+        "--data_dir", default='../generated_definitions/russian/greedy/',
     )
     parser.add_argument(
         "--results_dir",
@@ -35,7 +32,7 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
-    language = args.data_dir.split('/')[-2]
+    language = args.data_dir.split('/')[-3]
     res_path = os.path.join(args.results_dir, language)
     if not os.path.exists(res_path):
         os.mkdir(res_path)
