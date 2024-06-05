@@ -44,7 +44,7 @@ if __name__ == '__main__':
         quoting = csv.QUOTE_NONE
     for corpus in glob(f"{args.data_dir}/*.tsv.gz"):
         data = pd.read_csv(corpus, sep='\t', compression='gzip')
-        out = os.path.join(args.res_path, os.path.split(corpus)[-1])
+        out = os.path.join(res_path, os.path.split(corpus)[-1])
         if args.rm_whole_prompt:
             data.drop([1], axis=1, inplace=True)
         else:
