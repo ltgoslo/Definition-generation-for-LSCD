@@ -46,7 +46,7 @@ if __name__ == '__main__':
         data = pd.read_csv(corpus, sep='\t', compression='gzip')
         out = os.path.join(res_path, os.path.split(corpus)[-1])
         if args.rm_whole_prompt:
-            data.drop([1], axis=1, inplace=True)
+            data.drop(data.columns[1], axis=1, inplace=True)
         else:
             data[1] = data[1].apply(
                 lambda x: re.sub(PATTERNS[language], '', x)
