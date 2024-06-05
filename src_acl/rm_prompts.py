@@ -15,6 +15,8 @@ PATTERNS = {
     'russian1': PATTERN_RU,
     'russian2': PATTERN_RU,
     'russian3': PATTERN_RU,
+    'norwegian1': PATTERN_NB,
+    'norwegian2': PATTERN_NB,
 }
 
 
