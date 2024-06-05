@@ -255,15 +255,15 @@ def write_results(
     logging.info("Evaluation")
     logging.info("=========")
     if not os.path.exists(args.results_dir):
-        os.mkdir(args.results_dir)
+        os.makedirs(args.results_dir, exist_ok=True)
     method_dir = os.path.join(args.results_dir, args.method)
     if not os.path.exists(method_dir):
-        os.mkdir(os.path.join(method_dir))
+        os.makedirs(os.path.join(method_dir), exist_ok=True)
     method_dir = os.path.join(method_dir, args.lang)
     if args.method == "lesk":
         method_dir += f"_pos_{args.use_pos_in_lesk}"
     if not os.path.exists(method_dir):
-        os.mkdir(method_dir)
+        os.makedirs(method_dir, exist_ok=True)
     with open(f"{method_dir}/senseset_c1.txt", "w") as f:
         for target_word in target_list:
             f.write(f"{target_word}")
