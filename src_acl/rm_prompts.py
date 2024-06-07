@@ -38,7 +38,7 @@ if __name__ == '__main__':
     if language == 'english':
         quoting = csv.QUOTE_NONE
     for corpus in glob(f"{args.data_dir}/*.tsv.gz"):
-        data = pd.read_csv(corpus, sep='\t', compression='gzip')
+        data = pd.read_csv(corpus, sep='\t', compression='gzip', header=None)
         out = os.path.join(res_path, os.path.split(corpus)[-1])
         if args.rm_whole_prompt == 0:
             data.drop(data.columns[1], axis=1, inplace=True)
