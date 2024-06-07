@@ -43,11 +43,11 @@ if __name__ == '__main__':
         if args.rm_whole_prompt == 0:
             data.drop(data.columns[1], axis=1, inplace=True)
         elif args.rm_whole_prompt == 1:
-            data.columns[1] = data.columns[1].apply(
+            data.iloc[:,1] = data.iloc[:,1].apply(
                 lambda x: re.sub(PATTERNS[language], '', x)
             )
         else:
-            data.columns[1] = data.columns[1].apply(
+            data.iloc[:,1] = data.iloc[:,1].apply(
                 lambda x: re.search(PATTERNS[language], x).group(0)
             )
         data.to_csv(
