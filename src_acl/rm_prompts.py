@@ -51,5 +51,10 @@ if __name__ == '__main__':
                 lambda x: re.search(PATTERNS[language], x).group(0)
             )
         data.to_csv(
-            out, sep='\t', compression='gzip', quoting=quoting, index=False,
+            out,
+            sep='\t',
+            compression='gzip',
+            quoting=quoting,
+            index=False,
+            header=False,
         )
