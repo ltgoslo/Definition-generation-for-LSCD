@@ -9,7 +9,7 @@ from os import path
 from unicodedata import category
 import pandas as pd
 from leven import levenshtein
-
+import csv
 
 def normalize(text, badwords):
     text = "".join(ch for ch in text if category(ch)[0] != "P")
@@ -24,7 +24,7 @@ def normalize(text, badwords):
 def find_merges(df, argums):
     targ_words = df.word.unique()
 
-    if argums.strategy == "minimal":
+    if argums.strategy == "minimalist":
         logging.info("Minimalist: finding the definitions similar to the most frequent one...")
     else:
         logging.info("Full merging: finding the definitions similar to each other...")
@@ -58,7 +58,7 @@ def find_merges(df, argums):
                             mapped += 1
                 if mapped > 0:
                     logging.debug(f"{mapped} definitions mapped to {def2compare}")
-            if argums.strategy == "minimal":
+            if argums.strategy == "minimalist":
                 if def2compare:
                     break
         if not def2compare:
@@ -107,9 +107,9 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--strategy",
-        choices=["maximal", "minimal"],
-        help="Use only the most frequent definition to merge with (minimal) "
-             "or all definitions (maximal)",
+        choices=["full_fledged", "minimalist"],
+        help="Use only the most frequent definition to merge with (minimalist) "
+             "or all definitions (full_fledged)",
         default="maximal"
     )
     args = parser.parse_args()
@@ -124,8 +124,8 @@ if __name__ == "__main__":
 
     filename1 = f"{args.lang}-corpus1.tsv.gz"
     filename2 = f"{args.lang}-corpus2.tsv.gz"
-    df1 = pd.read_csv(path.join(args.data_path, filename1), sep="\t", header=None)
-    df2 = pd.read_csv(path.join(args.data_path, filename2), sep="\t", header=None)
+    df1 = pd.read_csv(path.join(args.data_path, filename1), sep="\t", header=None, quoting=csv.QUOTE_NONE)
+    df2 = pd.read_csv(path.join(args.data_path, filename2), sep="\t", header=None, quoting=csv.QUOTE_NONE)
     df1.columns = ["word", "usage", "definition"]
     df2.columns = ["word", "usage", "definition"]
 
@@ -151,5 +151,6 @@ if __name__ == "__main__":
             period.loc[period.word == word, "definition"] = new_defs
             cur_definitions = Counter(period[period.word == word].definition).most_common()
             logging.debug(f"{word}: {len(cur_definitions)} unique senses")
-        period.to_csv(path.join(args.out, filename), sep="\t", header=False, index=False)
+        period.to_csv(path.join(args.out, filename), sep="\t", header=None, index=False, quoting=csv.QUOTE_NONE)
         logging.info(f"Merged definitions saved to {path.join(args.out, filename)}")
+
