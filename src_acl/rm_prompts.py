@@ -45,7 +45,7 @@ if __name__ == '__main__':
         if args.rm_whole_prompt:
             data.drop(data.columns[1], axis=1, inplace=True)
         else:
-            data[1] = data[1].apply(
+            data.columns[1] = data.columns[1].apply(
                 lambda x: re.sub(PATTERNS[language], '', x)
             )
         data.to_csv(out, sep='\t', compression='gzip', quoting=quoting)
