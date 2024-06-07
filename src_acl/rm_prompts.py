@@ -1,7 +1,5 @@
 import argparse
-from ast import literal_eval
 from glob import glob
-import gzip
 import os
 import re
 import csv
@@ -52,4 +50,6 @@ if __name__ == '__main__':
             data.columns[1] = data.columns[1].apply(
                 lambda x: re.search(PATTERNS[language], x).group(0)
             )
-        data.to_csv(out, sep='\t', compression='gzip', quoting=quoting)
+        data.to_csv(
+            out, sep='\t', compression='gzip', quoting=quoting, index=False,
+        )
