@@ -5,10 +5,29 @@
     .
     ├── analysis      # APD and PRT results analysis
     ├── apd_prt       # APD and PRT experiments
-    ├── embeddings    # generating definitions embeddings
-    ├── gold          # ground truth, SemEval official Evaluation script
+    ├── embeddings    # generating definitions' embeddings
     ├── src           # Running Tang et al. (2023)'s method, see more in its README
-    ├── src_acl       # generating definitions and merging them, stats etc.           
+    ├── src_acl       # generating definitions and merging them, stats etc.
+
+## Obtain the data
+
+### Lists of words and ground truth
+
+```src/data/``` 
+
+### Diachronical corpora
+
+Sampled usage examples with prompts and generated definitions can be found in ```generated_definitions/```.
+
+The usage examples were sampled from the following resources:
+
+- [English](https://www.ims.uni-stuttgart.de/en/research/resources/corpora/sem-eval-ulscd-eng/)
+- Norwegian: [NBDigital corpus](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-34/) and [Norsk aviskorpus](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-4/) (available under [CC-BY-NC](https://creativecommons.org/licenses/by-nc/4.0/))
+- [Russian](https://rusvectores.org/static/corpora/); the corpora's license does not allow publishing them; for that reason, we could only release the prompts and definitions without usage examples
+
+## Reproduce the baselines
+
+
 
 ## Reproduce evaluation of LSCD performance with definition embeddings obtained with different decoding strategies (Table 3)
 
