@@ -5,9 +5,9 @@ To generate definitions which will be used for semantic change detection, you wi
 It should be a tab-separated plain text file where the first column contains target words, and the second column contains their usages.
 For example:
 
-'''
+```
 bank <TAB> She sat on the river bank and cried.
-'''
+```
 
 ## Generation
 
@@ -16,12 +16,12 @@ Clone it if you haven't done that already:
 
 `git clone git@github.com:ltgoslo/definition_modeling.git`
 
-Then you should use the `modeling/generate_t5.py` script to generate the actual definitions.
+Then you should use the `code/modeling/generate_t5.py` script to generate the actual definitions.
 Its 4 most important arguments are:
 1. `--model` controls what definition generation model to use (for example, [this one](https://huggingface.co/ltg/mt0-definition-en-xl) for English)
 2. `--testdata` is the path to the input data file
 3. `--prompt` controls what instruction prompt to use for generation. You can find the prompt ids [here](https://github.com/ltgoslo/definition_modeling/blob/main/code/modeling/generate_t5.py#L234); the id for "What is the definition of <TRG>?" added after the example is `8`.
-4 `--save` tells the script where to save the resulting definitions.
+4. `--save` tells the script where to save the resulting definitions.
 
 For example:
 
