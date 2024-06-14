@@ -27,7 +27,14 @@ The usage examples were sampled from the following resources:
 
 ## Reproduce the baselines
 
+## Definition generation
 
+```
+cd definition_generation
+git clone git@github.com:ltgoslo/definition_modeling.git
+./definition_generation_pipeline.sh ${}
+```
+Read about the generation parameters in the [README file](definition_generation/README.md).
 
 ## Reproduce evaluation of LSCD performance with definition embeddings obtained with different decoding strategies (Table 3)
 
