@@ -17,9 +17,6 @@ The files **bayesian_optimization.py** and **sense_dis.py** were taken from [Tan
 
 ### Input data
 
-#### Diachronic corpora
-Obtain the English corpora as described in [README](https://github.com/ltgoslo/Definition-generation-for-LSCD?tab=readme-ov-file#obtain-the-data) and put them into `data/english/`. They are expected to be named `corpus1/ccoha1.txt` and `corpus2/ccoha2.txt`.
-
 #### Bokmålsordboka and Wiktionary instead of WordNet for Norwegian and Russian
 
 - in order to get Bokmålsordboka in XML format, contact its [developers](https://ordbokene.no/eng/contact). You will have to [parse](https://github.com/ltgoslo/Definition-generation-for-LSCD/blob/main/src/norwegian-dataset.ipynb) it into `complete.tsv.gz` in CODWOE format (the same as for Russian) yourself. Put it into `data/norwegian1/` and `data/norwegian2/`

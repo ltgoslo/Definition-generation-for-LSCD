@@ -119,32 +119,19 @@ def _get_senses_lesk(args, target_dict, target_list, target_list_pos, sent_ls):
 
 
 def load_corpora(args):
-    # should be those that are lemmatized
-    if args.lang == "english":
-        with open(
-                os.path.join(args.data_dir, f"{args.lang}/corpus1/ccoha1.txt"),
-                "r",
-        ) as ccoha1:
-            c1_text = [line.strip() for line in ccoha1.readlines()]
-
-        with open(
-                os.path.join(args.data_dir, f"{args.lang}/corpus2/ccoha2.txt"),
-                "r",
-        ) as ccoha2:
-            c2_text = [line.strip() for line in ccoha2.readlines()]
-    elif ("norwegian" in args.lang) or ("russian" in args.lang):
-        c_texts = []
-        for period in (1, 2):
-            filename = f"{args.lang}/{args.lang}-corpus{period}.tsv.gz"
-            datafile = os.path.join(args.data_dir, filename)
-            corpus = pd.read_csv(
-                datafile,
-                sep="\t",
-                header=None,
-                compression="gzip",
-            )
-            c_texts.append(corpus[1].to_list())
-        c1_text, c2_text = c_texts
+    # we used lemmatized English ccoha corpora
+    c_texts = []
+    for period in (1, 2):
+        filename = f"{args.lang}/{args.lang}-corpus{period}.tsv.gz"
+        datafile = os.path.join(args.defgen_path, filename)
+        corpus = pd.read_csv(
+            datafile,
+            sep="\t",
+            header=None,
+            compression="gzip",
+        )
+        c_texts.append(corpus[1].to_list())
+    c1_text, c2_text = c_texts
     logging.info(f"{len(c1_text)}, {len(c2_text)}")
     return c1_text, c2_text
 
@@ -225,7 +212,7 @@ def parse_args():
         default=None,
         type=str,
         required=True,
-        help="Data directory with gold data and lemmatized corpus for Lesk",
+        help="Data directory with gold data for Lesk",
     )
     parser.add_argument(
         "--results_dir",
@@ -243,7 +230,7 @@ def parse_args():
     parser.add_argument(
         "--defgen_path",
         help="Path to the directory with generated definitions",
-        default="generated_definitions/english/diverse_beam_search",
+        default="../generated_definitions/",
     )
     return parser.parse_args()
 
