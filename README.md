@@ -27,7 +27,7 @@ The usage examples were sampled from the following resources:
 
 ## Reproduce the baselines
 
-## Definition generation
+## Definition generation and evaluation
 
 ```
 cd definition_generation
