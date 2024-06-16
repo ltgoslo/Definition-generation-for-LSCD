@@ -1,13 +1,12 @@
 # Definition Generation for Lexical Semantic Change Detection (LSCD)
 
 ## Repository structure
-
     .
-    ├── analysis      # APD and PRT results analysis
-    ├── apd_prt       # APD and PRT experiments
-    ├── embeddings    # generating definitions' embeddings
-    ├── src           # Running Tang et al. (2023)'s method, see more in its README
-    ├── src_acl       # generating definitions and merging them, stats etc.
+    ├── apd_prt                 # APD and PRT experiments
+    ├── definition_generation   # generating definitions
+    ├── embeddings              # generating definitions' embeddings
+    ├── generated_definitions   # prompts and definitions generated
+    ├── src                     # Running Tang et al. (2023)'s method, see more in its README
 
 ## Obtain the data
 

@@ -10,18 +10,17 @@ echo ${GEN}
 echo ${MERGE}
 echo ${THRESHOLD}
 
-cd src_acl
-echo "Merging definitions from ../../generated_definitions/${LANG}/${GEN}/..."
-if python3 merge_definitions_string.py --data_path ../../generated_definitions/${LANG}/${GEN}/ --out ../../generated_definitions/merged/${LANG}/${MERGE}/${GEN}${THRESHOLD}/ --lang ${LANG} --thresh ${THRESHOLD} --strategy ${MERGE} ; then
-    echo "Definitions merged and saved to ../../generated_definitions/merged/${LANG}/${MERGE}/${GEN}${THRESHOLD}/"
+cd src/
+echo "Merging definitions from ../generated_definitions/${LANG}/${GEN}/..."
+if python3 merge_definitions_string.py --data_path ../generated_definitions/${LANG}/${GEN}/ --out ../generated_definitions/merged/${LANG}/${MERGE}/${GEN}${THRESHOLD}/ --lang ${LANG} --thresh ${THRESHOLD} --strategy ${MERGE} ; then
+    echo "Definitions merged and saved to ../generated_definitions/merged/${LANG}/${MERGE}/${GEN}${THRESHOLD}/"
 else
  echo "Definitions merging failed"
  exit 1
 fi
 
-cd ../src/
 echo "Evaluating..."
-if python3 sense_dis.py --data_dir data/ --defgen_path ../../generated_definitions/merged/${LANG}/${MERGE}/${GEN}${THRESHOLD}/ --results_dir ../src_acl/merge_results/${LANG}/${GEN}${THRESHOLD}-${MERGE}/ --method defgen --lang ${LANG} ; then
+if python3 sense_dis.py --data_dir data/ --defgen_path ../generated_definitions/merged/${LANG}/${MERGE}/${GEN}${THRESHOLD}/ --results_dir predictions/merge_results/${LANG}/${GEN}${THRESHOLD}-${MERGE}/ --method defgen --lang ${LANG} ; then
  echo "Evaluation finished"
  ./eval.sh ${LANG} ${GEN}${THRESHOLD}-${MERGE}
 else

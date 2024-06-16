@@ -20,10 +20,10 @@ def run(metric, strat_folder, language, f):
     result = subprocess.run(
         [
             sys.executable,
-            "../src/eval.py",
+            "../eval.py",
             "2",
             f"{strat_folder}/defgen/{language}/{metric}_dict.tsv",
-            f"../src/data/{language}/truth/graded.txt", # the ground truth on saga had landet changed to land . omg
+            f"../data/{language}/truth/graded.txt",
         ], capture_output=True,
     )
     value = result.stdout.decode('utf8').split("\t")
@@ -43,10 +43,10 @@ def run_lesk(strat_folder, language, f):
         result = subprocess.run(
             [
                 sys.executable,
-                "../src/eval.py",
+                "../eval.py",
                 "2",
                 metric_dict,
-                f"../../acl_data/{language}/truth/graded.txt",
+                f"../data/{language}/truth/graded.txt",
             ], capture_output=True,
         )
         value = result.stdout.decode('utf8').split("\t")
@@ -60,7 +60,7 @@ def run_lesk(strat_folder, language, f):
 
 
 def main():
-    pred_path = "predictions/"
+    pred_path = "../predictions/"
     with open("result.txt", "w", encoding="utf8") as f:
         for language in tqdm(LANGS):
             for strat_folder in glob(f"{pred_path}merge_results/{language}/*"):
