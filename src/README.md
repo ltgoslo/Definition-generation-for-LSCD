@@ -30,9 +30,3 @@ python sense_dis.py --data_dir data/ --results_dir predictions/ --use_pos_in_les
 ```commandline
 python sense_dis.py --data_dir data/ --results_dir predictions/ --lang <english|norwegian1|norwegian2|russian1|russian2|russian3>
 ```
-
-### Evaluate the results
-
-```commandline
-./eval.sh  <english|norwegian1|norwegian2|russian1|russian2|russian3> 2 predictions/
-```
