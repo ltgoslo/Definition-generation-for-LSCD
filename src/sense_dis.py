@@ -1,5 +1,6 @@
 import argparse
 from ast import literal_eval
+from csv import QUOTE_NONE, QUOTE_MINIMAL
 from collections import Counter
 import logging
 import os
@@ -119,7 +120,7 @@ def _get_senses_lesk(args, target_dict, target_list, target_list_pos, sent_ls):
 
 
 def load_corpora(args):
-    # should be those that are lemmatized
+    # we used lemmatized English ccoha corpora
     if args.lang == "english":
         with open(
                 os.path.join(args.data_dir, f"{args.lang}/corpus1/ccoha1.txt"),
@@ -132,20 +133,24 @@ def load_corpora(args):
                 "r",
         ) as ccoha2:
             c2_text = [line.strip() for line in ccoha2.readlines()]
-    elif ("norwegian" in args.lang) or ("russian" in args.lang):
+    else:
+        quoting = QUOTE_MINIMAL
+        # if args.lang == "english":
+        #     quoting = QUOTE_NONE
         c_texts = []
         for period in (1, 2):
             filename = f"{args.lang}/{args.lang}-corpus{period}.tsv.gz"
-            datafile = os.path.join(args.data_dir, filename)
+            datafile = os.path.join(args.defgen_path, filename)
             corpus = pd.read_csv(
                 datafile,
                 sep="\t",
                 header=None,
                 compression="gzip",
+                quoting=quoting,
             )
             c_texts.append(corpus[1].to_list())
         c1_text, c2_text = c_texts
-    logging.info(f"{len(c1_text)}, {len(c2_text)}")
+        logging.info(f"{len(c1_text)}, {len(c2_text)}")
     return c1_text, c2_text
 
 
@@ -225,7 +230,7 @@ def parse_args():
         default=None,
         type=str,
         required=True,
-        help="Data directory with gold data and lemmatized corpus for Lesk",
+        help="Data directory with gold data for Lesk",
     )
     parser.add_argument(
         "--results_dir",
@@ -243,7 +248,7 @@ def parse_args():
     parser.add_argument(
         "--defgen_path",
         help="Path to the directory with generated definitions",
-        default="generated_definitions/english/diverse_beam_search",
+        default="../generated_definitions/",
     )
     return parser.parse_args()
 
@@ -260,7 +265,7 @@ def write_results(
     if not os.path.exists(method_dir):
         os.makedirs(os.path.join(method_dir), exist_ok=True)
     method_dir = os.path.join(method_dir, args.lang)
-    if args.method == "lesk":
+    if (args.method == "lesk") and args.use_pos_in_lesk:
         method_dir += f"_pos_{args.use_pos_in_lesk}"
     if not os.path.exists(method_dir):
         os.makedirs(method_dir, exist_ok=True)
