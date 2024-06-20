@@ -1,4 +1,6 @@
-# Definition Generation for Lexical Semantic Change Detection (LSCD)
+## Definition Generation for Lexical Semantic Change Detection (LSCD)
+
+# the work to clean up the code is ongoing
 
 ## Repository structure
     .
