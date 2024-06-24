@@ -50,5 +50,5 @@ python sense_dis.py --data_dir data/ --results_dir predictions/ --lang <english|
 Running the official SemEval evaluation script:
 
 ```commandline
-2 predictions/lesk/<language>/<metric>_dict.tsv data/<language>/truth/graded.txt
+python eval.py 2 predictions/lesk/<language>/<metric>_dict.tsv data/<language>/truth/graded.txt
 ```
