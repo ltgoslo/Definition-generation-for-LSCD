@@ -26,7 +26,7 @@ The usage examples were sampled from the following resources:
 - Norwegian: [NBDigital corpus](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-34/) and [Norsk aviskorpus](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-4/) (available under [CC-BY-NC](https://creativecommons.org/licenses/by-nc/4.0/))
 - [Russian](https://ruscorpora.ru/new/en/corpora-usage.html); the corpora's license does not allow publishing them; for that reason, we could only release the prompts and definitions without usage examples. Any other corpus may be used instead of it (although the results may be different then).
 
-## [Reproduce the baselines](https://github.com/ltgoslo/Definition-generation-for-LSCD/tree/main/src#reproduce-lesk-baselines)
+## [Reproduce the baselines](https://github.com/ltgoslo/Definition-generation-for-LSCD/tree/main/src#reproduce-lesk-baselines) (Table 2)
 
 ## Definition generation and evaluation
 

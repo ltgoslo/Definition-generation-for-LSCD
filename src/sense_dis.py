@@ -46,6 +46,13 @@ METRICS = [
     jensenshannon,
     kl,
 ]
+PERIODS = {
+    'norwegian1': (1, 2),
+    'norwegian2': (1, 2),
+    'russian1': (1, 2),
+    'russian2': (2, 3),
+    'russian3': (1, 3),
+}
 
 
 def _get_senses_lesk(args, target_dict, target_list, target_list_pos, sent_ls):
@@ -138,11 +145,14 @@ def load_corpora(args):
         # if args.lang == "english":
         #     quoting = QUOTE_NONE
         c_texts = []
-        for period in (1, 2):
-            filename = f"{args.lang}/{args.lang}-corpus{period}.tsv.gz"
-            datafile = os.path.join(args.defgen_path, filename)
+        for period in PERIODS[args.lang]:
+            lang = args.lang
+            if 'russian' in lang:
+                lang = lang[:-1]
+            filename = f"{lang}/{lang}-corpus{period}.tsv.gz"
+            filename = os.path.join(args.defgen_path, filename)
             corpus = pd.read_csv(
-                datafile,
+                filename,
                 sep="\t",
                 header=None,
                 compression="gzip",
