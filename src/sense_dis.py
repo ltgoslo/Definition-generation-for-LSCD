@@ -173,7 +173,7 @@ def get_senses_lesk(
         target_dict1,
         target_dict2,
 ):
-    lang_folder = f"{args.results_dir}/{args.lang}"
+    lang_folder = os.path.join(args.results_dir, args.method, args.lang)
     sent_ls1_path = f"{lang_folder}/sent_ls1.json"
     sent_ls2_path = sent_ls1_path.replace("ls1", "ls2")
     if not os.path.exists(sent_ls1_path):
