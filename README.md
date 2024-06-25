@@ -1,6 +1,8 @@
 ## Definition Generation for Lexical Semantic Change Detection (LSCD)
 
-# the work to clean up the code is ongoing
+This repository contains the code and some data for the paper [Definition generation for lexical semantic change detection](https://arxiv.org/abs/2406.14167) by Mariia Fedorova, Andrey Kutuzov and Yves Scherrer.
+
+# The work to clean up the code is ongoing
 
 ## Repository structure
     .
