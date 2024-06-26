@@ -221,6 +221,8 @@ def get_senses_lesk(
 
 
 def get_senses_defgen(target_dict, data_dir, language, period):
+    if 'russian' in language:
+        language = 'russian'
     filename = f"{language}-corpus{period}.tsv.gz"
     datafile = os.path.join(data_dir, filename)
     corpus = pd.read_csv(datafile, sep="\t", header=None)
@@ -346,10 +348,11 @@ def main():
             target_dict2,
         )
     elif args.method == "defgen":
+        period_1, period_2 = PERIODS[args.lang]
         target_dict1 = get_senses_defgen(target_dict1, args.defgen_path,
-                                         args.lang, "1")
+                                         args.lang, str(period_1))
         target_dict2 = get_senses_defgen(target_dict2, args.defgen_path,
-                                         args.lang, "2")
+                                         args.lang, str(period_2))
     dis_dicts = [{} for _ in METRICS]
     for target_word in target_list:
         sense_set = set(target_dict1[target_word]).union(

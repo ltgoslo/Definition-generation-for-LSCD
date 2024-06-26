@@ -5,3 +5,4 @@ __pycache__/
 src/data/english/corpus1/
 src/data/english/corpus2/
 env/
+generated_definitions/merged/

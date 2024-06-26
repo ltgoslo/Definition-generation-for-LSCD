@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import argparse
+import re
 import logging
 import os
 from collections import Counter
@@ -10,6 +11,11 @@ from unicodedata import category
 import pandas as pd
 from leven import levenshtein
 import csv
+
+
+PATTERN = re.compile(r"russian\d")
+RUSSIAN = 'russian'
+
 
 def normalize(text, badwords):
     text = "".join(ch for ch in text if category(ch)[0] != "P")
@@ -123,9 +129,23 @@ if __name__ == "__main__":
     logging.basicConfig(format="%(asctime)s : %(levelname)s : %(message)s", level=logging.INFO)
 
     filename1 = f"{args.lang}-corpus1.tsv.gz"
+    path1 = path.join(args.data_path, filename1)
     filename2 = f"{args.lang}-corpus2.tsv.gz"
-    df1 = pd.read_csv(path.join(args.data_path, filename1), sep="\t", header=None, quoting=csv.QUOTE_NONE)
-    df2 = pd.read_csv(path.join(args.data_path, filename2), sep="\t", header=None, quoting=csv.QUOTE_NONE)
+    path2 = path.join(args.data_path, filename2)
+    if RUSSIAN in args.lang:
+        if args.lang == 'russian1':
+            filename1 = "russian-corpus1.tsv.gz"
+            filename2 = "russian-corpus2.tsv.gz"
+        elif args.lang == 'russian2':
+            filename1 = "russian-corpus2.tsv.gz"
+            filename2 = "russian-corpus3.tsv.gz"
+        elif args.lang == 'russian3':
+            filename1 = "russian-corpus1.tsv.gz"
+            filename2 = "russian-corpus3.tsv.gz"
+        path1 = path.join(re.sub(PATTERN, RUSSIAN, args.data_path), filename1)
+        path2 = path.join(re.sub(PATTERN, RUSSIAN, args.data_path), filename2)
+    df1 = pd.read_csv(path1, sep="\t", header=None, quoting=csv.QUOTE_NONE)
+    df2 = pd.read_csv(path2, sep="\t", header=None, quoting=csv.QUOTE_NONE)
     df1.columns = ["word", "usage", "definition"]
     df2.columns = ["word", "usage", "definition"]
 

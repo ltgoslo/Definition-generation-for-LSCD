@@ -49,7 +49,7 @@ cd apd_prt
 ## Reproduce evaluation of LSCD performance with merged definitions obtained with different decoding strategies (Table 4)
 
 ```commandline
-./merge_pipeline.sh
+./merge_all.sh
 ```
 
 ## Reproduce Figure 1

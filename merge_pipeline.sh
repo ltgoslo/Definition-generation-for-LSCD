@@ -22,7 +22,7 @@ fi
 echo "Evaluating..."
 if python3 sense_dis.py --data_dir data/ --defgen_path ../generated_definitions/merged/${LANG}/${MERGE}/${GEN}${THRESHOLD}/ --results_dir predictions/merge_results/${LANG}/${GEN}${THRESHOLD}-${MERGE}/ --method defgen --lang ${LANG} ; then
  echo "Evaluation finished"
- ./eval.sh ${LANG} ${GEN}${THRESHOLD}-${MERGE}
+ ./eval.sh ${LANG} ${GEN}${THRESHOLD}-${MERGE} predictions/merge_results/
 else
  echo "Evaluation failed"
 fi

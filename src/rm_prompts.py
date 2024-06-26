@@ -30,10 +30,12 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
-    language = args.data_dir.split('/')[-3]
-    res_path = os.path.join(args.results_dir, language)
+    splitted = args.data_dir.split('/')
+    language = splitted[-3]
+    gen = splitted[-2]
+    res_path = os.path.join(args.results_dir, language, gen)
     if not os.path.exists(res_path):
-        os.mkdir(res_path)
+        os.makedirs(res_path)
     quoting = csv.QUOTE_MINIMAL
     if language == 'english':
         quoting = csv.QUOTE_NONE
@@ -42,11 +44,11 @@ if __name__ == '__main__':
         out = os.path.join(res_path, os.path.split(corpus)[-1])
         if args.rm_whole_prompt == 0:
             data.drop(data.columns[1], axis=1, inplace=True)
-        elif args.rm_whole_prompt == 1:
+        elif args.rm_whole_prompt == 1:  # remove What is the definition...? only
             data.iloc[:,1] = data.iloc[:,1].apply(
                 lambda x: re.sub(PATTERNS[language], '', x)
             )
-        else:
+        else: # remove usage example
             data.iloc[:,1] = data.iloc[:,1].apply(
                 lambda x: re.search(PATTERNS[language], x).group(0)
             )
