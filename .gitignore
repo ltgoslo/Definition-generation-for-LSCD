@@ -4,3 +4,4 @@ __pycache__/
 *complete.*
 src/data/english/corpus1/
 src/data/english/corpus2/
+env/

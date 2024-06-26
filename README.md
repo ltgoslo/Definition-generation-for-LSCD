@@ -32,7 +32,7 @@ The usage examples were sampled from the following resources:
 
 ## Definition generation and evaluation
 
-```
+```commandline
 cd definition_generation
 git clone git@github.com:ltgoslo/definition_modeling.git
 ./definition_generation_pipeline.sh ${}
@@ -41,7 +41,17 @@ Read about the generation parameters in the [README file](definition_generation/
 
 ## Reproduce evaluation of LSCD performance with definition embeddings obtained with different decoding strategies (Table 3)
 
-```
+```commandline
 cd apd_prt
 ./evaluate.sh
 ```
+
+## Reproduce evaluation of LSCD performance with merged definitions obtained with different decoding strategies (Table 4)
+
+```commandline
+./merge_pipeline.sh
+```
+
+## Reproduce Figure 1
+
+`src/analysis/graphs.ipynb`
