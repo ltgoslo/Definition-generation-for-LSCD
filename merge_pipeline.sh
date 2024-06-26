@@ -2,7 +2,7 @@
 
 LANG=${1}  # Data language (english, norwegian1, norwegian2, etc)
 GEN=${2}  # Generation strategy (greedy, beam, divbeam)
-MERGE=${3} # Merge strategy (maximal or minimal)
+MERGE=${3} # Merge strategy (full_fledged or minimalist)
 THRESHOLD=${4}  # Levenshtein threshold (10 or 50...)
 
 echo ${LANG}
