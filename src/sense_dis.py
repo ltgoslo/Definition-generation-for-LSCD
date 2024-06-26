@@ -52,6 +52,7 @@ PERIODS = {
     'russian1': (1, 2),
     'russian2': (2, 3),
     'russian3': (1, 3),
+    'english': (1, 2),
 }
 
 
