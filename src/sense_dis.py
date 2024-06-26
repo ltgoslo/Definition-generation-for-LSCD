@@ -1,5 +1,6 @@
 import argparse
 from ast import literal_eval
+from csv import QUOTE_NONE, QUOTE_MINIMAL
 from collections import Counter
 import logging
 import os
@@ -45,6 +46,13 @@ METRICS = [
     jensenshannon,
     kl,
 ]
+PERIODS = {
+    'norwegian1': (1, 2),
+    'norwegian2': (1, 2),
+    'russian1': (1, 2),
+    'russian2': (2, 3),
+    'russian3': (1, 3),
+}
 
 
 def _get_senses_lesk(args, target_dict, target_list, target_list_pos, sent_ls):
@@ -120,19 +128,39 @@ def _get_senses_lesk(args, target_dict, target_list, target_list_pos, sent_ls):
 
 def load_corpora(args):
     # we used lemmatized English ccoha corpora
-    c_texts = []
-    for period in (1, 2):
-        filename = f"{args.lang}/{args.lang}-corpus{period}.tsv.gz"
-        datafile = os.path.join(args.defgen_path, filename)
-        corpus = pd.read_csv(
-            datafile,
-            sep="\t",
-            header=None,
-            compression="gzip",
-        )
-        c_texts.append(corpus[1].to_list())
-    c1_text, c2_text = c_texts
-    logging.info(f"{len(c1_text)}, {len(c2_text)}")
+    if args.lang == "english":
+        with open(
+                os.path.join(args.data_dir, f"{args.lang}/corpus1/ccoha1.txt"),
+                "r",
+        ) as ccoha1:
+            c1_text = [line.strip() for line in ccoha1.readlines()]
+
+        with open(
+                os.path.join(args.data_dir, f"{args.lang}/corpus2/ccoha2.txt"),
+                "r",
+        ) as ccoha2:
+            c2_text = [line.strip() for line in ccoha2.readlines()]
+    else:
+        quoting = QUOTE_MINIMAL
+        # if args.lang == "english":
+        #     quoting = QUOTE_NONE
+        c_texts = []
+        for period in PERIODS[args.lang]:
+            lang = args.lang
+            if 'russian' in lang:
+                lang = lang[:-1]
+            filename = f"{lang}/{lang}-corpus{period}.tsv.gz"
+            filename = os.path.join(args.defgen_path, filename)
+            corpus = pd.read_csv(
+                filename,
+                sep="\t",
+                header=None,
+                compression="gzip",
+                quoting=quoting,
+            )
+            c_texts.append(corpus[1].to_list())
+        c1_text, c2_text = c_texts
+        logging.info(f"{len(c1_text)}, {len(c2_text)}")
     return c1_text, c2_text
 
 
@@ -145,7 +173,7 @@ def get_senses_lesk(
         target_dict1,
         target_dict2,
 ):
-    lang_folder = f"{args.results_dir}/{args.lang}"
+    lang_folder = os.path.join(args.results_dir, args.method, args.lang)
     sent_ls1_path = f"{lang_folder}/sent_ls1.json"
     sent_ls2_path = sent_ls1_path.replace("ls1", "ls2")
     if not os.path.exists(sent_ls1_path):
@@ -247,7 +275,7 @@ def write_results(
     if not os.path.exists(method_dir):
         os.makedirs(os.path.join(method_dir), exist_ok=True)
     method_dir = os.path.join(method_dir, args.lang)
-    if args.method == "lesk":
+    if (args.method == "lesk") and args.use_pos_in_lesk:
         method_dir += f"_pos_{args.use_pos_in_lesk}"
     if not os.path.exists(method_dir):
         os.makedirs(method_dir, exist_ok=True)
