@@ -49,3 +49,13 @@ Running the official SemEval evaluation script:
 ```commandline
 python eval.py 2 predictions/lesk/<language>/<metric>_dict.tsv data/<language>/truth/graded.txt
 ```
+
+## Reproduce Tang et al. (2023) NLTK accuracy (Table 1 in their paper)
+
+### WARNING
+
+They use ax-platform, which requires [PyTorch](https://pytorch.org/get-started/locally/) to be installed
+
+```commandline
+python bayesian_optimization.py --sense_dis_method_dir predictions/lesk/english --method ax
+```
