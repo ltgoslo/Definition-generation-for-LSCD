@@ -41,6 +41,10 @@ Read about the generation parameters in the [README file](definition_generation/
 
 ## Reproduce evaluation of LSCD performance with definition embeddings obtained with different decoding strategies (Table 3)
 
+### WARNING
+
+Scripts in `apd_prt` are SLURM scripts, loading python libraries compiled for a specific cluster in the beginning. In order to run them as regular bash scripts, comment out `module use` lines. (In fact, APD and PRT themselves do not require a GPU to be run - but computing sentence transformers embeddings for all usage examples in reasonable time does).
+
 ```commandline
 cd apd_prt
 ./evaluate.sh
@@ -52,7 +56,7 @@ cd apd_prt
 ./merge_all.sh
 ```
 
-## Reproduce evaluation of both baselines and merged definitions LSCD in one run
+## Reproduce evaluation of both baseline and merged definitions LSCD in one run
 
 This assumes, that you already have all your predictions in `src/predictions/`
 
