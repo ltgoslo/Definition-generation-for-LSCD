@@ -52,6 +52,17 @@ cd apd_prt
 ./merge_all.sh
 ```
 
+## Reproduce evaluation of both baselines and merged definitions LSCD in one run
+
+This assumes, that you already have all your predictions in `src/predictions/`
+
+```commandline
+cd src/analysis/
+python eval_all.py
+```
+
+This will create src/analysis/result.txt with scores and p-values for all methods. Insignificant correlations will be highlighted.
+
 ## Reproduce Figure 1
 
 `src/analysis/graphs.ipynb`
