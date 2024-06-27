@@ -150,7 +150,7 @@ def load_corpora(args):
             lang = args.lang
             if 'russian' in lang:
                 lang = lang[:-1]
-            filename = f"{lang}/{lang}-corpus{period}.tsv.gz"
+            filename = f"{lang}/greedy/{lang}-corpus{period}.tsv.gz"
             filename = os.path.join(args.defgen_path, filename)
             corpus = pd.read_csv(
                 filename,
