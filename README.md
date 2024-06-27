@@ -50,6 +50,8 @@ cd apd_prt
 ./evaluate.sh
 ```
 
+In order to reproduce the whole experiment, create sentence transformers embeddings of usage examples using `embeddings/embed_definitions.py` (`embeddings/embeddings.slurm` shows an example of running it on a cluster) and run `apd_prt/compute_scores.sh`
+
 ## Reproduce evaluation of LSCD performance with merged definitions obtained with different decoding strategies (Table 4)
 
 ```commandline
