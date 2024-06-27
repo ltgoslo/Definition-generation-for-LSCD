@@ -5,14 +5,18 @@ The files **bayesian_optimization.py** and **sense_dis.py** were taken from [Tan
 ## Folder structure
 
     .
-    ├── data/                      # ground truth
-    ├── logs/                      # evaluation logs
-    ├── sampling_usages/           # sample usage examples for definition generation
-    ├── bayesian_optimization.py   # Tang et al. (2023) classification (not used by us, modified for better reproducability).
-    ├── eval.py                    # SemEval official Evaluation script
-    ├── eval.sh                    # running eval.py  
-    ├── sense_dis.py               # ranking by Lesk
-    ├── utils.py                   # ranking utils
+    ├── analysis/                   # results and figure
+    ├── data/                       # ground truth
+    ├── logs/                       # evaluation logs
+    ├── sampling_usages/            # sample usage examples for definition generation
+    ├── bayesian_optimization.py    # Tang et al. (2023) classification (not used by us, modified for better reproducability).
+    ├── eval.py                     # SemEval official Evaluation script
+    ├── eval.sh                     # running eval.py  
+    ├── merge_definitions_string.py # merge definitions
+    ├── norwegian-dataset.ipynb     # parse Bokmålsordboka
+    ├── rm_prompts.py               # remove prompts or their parts from data (e.g. for data publication)
+    ├── sense_dis.py                # ranking by Lesk
+    ├── utils.py                    # ranking utils
 
 ## Reproduce Lesk baselines
 
