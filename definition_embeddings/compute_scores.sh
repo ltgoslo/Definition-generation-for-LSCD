@@ -1,8 +1,8 @@
 #!/bin/bash
 
-module use -a /cluster/shared/nlpl/software/eb/etc/all/
-module load nlpl-scipy-ecosystem/01-foss-2022b-Python-3.10.8
-module load nlpl-scikit-bundle/1.3.2-foss-2022b-Python-3.10.8
+# module use -a /cluster/shared/nlpl/software/eb/etc/all/
+# module load nlpl-scipy-ecosystem/01-foss-2022b-Python-3.10.8
+# module load nlpl-scikit-bundle/1.3.2-foss-2022b-Python-3.10.8
 
 for OUTLANG in english norwegian1 norwegian2 russian12 russian13 russian23; do
 	mkdir -p $OUTLANG
@@ -22,15 +22,15 @@ for OUTLANG in english norwegian1 norwegian2 russian12 russian13 russian23; do
 
     for RUN in greedy beam diverse_beam_search; do
 		python new_scores/average_pairwise_distance.py \
-		-i0 ../embeddings/$INLANG/embeddings_perword.$RUN.$A.npz \
-		-i1 ../embeddings/$INLANG/embeddings_perword.$RUN.$B.npz \
-		-t ../embeddings/$INLANG/target_words.txt \
+		-i0 ../embed_definitions/$INLANG/embeddings_perword.$RUN.$A.npz \
+		-i1 ../embed_definitions/$INLANG/embeddings_perword.$RUN.$B.npz \
+		-t ../embed_definitions/$INLANG/target_words.txt \
 		-o $OUTLANG/$RUN.apd.csv -f
 
 		python new_scores/cosine_distance.py \
-		-i0 ../embeddings/$INLANG/embeddings_perword.$RUN.$A.npz \
-		-i1 ../embeddings/$INLANG/embeddings_perword.$RUN.$B.npz \
-		-t ../embeddings/$INLANG/target_words.txt \
+		-i0 ../embed_definitions/$INLANG/embeddings_perword.$RUN.$A.npz \
+		-i1 ../embed_definitions/$INLANG/embeddings_perword.$RUN.$B.npz \
+		-t ../embed_definitions/$INLANG/target_words.txt \
 		-o $OUTLANG/$RUN.prt.csv -f
 
 		python new_scores/combine_scores.py \

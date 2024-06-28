@@ -6,11 +6,11 @@ This repository contains the code and some data for the paper [Definition genera
 
 ## Repository structure
     .
-    ├── apd_prt                 # APD and PRT experiments
+    ├── definition_embeddings   # APD and PRT experiments (section 4.2. in the paper)
     ├── definition_generation   # generating definitions
-    ├── embeddings              # generating definitions' embeddings
+    ├── embed_definitions       # generating definitions' embeddings (section 4.2. in the paper)
     ├── generated_definitions   # prompts and definitions generated
-    ├── src                     # Running Tang et al. (2023)'s method, see more in its README
+    ├── src                     # Running Tang et al. (2023)'s method on definitions obtained by Lesk and our merging approach, see more in its README (sections 4.1, 4.3 in the paper)
 
 ## Obtain the data
 
@@ -43,14 +43,14 @@ Read about the generation parameters in the [README file](definition_generation/
 
 ### WARNING
 
-Scripts in `apd_prt` are SLURM scripts, loading python libraries compiled for a specific cluster in the beginning. In order to run them as regular bash scripts, comment out `module use` lines. (In fact, APD and PRT themselves do not require a GPU to be run - but computing sentence transformers embeddings for all usage examples in reasonable time does).
+Scripts in `definition_embeddings/` are SLURM scripts, loading python libraries compiled for a specific cluster in the beginning. In order to run them as regular bash scripts, we commented out `module use` lines. (In fact, APD and PRT themselves do not require a GPU to be run - but computing sentence transformers embeddings for all usage examples in reasonable time does).
 
 ```commandline
-cd apd_prt
+cd definition_embeddings
 ./evaluate.sh
 ```
 
-In order to reproduce the whole experiment, create sentence transformers embeddings of usage examples using `embeddings/embed_definitions.py` (`embeddings/embeddings.slurm` shows an example of running it on a cluster) and run `apd_prt/compute_scores.sh`
+In order to reproduce the whole experiment, create sentence transformers embeddings of usage examples using `embed_definitions/embed_definitions.py` (`embed_definitions/embeddings.slurm` shows an example of running it on a cluster, don't forget to replace account name and modules used) and run `definition_embeddings/compute_scores.sh`
 
 ## Reproduce evaluation of LSCD performance with merged definitions obtained with different decoding strategies (Table 4)
 

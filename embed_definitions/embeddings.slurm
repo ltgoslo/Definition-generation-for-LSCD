@@ -32,7 +32,7 @@ for LANG in english norwegian1 norwegian2 russian; do
     for RUN in greedy beam diverse_beam_search; do
         for ID in $IDS; do
             echo "$LANG $RUN $ID"
-            python embed_definitions.py -m /cluster/projects/nn9851k/models/all-distilroberta-v1 -i ../generated_definitions/$LANG/$RUN/$LANG-corpus"$ID".tsv* -b 8 -o $LANG/embeddings_perword.$RUN.$ID.npz
+            python embed_definitions.py -m sentence-transformers/all-distilroberta-v1 -i ../generated_definitions/$LANG/$RUN/$LANG-corpus"$ID".tsv* -b 8 -o $LANG/embeddings_perword.$RUN.$ID.npz
         done
     done
 done
