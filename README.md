@@ -10,8 +10,7 @@ This repository contains the code and some data for the paper [Definition genera
     ├── definition_generation   # generating definitions
     ├── embed_definitions       # generating definitions' embeddings (section 4.2. in the paper)
     ├── generated_definitions   # prompts and definitions generated
-    ├── src                     # Running Tang et al. (2023)'s method on definitions obtained by Lesk and our merging approach, see more in its README (sections 4.1, 4.3 in the paper)
-
+    ├── src                     # other experiments and evaluation, see more in its README (sections 4.1, 4.3 in the paper)
 ## Obtain the data
 
 ### Lists of words and ground truth
@@ -50,7 +49,7 @@ cd definition_embeddings
 ./evaluate.sh
 ```
 
-In order to reproduce the whole experiment, create sentence transformers embeddings of usage examples using `embed_definitions/embed_definitions.py` (`embed_definitions/embeddings.slurm` shows an example of running it on a cluster, don't forget to replace account name and modules used) and run `definition_embeddings/compute_scores.sh`
+In order to reproduce the whole experiment, create sentence transformers embeddings of usage examples using `embed_definitions/embed_definitions.py` (`embed_definitions/embeddings.slurm` shows an example of running it on a cluster, don't forget to replace account name and modules used) and run `compute_scores.sh`
 
 ## Reproduce evaluation of LSCD performance with merged definitions obtained with different decoding strategies (Table 4)
 
