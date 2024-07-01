@@ -1,4 +1,4 @@
-## Definition Generation for Lexical Semantic Change Detection (LSCD)
+# Definition Generation for Lexical Semantic Change Detection (LSCD)
 
 This repository contains the code and some data for the paper [Definition generation for lexical semantic change detection](https://arxiv.org/abs/2406.14167) by Mariia Fedorova, Andrey Kutuzov and Yves Scherrer.
 
@@ -15,7 +15,7 @@ This repository contains the code and some data for the paper [Definition genera
 
 ```src/data/``` 
 
-### Diachronical corpora
+### Diachronic corpora
 
 Sampled usage examples with prompts and generated definitions can be found in ```generated_definitions/```.
 
@@ -25,8 +25,6 @@ The usage examples were sampled from the following resources:
 - Norwegian: [NBDigital corpus](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-34/) and [Norsk aviskorpus](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-4/) (available under [CC-BY-NC](https://creativecommons.org/licenses/by-nc/4.0/))
 - [Russian](https://ruscorpora.ru/new/en/corpora-usage.html); the corpora's license does not allow publishing them; for that reason, we could only release the prompts and definitions without usage examples. Any other corpus may be used instead of it (although the results may be different then).
 
-## [Reproduce the baselines](https://github.com/ltgoslo/Definition-generation-for-LSCD/tree/main/src#reproduce-lesk-baselines) (Table 2)
-
 ## Definition generation and evaluation
 
 ```commandline
@@ -35,6 +33,8 @@ git clone git@github.com:ltgoslo/definition_modeling.git
 ./definition_generation_pipeline.sh ${}
 ```
 Read about the generation parameters in the [README file](definition_generation/README.md).
+
+## [Reproducing the baselines](https://github.com/ltgoslo/Definition-generation-for-LSCD/tree/main/src#reproducing-lesk-baselines) (Table 2)
 
 ## Reproducing evaluation of LSCD performance with definition embeddings obtained with different decoding strategies (Table 3)
 
@@ -56,16 +56,16 @@ In order to reproduce the whole experiment, create sentence transformers embeddi
 ./merge_all.sh
 ```
 
-## Reproduce evaluation of both baseline and merged definitions LSCD in one run
+## Reproducing evaluation of both baseline and merged definitions LSCD in one run
 
-This assumes, that you already have all your predictions in `src/predictions/`
+This assumes that you already have all your predictions in `src/predictions/`
 
 ```commandline
 cd src/analysis/
 python eval_all.py
 ```
 
-This will create src/analysis/result.txt with scores and p-values for all methods. Insignificant correlations will be highlighted.
+This will create src/analysis/result.txt with Spearmal correlation scores and p-values for all methods. Insignificant correlations will be highlighted.
 
 ## Reproducing Figure 1
 
