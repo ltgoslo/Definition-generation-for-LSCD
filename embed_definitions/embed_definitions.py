@@ -104,7 +104,7 @@ if __name__ == "__main__":
         help="Path to the tsv file containing generated definitions",
         required=True,
     )
-    arg("--bsize", "-b", type=int, help="Batch size", default=4)
+    arg("--bsize", "-b", type=int, help="Batch size", default=16)
     arg(
         "--output_path",
         "-o",

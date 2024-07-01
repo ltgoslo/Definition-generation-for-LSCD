@@ -40,15 +40,22 @@ Read about the generation parameters in the [README file](definition_generation/
 
 ### WARNING
 
-Scripts in `definition_embeddings/` are SLURM scripts, loading cluster-specific modules. For easier use in generic settings, we commented out `module use` and `module load` commands. 
+Scripts in `definition_embeddings/` are SLURM scripts, loading cluster-specific modules. For easier use in generic settings, we commented out `module use` and `module load` commands.
 (In fact, APD and PRT themselves do not require a GPU to be run - but computing sentence transformers embeddings for all usage examples in reasonable time does).
 
+In order to reproduce the whole experiment, create sentence transformers embeddings of usage examples using `embed_definitions/embed_definitions.py` (`embed_definitions/embeddings.slurm` shows an example of running it on a cluster, don't forget to replace account name and modules used) and run `compute_scores.sh` to compute the per-word change scores.
 ```commandline
-cd definition_embeddings
-./evaluate.sh
+cd embed_definitions
+./embeddings.slurm
+cd ../definition_embeddings
+./compute_scores.sh
 ```
 
-In order to reproduce the whole experiment, create sentence transformers embeddings of usage examples using `embed_definitions/embed_definitions.py` (`embed_definitions/embeddings.slurm` shows an example of running it on a cluster, don't forget to replace account name and modules used) and run `compute_scores.sh`
+Then run evaluation:
+
+```commandline
+./evaluate.sh
+```
 
 ## Reproducing evaluation of LSCD performance with merged definitions obtained with different decoding strategies (Table 4)
 
