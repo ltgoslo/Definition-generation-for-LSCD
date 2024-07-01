@@ -72,7 +72,7 @@ cd src/analysis/
 python eval_all.py
 ```
 
-This will create src/analysis/result.txt with Spearmal correlation scores and p-values for all methods. Insignificant correlations will be highlighted.
+This will create src/analysis/result.txt with Spearman correlation scores and p-values for all methods. Insignificant correlations will be highlighted.
 
 ## Reproducing Figure 1
 
