@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# module use -a /cluster/shared/nlpl/software/eb/etc/all/
+set -o errexit  # Exit the script on any error
+set -o nounset  # Treat any unset variables as an error
+
+# module purge  # Reset the modules to the system default
+
 # module load nlpl-scipy-ecosystem/01-foss-2022b-Python-3.10.8
 # module load nlpl-scikit-bundle/1.3.2-foss-2022b-Python-3.10.8
 
@@ -27,7 +31,7 @@ for OUTLANG in english norwegian1 norwegian2 russian1 russian2 russian3; do
 
 	echo "$INLANG $A $B => $OUTLANG"
 
-	for RUN in greedy beam diverse_beam_search; do
+    for RUN in greedy beam divbeam; do
 		python new_scores/average_pairwise_distance.py \
 		-i0 ../embed_definitions/$INLANG/embeddings_perword.$RUN.$A.npz \
 		-i1 ../embed_definitions/$INLANG/embeddings_perword.$RUN.$B.npz \

@@ -22,16 +22,16 @@ Task	Score	p-value
 ** english beam gm **
 Task	Score	p-value
 2	0.399	0.015
-** english diverse_beam_search apd **
+** english divbeam apd **
 Task	Score	p-value
 2	0.613	0.000
-** english diverse_beam_search prt **
+** english divbeam prt **
 Task	Score	p-value
 2	0.359	0.029
-** english diverse_beam_search am **
+** english divbeam am **
 Task	Score	p-value
 2	0.591	0.000
-** english diverse_beam_search gm **
+** english divbeam gm **
 Task	Score	p-value
 2	0.400	0.014
 ** norwegian1 greedy apd **
@@ -58,16 +58,16 @@ Task	Score	p-value
 ** norwegian1 beam gm **
 Task	Score	p-value
 2	0.482	0.003
-** norwegian1 diverse_beam_search apd **
+** norwegian1 divbeam apd **
 Task	Score	p-value
 2	0.335	0.043
-** norwegian1 diverse_beam_search prt **
+** norwegian1 divbeam prt **
 Task	Score	p-value
 2	0.364	0.027
-** norwegian1 diverse_beam_search am **
+** norwegian1 divbeam am **
 Task	Score	p-value
 2	0.444	0.006
-** norwegian1 diverse_beam_search gm **
+** norwegian1 divbeam gm **
 Task	Score	p-value
 2	0.399	0.014
 ** norwegian2 greedy apd **
@@ -94,16 +94,16 @@ Task	Score	p-value
 ** norwegian2 beam gm **
 Task	Score	p-value
 2	0.503	0.002
-** norwegian2 diverse_beam_search apd **
+** norwegian2 divbeam apd **
 Task	Score	p-value
 2	0.508	0.001
-** norwegian2 diverse_beam_search prt **
+** norwegian2 divbeam prt **
 Task	Score	p-value
 2	0.470	0.003
-** norwegian2 diverse_beam_search am **
+** norwegian2 divbeam am **
 Task	Score	p-value
 2	0.523	0.001
-** norwegian2 diverse_beam_search gm **
+** norwegian2 divbeam gm **
 Task	Score	p-value
 2	0.501	0.002
 ** russian3 greedy apd **
@@ -130,16 +130,16 @@ Task	Score	p-value
 ** russian3 beam gm **
 Task	Score	p-value
 2	-0.450	0.000
-** russian3 diverse_beam_search apd **
+** russian3 divbeam apd **
 Task	Score	p-value
 2	-0.414	0.000
-** russian3 diverse_beam_search prt **
+** russian3 divbeam prt **
 Task	Score	p-value
 2	-0.476	0.000
-** russian3 diverse_beam_search am **
+** russian3 divbeam am **
 Task	Score	p-value
 2	-0.436	0.000
-** russian3 diverse_beam_search gm **
+** russian3 divbeam gm **
 Task	Score	p-value
 2	-0.467	0.000
 ** russian1 greedy apd **
@@ -166,16 +166,16 @@ Task	Score	p-value
 ** russian1 beam gm **
 Task	Score	p-value
 2	-0.404	0.000
-** russian1 diverse_beam_search apd **
+** russian1 divbeam apd **
 Task	Score	p-value
 2	-0.396	0.000
-** russian1 diverse_beam_search prt **
+** russian1 divbeam prt **
 Task	Score	p-value
 2	-0.457	0.000
-** russian1 diverse_beam_search am **
+** russian1 divbeam am **
 Task	Score	p-value
 2	-0.433	0.000
-** russian1 diverse_beam_search gm **
+** russian1 divbeam gm **
 Task	Score	p-value
 2	-0.458	0.000
 ** russian2 greedy apd **
@@ -202,15 +202,15 @@ Task	Score	p-value
 ** russian2 beam gm **
 Task	Score	p-value
 2	-0.448	0.000
-** russian2 diverse_beam_search apd **
+** russian2 divbeam apd **
 Task	Score	p-value
 2	-0.405	0.000
-** russian2 diverse_beam_search prt **
+** russian2 divbeam prt **
 Task	Score	p-value
 2	-0.449	0.000
-** russian2 diverse_beam_search am **
+** russian2 divbeam am **
 Task	Score	p-value
 2	-0.417	0.000
-** russian2 diverse_beam_search gm **
+** russian2 divbeam gm **
 Task	Score	p-value
 2	-0.459	0.000
