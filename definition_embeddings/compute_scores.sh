@@ -4,14 +4,21 @@
 # module load nlpl-scipy-ecosystem/01-foss-2022b-Python-3.10.8
 # module load nlpl-scikit-bundle/1.3.2-foss-2022b-Python-3.10.8
 
-for OUTLANG in english norwegian1 norwegian2 russian12 russian13 russian23; do
+for OUTLANG in english norwegian1 norwegian2 russian1 russian2 russian3; do
 	mkdir -p $OUTLANG
 
-	if [[ $OUTLANG == russian* ]]
-	then
-		INLANG=${OUTLANG:0:7}
-		A=${OUTLANG:7:1}
-		B=${OUTLANG:8:1}
+	if [[ $OUTLANG == russian1 ]]; then
+		INLANG=russian
+		A=1
+		B=2
+	elif [[ $OUTLANG == russian2 ]]; then
+		INLANG=russian
+		A=2
+		B=3
+	elif [ $OUTLANG == russian3 ]]; then
+		INLANG=russian
+		A=1
+		B=3
 	else
 		INLANG=$OUTLANG
 		A=1
@@ -20,7 +27,7 @@ for OUTLANG in english norwegian1 norwegian2 russian12 russian13 russian23; do
 
 	echo "$INLANG $A $B => $OUTLANG"
 
-    for RUN in greedy beam diverse_beam_search; do
+	for RUN in greedy beam diverse_beam_search; do
 		python new_scores/average_pairwise_distance.py \
 		-i0 ../embed_definitions/$INLANG/embeddings_perword.$RUN.$A.npz \
 		-i1 ../embed_definitions/$INLANG/embeddings_perword.$RUN.$B.npz \
