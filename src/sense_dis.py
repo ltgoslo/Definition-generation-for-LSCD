@@ -146,20 +146,34 @@ def load_corpora(args):
         # if args.lang == "english":
         #     quoting = QUOTE_NONE
         c_texts = []
-        for period in PERIODS[args.lang]:
-            lang = args.lang
-            if 'russian' in lang:
-                lang = lang[:-1]
-            filename = f"{lang}/greedy/{lang}-corpus{period}.tsv.gz"
-            filename = os.path.join(args.defgen_path, filename)
-            corpus = pd.read_csv(
-                filename,
-                sep="\t",
-                header=None,
-                compression="gzip",
-                quoting=quoting,
-            )
-            c_texts.append(corpus[1].to_list())
+        if args.no_path_rewrite:
+            for period in (1, 2):
+                filename = f"{args.lang}/greedy/{args.lang}-corpus{period}.tsv.gz"
+                filename = os.path.join(args.defgen_path, filename)
+                corpus = pd.read_csv(
+                    filename,
+                    sep="\t",
+                    header=None,
+                    compression="gzip",
+                    quoting=quoting,
+                )
+                c_texts.append(corpus[1].to_list())
+        else:
+            for period in PERIODS[args.lang]:
+                lang = args.lang
+                if 'russian' in lang:
+                    lang = lang[:-1]
+                filename = f"{lang}/greedy/{lang}-corpus{period}.tsv.gz"
+                filename = os.path.join(args.defgen_path, filename)
+                corpus = pd.read_csv(
+                    filename,
+                    sep="\t",
+                    header=None,
+                    compression="gzip",
+                    quoting=quoting,
+                )
+                c_texts.append(corpus[1].to_list())
+
         c1_text, c2_text = c_texts
         logging.info(f"{len(c1_text)}, {len(c2_text)}")
     return c1_text, c2_text
@@ -222,8 +236,6 @@ def get_senses_lesk(
 
 
 def get_senses_defgen(target_dict, data_dir, language, period):
-    if 'russian' in language:
-        language = 'russian'
     filename = f"{language}-corpus{period}.tsv.gz"
     datafile = os.path.join(data_dir, filename)
     corpus = pd.read_csv(datafile, sep="\t", header=None)
@@ -263,6 +275,8 @@ def parse_args():
         help="Path to the directory with generated definitions",
         default="../generated_definitions/",
     )
+    parser.add_argument("--no_path_rewrite", action="store_true",
+        help="Do not rewrite file names for Russian")
     return parser.parse_args()
 
 
@@ -349,11 +363,16 @@ def main():
             target_dict2,
         )
     elif args.method == "defgen":
-        period_1, period_2 = PERIODS[args.lang]
+        if args.no_path_rewrite:
+            period_1, period_2 = 1, 2
+            lang = args.lang
+        else:
+            period_1, period_2 = PERIODS[args.lang]
+            lang = 'russian' if 'russian' in args.lang else args.lang
         target_dict1 = get_senses_defgen(target_dict1, args.defgen_path,
-                                         args.lang, str(period_1))
+                                         lang, str(period_1))
         target_dict2 = get_senses_defgen(target_dict2, args.defgen_path,
-                                         args.lang, str(period_2))
+                                         lang, str(period_2))
     dis_dicts = [{} for _ in METRICS]
     for target_word in target_list:
         sense_set = set(target_dict1[target_word]).union(
@@ -389,7 +408,7 @@ def main():
     logging.info(
         "Don't forget to evaluate the predictions with the official scorer.")
     logging.info(f"They can be found in the *.dict.tsv files in the "
-                 f"{os.path.join(args.results_dir, args.method, args.lang)} directory.")
+                 f"{os.path.join(args.results_dir, args.method, lang)} directory.")
 
 
 if __name__ == "__main__":
