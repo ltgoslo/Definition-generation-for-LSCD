@@ -1,0 +1,37 @@
+
+english
+Task	Score	p-value
+2	0.384	0.019
+Task	Score	p-value
+2	0.483	0.002
+
+norwegian1
+Task	Score	p-value
+2	0.531	0.001
+Task	Score	p-value
+2	0.548	0.000
+
+norwegian2
+Task	Score	p-value
+2	0.411	0.012
+Task	Score	p-value
+2	0.511	0.001
+
+russian1
+Task	Score	p-value
+2	-0.505	0.000
+Task	Score	p-value
+2	-0.559	0.000
+
+russian2
+Task	Score	p-value
+2	-0.536	0.000
+Task	Score	p-value
+2	-0.610	0.000
+
+russian3
+Task	Score	p-value
+2	-0.529	0.000
+Task	Score	p-value
+2	-0.620	0.000
+
