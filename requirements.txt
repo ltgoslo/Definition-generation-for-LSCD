@@ -11,4 +11,4 @@ ruptures==1.1.9
 scikit-learn==1.5.0
 scipy==1.10.1
 tqdm==4.66.3
-transformers==4.38.2
+transformers==4.48.0
