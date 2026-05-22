@@ -9,7 +9,7 @@ from collections import Counter
 from os import path
 from unicodedata import category
 import pandas as pd
-from leven import levenshtein
+from Levenshtein import distance
 import csv
 
 
@@ -54,12 +54,12 @@ def find_merges(df, argums):
                     if definition_text != def2compare and \
                             definition_text not in mappings[targ_word]:
                         if (definition_text, def2compare) in sim_cache:
-                            distance = sim_cache[(definition_text, def2compare)]
+                            text_distance = sim_cache[(definition_text, def2compare)]
                         else:
-                            distance = levenshtein(definition_text, def2compare)
-                            sim_cache[(definition_text, def2compare)] = distance
-                            sim_cache[(def2compare, definition_text)] = distance
-                        if distance < DISTANCE:
+                            text_distance = distance(definition_text, def2compare)
+                            sim_cache[(definition_text, def2compare)] = text_distance
+                            sim_cache[(def2compare, definition_text)] = text_distance
+                        if text_distance < DISTANCE_THRESHOLD:
                             mappings[targ_word][definition_text] = def2compare
                             mapped += 1
                 if mapped > 0:
@@ -124,7 +124,7 @@ if __name__ == "__main__":
 
     LENGTH = args.len
 
-    DISTANCE = args.thresh
+    DISTANCE_THRESHOLD = args.thresh
 
     logging.basicConfig(format="%(asctime)s : %(levelname)s : %(message)s", level=logging.INFO)
 
@@ -144,8 +144,8 @@ if __name__ == "__main__":
             filename2 = "russian-corpus3.tsv.gz"
         path1 = path.join(re.sub(PATTERN, RUSSIAN, args.data_path), filename1)
         path2 = path.join(re.sub(PATTERN, RUSSIAN, args.data_path), filename2)
-    df1 = pd.read_csv(path1, sep="\t", header=None, quoting=csv.QUOTE_NONE)
-    df2 = pd.read_csv(path2, sep="\t", header=None, quoting=csv.QUOTE_NONE)
+    df1 = pd.read_csv(path1, sep="\t", header=None)
+    df2 = pd.read_csv(path2, sep="\t", header=None)
     df1.columns = ["word", "usage", "definition"]
     df2.columns = ["word", "usage", "definition"]
 
@@ -153,6 +153,7 @@ if __name__ == "__main__":
     # notcontent = set(stopwords.words("norwegian" if "norwegian" in args.lang else args.lang))
 
     notcontent = None
+
     if args.punct:
         logging.info("Removing punctuation marks from the definitions...")
         df1["definition"] = df1["definition"].apply(lambda x: normalize(x, notcontent))
